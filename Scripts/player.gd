@@ -4,6 +4,8 @@ const SPEED := 5.0
 const JUMP_VELOCITY := 4.5
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 func _physics_process(delta: float) -> void:
 	#Add the gravity.
 	if not is_on_floor():
