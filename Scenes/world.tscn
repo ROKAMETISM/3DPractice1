@@ -30,6 +30,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1254166, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.8213882, 0.57036954, 0, -0.57036954, 0.8213882, 0, 34.07879, 0)
+shadow_enabled = true
+shadow_opacity = 0.59
+shadow_blur = 2.475
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -21)
