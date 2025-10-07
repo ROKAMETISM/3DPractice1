@@ -8,6 +8,7 @@ const SENSITIVITY := 0.003
 const AIRCONTROL := 2.0
 const BASE_FOV := 75.0
 const FOV_MODIFIER := 1.5
+const BULLET = preload("uid://duw3fo840ycjy")
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var headpivot = %HeadPivot
@@ -49,4 +50,8 @@ func _physics_process(delta: float) -> void:
 	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
+	if Input.is_action_pressed("fire_main"):
+		var bullet = BULLET.instantiate()
+		bullet.global_position = headpivot.global_position
+		get_tree().current_scene.add_child(bullet)
 	move_and_slide()
