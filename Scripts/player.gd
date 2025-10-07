@@ -4,6 +4,8 @@ const SPEED := 5.0
 const JUMP_VELOCITY := 4.5
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var headpivot = $%HeadPivot
+@onready var camera = $%Camera3D
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 func _physics_process(delta: float) -> void:
