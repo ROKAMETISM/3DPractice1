@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
-const SPEED := 5.0
+var speed : float
+const WALK_SPEED := 5.0
+const SPRINT_SPEED := 7.0
 const JUMP_VELOCITY := 4.5
 const SENSITIVITY := 0.003
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
