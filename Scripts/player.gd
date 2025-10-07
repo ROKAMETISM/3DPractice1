@@ -5,6 +5,9 @@ const WALK_SPEED := 5.0
 const SPRINT_SPEED := 7.0
 const JUMP_VELOCITY := 4.5
 const SENSITIVITY := 0.003
+const AIRCONTROL := 2.0
+const BASE_FOV := 75.0
+const FOV_MODIFIER := 1.5
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var headpivot = %HeadPivot
@@ -32,10 +35,18 @@ func _physics_process(delta: float) -> void:
 	#As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (headpivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction : 
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+	if not is_on_floor():
+		velocity.x = lerp(velocity.x, direction.x * speed, delta * AIRCONTROL)
+		velocity.z = lerp(velocity.z, direction.x * speed, delta * AIRCONTROL)
 	else:
-		velocity.x = 0.0
-		velocity.z = 0.0
+		if direction : 
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+		else:
+			velocity.x = 0.0
+			velocity.z = 0.0
+	#FOV
+	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	move_and_slide()
