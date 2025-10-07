@@ -1,4 +1,4 @@
-extends RigidBody3D
+extends Area3D
 
 var lifetime := 3.0
 
