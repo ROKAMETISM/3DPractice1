@@ -6,15 +6,17 @@ const SPRINT_SPEED := 10.0
 const JUMP_VELOCITY := 5.0
 const SENSITIVITY := 0.003
 const AIRCONTROL := 2.0
-const BASE_FOV := 75.0
+const BASE_FOV := 90.0
 const FOV_MODIFIER := 1.5
 const BULLET = preload("uid://duw3fo840ycjy")
+const BOTTOM_THRESHOLD := -50.0
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Console.font_size = 10
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		headpivot.rotate_y(-event.relative.x * SENSITIVITY)
@@ -57,3 +59,5 @@ func _physics_process(delta: float) -> void:
 		bullet.global_position = headpivot.global_position
 		get_tree().current_scene.add_child(bullet)
 	move_and_slide()
+	if global_position.y < BOTTOM_THRESHOLD:
+		get_tree().reload_current_scene()
