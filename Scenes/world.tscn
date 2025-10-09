@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxcsfsbdynv4y"]
+[gd_scene load_steps=8 format=3 uid="uid://bxcsfsbdynv4y"]
 
 [ext_resource type="PackedScene" uid="uid://b81emnirlm0d0" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="Script" uid="uid://cxapm8es27fu7" path="res://Scripts/world.gd" id="1_go701"]
@@ -15,15 +15,22 @@ sky_material = SubResource("ProceduralSkyMaterial_5a7ea")
 background_mode = 2
 sky = SubResource("Sky_8j60k")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go701"]
+albedo_color = Color(0.14, 0.09408, 0.072799996, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5a7ea"]
+albedo_color = Color(0, 1, 1, 1)
+
 [node name="World" type="Node3D"]
 script = ExtResource("1_go701")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a02cp")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="Plane" type="CSGBox3D" parent="."]
 use_collision = true
 size = Vector3(64, 0.002, 64)
+material = SubResource("StandardMaterial3D_go701")
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1254166, 0)
@@ -34,6 +41,19 @@ shadow_opacity = 0.59
 shadow_blur = 2.475
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.88964844, -21)
 use_collision = true
-size = Vector3(4, 4, 4)
+size = Vector3(4, 1.7792969, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8918562, 1.2429434, -21)
+use_collision = true
+size = Vector3(4, 2.5120313, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5113549, -21)
+use_collision = true
+size = Vector3(4, 1.015, 4)
+material = SubResource("StandardMaterial3D_5a7ea")

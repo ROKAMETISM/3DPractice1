@@ -1,9 +1,9 @@
 extends CharacterBody3D
 
 var speed : float
-const WALK_SPEED := 5.0
-const SPRINT_SPEED := 7.0
-const JUMP_VELOCITY := 4.5
+const WALK_SPEED := 6.0
+const SPRINT_SPEED := 10.0
+const JUMP_VELOCITY := 5.0
 const SENSITIVITY := 0.003
 const AIRCONTROL := 2.0
 const BASE_FOV := 75.0
@@ -38,7 +38,7 @@ func _physics_process(delta: float) -> void:
 	var direction = (headpivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if not is_on_floor():
 		velocity.x = lerp(velocity.x, direction.x * speed, delta * AIRCONTROL)
-		velocity.z = lerp(velocity.z, direction.x * speed, delta * AIRCONTROL)
+		velocity.z = lerp(velocity.z, direction.z * speed, delta * AIRCONTROL)
 	else:
 		if direction : 
 			velocity.x = direction.x * speed
@@ -47,7 +47,9 @@ func _physics_process(delta: float) -> void:
 			velocity.x = 0.0
 			velocity.z = 0.0
 	#FOV
-	var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)
+	var horizontal_veolcity = velocity
+	horizontal_veolcity.y = 0.0
+	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	if Input.is_action_pressed("fire_main"):
