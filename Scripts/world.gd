@@ -6,3 +6,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().quit()
 	if Input.is_action_just_pressed("restart_game"):
 		get_tree().reload_current_scene()
+	debugtext.text = ""
+	debugtext.text += "PlayerGlobalPosition:"+str(player.global_position)
+	debugtext.text += "\nPlayerSpeed:"+str(player.velocity.length())
+	
