@@ -33,6 +33,7 @@ size = Vector3(64, 0.002, 64)
 material = SubResource("StandardMaterial3D_go701")
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1254166, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -57,3 +58,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5113549, -21)
 use_collision = true
 size = Vector3(4, 1.015, 4)
 material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DebugText" type="Label" parent="UI/HUD"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
