@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://kft8ejopthmq"]
+
+[node name="WeaponPistol" type="Node3D"]
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
