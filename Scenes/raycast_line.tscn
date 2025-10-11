@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://be2ixbaa5oacl"]
+
+[sub_resource type="ImmediateMesh" id="ImmediateMesh_g4vkr"]
+
+[node name="RaycastLine" type="MeshInstance3D"]
+cast_shadow = 0
+mesh = SubResource("ImmediateMesh_g4vkr")
