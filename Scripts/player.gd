@@ -56,8 +56,8 @@ func _physics_process(delta: float) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	if Input.is_action_pressed("fire_main"):
 		var bullet = BULLET.instantiate()
-		bullet.global_position = headpivot.global_position
 		get_tree().current_scene.add_child(bullet)
+		bullet.global_position = headpivot.global_position
 	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()
