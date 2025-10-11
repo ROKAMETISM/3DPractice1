@@ -8,6 +8,7 @@ func fire() -> void:
 	if not player:
 		return
 	if fire_timer <= 0.0:
+		print("pistol can fire")
 		fire_timer = FIRE_RATE
 		var new_ray = RAY.instantiate()
 		get_tree().current_scene.add_child(new_ray)
@@ -15,7 +16,6 @@ func fire() -> void:
 		points.append(player.global_position)
 		points.append(player.global_position + player.pointing_vector * RAY_LENGTH)
 		new_ray.update_points(points)
-		
 func _physics_process(delta: float) -> void:
 	if fire_timer > 0.0:
 		fire_timer = maxf(fire_timer - delta, 0.0)

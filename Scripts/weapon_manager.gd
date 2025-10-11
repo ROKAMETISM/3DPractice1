@@ -14,4 +14,7 @@ func fire() -> void:
 	if not weapons[current_weapon_index]:
 		return
 	weapons[current_weapon_index].fire()
-	
+func set_player(new_player : CharacterBody3D):
+	player = new_player
+	for weapon in weapons:
+		weapon.player = new_player
