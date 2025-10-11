@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=8 format=3 uid="uid://du3tuubqmh3i8"]
 
 [ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
@@ -21,6 +21,16 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_67vpr"]
+top_radius = 0.4
+bottom_radius = 0.4
+height = 1.8
+radial_segments = 8
+rings = 2
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kxk0d"]
+points = PackedVector3Array(0.38359535, 0.84672093, 0.03958388, -0.38356552, -0.84665525, -0.039655853, -0.38359535, -0.8467211, 0.039583888, -0.38359535, 0.8467211, 0.039583888, 0.039583888, 0.8467211, -0.38359535, 0.28280002, -0.86230874, -0.28279996, 0.03958388, -0.84672093, 0.38359535, -0.03965585, 0.84665513, 0.38356552, -0.2828, -0.86230886, -0.2828, 0.2828, -0.8623087, 0.2828, -0.28279996, -0.86230874, 0.28280002, -0.2828, 0.86230886, -0.2828, 0.2828, 0.8623087, 0.2828, 0.28280002, 0.86230874, -0.28279996, -0.039655853, -0.84665525, -0.38356552, 0.38356552, -0.84665513, -0.03965585, -0.28279996, 0.86230874, 0.28280002, 0.039583888, -0.8467211, -0.38359535, 0.38359535, -0.84672093, 0.03958388, 0.03958388, 0.84672093, 0.38359535, -0.039655853, 0.84665525, -0.38356552, -0.38356552, 0.84665525, -0.039655853, 0.38356552, 0.84665513, -0.03965585, -0.03965585, -0.84665513, 0.38356552)
+
 [node name="EnemyTest" type="CharacterBody3D"]
 script = ExtResource("1_67vpr")
 
@@ -35,3 +45,16 @@ shape = SubResource("ConvexPolygonShape3D_q8xid")
 pixel_size = 0.015
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_67vpr")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+visible = false
+mesh = SubResource("CylinderMesh_67vpr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("ConvexPolygonShape3D_kxk0d")
