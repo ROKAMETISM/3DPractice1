@@ -18,6 +18,7 @@ func fire() -> void:
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
 	if raycast.is_colliding():
+		#An Enemy or an Environment has been hit!
 		var ray_endpoint : Vector3 = raycast.get_collision_point()
 		points.append(ray_endpoint)
 	else:
