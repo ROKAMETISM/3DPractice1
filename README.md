@@ -10,3 +10,5 @@ Layer 2 : Player Hurtbox
 Layer 3 : Player (and all player-driven obejects) Hitbox
 Layer 4 : Enemy Hurtbox
 Layer 5 : Enemy Hitbox
+
+All Hitbox and Hurtbox are Area3Ds.

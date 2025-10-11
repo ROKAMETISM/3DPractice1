@@ -68,3 +68,4 @@ func _physics_process(delta: float) -> void:
 	acceleration_y = (velocity.y - previous_velocity_y) / delta
 	previous_velocity_y = velocity.y
 	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
+	
