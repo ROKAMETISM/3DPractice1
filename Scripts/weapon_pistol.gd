@@ -1,5 +1,6 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
+const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const FIRE_RATE := 0.2
 const PISTOL_RANGE := 30.0
 var fire_timer := 0.0
@@ -21,6 +22,10 @@ func fire() -> void:
 		#An Enemy or an Environment has been hit!
 		var ray_endpoint : Vector3 = raycast.get_collision_point()
 		points.append(ray_endpoint)
+		var hit_particle : MeshInstance3D = HITPARTICLE.instantiate()
+		get_tree().current_scene.add_child(hit_particle)
+		hit_particle.global_position = ray_endpoint
+		hit_particle.set_direction(raycast.get_collision_normal())
 	else:
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
