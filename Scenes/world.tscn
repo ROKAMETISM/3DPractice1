@@ -31,6 +31,7 @@ environment = SubResource("Environment_a02cp")
 [node name="Plane" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0)
 use_collision = true
+collision_layer = 3
 size = Vector3(64, 0.002, 64)
 material = SubResource("StandardMaterial3D_go701")
 
@@ -46,18 +47,21 @@ shadow_blur = 2.475
 [node name="CSGBox3D2" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.88964844, -21)
 use_collision = true
+collision_layer = 3
 size = Vector3(4, 1.7792969, 4)
 material = SubResource("StandardMaterial3D_5a7ea")
 
 [node name="CSGBox3D4" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8918562, 1.2429434, -21)
 use_collision = true
+collision_layer = 3
 size = Vector3(4, 2.5120313, 4)
 material = SubResource("StandardMaterial3D_5a7ea")
 
 [node name="CSGBox3D3" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5113549, -21)
 use_collision = true
+collision_layer = 3
 size = Vector3(4, 1.015, 4)
 material = SubResource("StandardMaterial3D_5a7ea")
 
