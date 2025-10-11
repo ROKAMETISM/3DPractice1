@@ -9,7 +9,6 @@ func fire() -> void:
 		return
 	if fire_timer <= 0.0:
 		fire_timer = FIRE_RATE
-		print("fire!")
 		var new_ray = RAY.instantiate()
 		get_tree().current_scene.add_child(new_ray)
 		var points : Array[Vector3]
