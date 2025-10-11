@@ -29,8 +29,8 @@ func fire() -> void:
 		hit_particle.global_position = ray_endpoint
 		hit_particle.set_direction(raycast.get_collision_normal())
 		#check if the collider is an enemy
-		var collider : Object = raycast.get_collider()
-		if collider.get_parent().is_in_group("Enemy"):
+		var collider : Object = raycast.get_collider().get_parent()
+		if collider.is_in_group("Enemy"):
 			var damage := BASE_DAMAGE
 			damage += randf_range(-1.0, 1.0)*DAMAGE_SPREAD
 			collider.take_damage(damage)

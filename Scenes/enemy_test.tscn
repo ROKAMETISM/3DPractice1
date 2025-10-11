@@ -25,7 +25,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_kxk0d")
 }],
-"loop": true,
+"loop": false,
 "name": &"hit",
 "speed": 5.0
 }]
@@ -55,7 +55,6 @@ unique_name_in_owner = true
 pixel_size = 0.015
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_67vpr")
-animation = &"hit"
 
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_layer = 16
