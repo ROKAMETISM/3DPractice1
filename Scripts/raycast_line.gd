@@ -5,6 +5,7 @@ func _process(delta: float) -> void:
 	lifetime -= delta
 	var material : Material = mesh.surface_get_material(0)
 	material.albedo_color.a = lifetime / life
+	mesh.surface_set_material(0,  material)
 	if lifetime < 0:
 		queue_free()
 func update_points(points : Array[Vector3]) : 
