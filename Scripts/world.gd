@@ -1,6 +1,9 @@
 extends Node3D
 @onready var player := %Player
 @onready var debugtext := %DebugText
+const RAY := preload("uid://be2ixbaa5oacl")
+func _ready() -> void:
+	pass
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
