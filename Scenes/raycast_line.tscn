@@ -1,7 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://be2ixbaa5oacl"]
+[gd_scene load_steps=3 format=3 uid="uid://be2ixbaa5oacl"]
+
+[ext_resource type="Script" uid="uid://bkierwnj7tejn" path="res://Scripts/raycast_line.gd" id="1_bo8d7"]
 
 [sub_resource type="ImmediateMesh" id="ImmediateMesh_g4vkr"]
 
 [node name="RaycastLine" type="MeshInstance3D"]
 cast_shadow = 0
 mesh = SubResource("ImmediateMesh_g4vkr")
+script = ExtResource("1_bo8d7")
