@@ -4,6 +4,7 @@ var speed : float
 const WALK_SPEED := 6.0
 const SPRINT_SPEED := 10.0
 const JUMP_VELOCITY := 5.0
+const JUMP_ACCEL := 7.0
 const SENSITIVITY := 0.003
 const AIRCONTROL := 2.0
 const BASE_FOV := 90.0
@@ -11,7 +12,10 @@ const FOV_MODIFIER := 1.5
 const BULLET = preload("uid://duw3fo840ycjy")
 const BOTTOM_THRESHOLD := -50.0
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
-var gravity : float = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity : float = 16.0
+var jump_initial_acceleration := 0.0
+var previous_velocity_y := 0.0
+var acceleration_y := 0.0
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
 func _ready() -> void:
@@ -26,9 +30,15 @@ func _physics_process(delta: float) -> void:
 	#Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		if jump_initial_acceleration > 0:
+			velocity.y += jump_initial_acceleration * delta
+			jump_initial_acceleration -= delta * 3.5
+		elif jump_initial_acceleration < 0 :
+			jump_initial_acceleration = 0
 	#Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		jump_initial_acceleration = JUMP_ACCEL
 	#Handle sprint.
 	if Input.is_action_pressed("sprint"):
 		speed = SPRINT_SPEED
@@ -61,3 +71,5 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()
+	acceleration_y = (velocity.y - previous_velocity_y) / delta
+	previous_velocity_y = velocity.y

@@ -9,6 +9,11 @@ func _physics_process(delta: float) -> void:
 		get_tree().reload_current_scene()
 		return
 	debugtext.text = ""
-	debugtext.text += "PlayerGlobalPosition:"+str(player.global_position)
-	debugtext.text += "\nPlayerSpeed:"+str(player.velocity.length())
+	debugtext.text += "PlayerGlobalPosition:["
+	debugtext.text += "%.2f, " %player.global_position.x
+	debugtext.text += "%.2f, " %player.global_position.y
+	debugtext.text += "%.2f]" %player.global_position.z
+	debugtext.text += "\nPlayerSpeed:%.2f"%player.velocity.length()
+	debugtext.text += "\nPlayerYAcceleration:%.2f"%player.acceleration_y
+	debugtext.text += "\nPlayerJumpInitAccel:%.2f"%player.jump_initial_acceleration
 	

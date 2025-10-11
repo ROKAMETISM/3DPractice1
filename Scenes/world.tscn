@@ -28,6 +28,7 @@ script = ExtResource("1_go701")
 environment = SubResource("Environment_a02cp")
 
 [node name="Plane" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0)
 use_collision = true
 size = Vector3(64, 0.002, 64)
 material = SubResource("StandardMaterial3D_go701")
