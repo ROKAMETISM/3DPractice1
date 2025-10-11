@@ -8,3 +8,9 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	move_and_slide()
+func take_damage(damage : float) -> void:
+	current_hp -= damage
+	if current_hp <= 0.0:
+		_die()
+func _die() -> void:
+	queue_free()

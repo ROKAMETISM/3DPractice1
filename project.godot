@@ -30,6 +30,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/console/plugin.cfg")
 
+[global_group]
+
+Enemy=""
+
 [input]
 
 jump={

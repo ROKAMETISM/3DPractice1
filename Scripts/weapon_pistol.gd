@@ -3,6 +3,8 @@ const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const FIRE_RATE := 0.2
 const PISTOL_RANGE := 30.0
+const BASE_DAMAGE := 5.0
+const DAMAGE_SPREAD := 1.0
 var fire_timer := 0.0
 var player : CharacterBody3D
 @onready var raycast := $RayCast3D
@@ -26,7 +28,14 @@ func fire() -> void:
 		get_tree().current_scene.add_child(hit_particle)
 		hit_particle.global_position = ray_endpoint
 		hit_particle.set_direction(raycast.get_collision_normal())
+		#check if the collider is an enemy
+		var collider : Object = raycast.get_collider()
+		if collider.get_parent().is_in_group("Enemy"):
+			var damage := BASE_DAMAGE
+			damage += randf_range(-1.0, 1.0)*DAMAGE_SPREAD
+			collider.take_damage(damage)
 	else:
+		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
 func _physics_process(delta: float) -> void:

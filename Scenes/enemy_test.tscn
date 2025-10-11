@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=9 format=3 uid="uid://du3tuubqmh3i8"]
 
 [ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
+[ext_resource type="Texture2D" uid="uid://bvv3u6458bc2w" path="res://Sprites/sprite_enemy_test_hit.png" id="3_kxk0d"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xb7yx"]
 radial_segments = 16
@@ -16,8 +17,16 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("1_q8xid")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kxk0d")
+}],
+"loop": true,
+"name": &"hit",
 "speed": 5.0
 }]
 
@@ -31,7 +40,7 @@ rings = 2
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kxk0d"]
 points = PackedVector3Array(0.38359535, 0.84672093, 0.03958388, -0.38356552, -0.84665525, -0.039655853, -0.38359535, -0.8467211, 0.039583888, -0.38359535, 0.8467211, 0.039583888, 0.039583888, 0.8467211, -0.38359535, 0.28280002, -0.86230874, -0.28279996, 0.03958388, -0.84672093, 0.38359535, -0.03965585, 0.84665513, 0.38356552, -0.2828, -0.86230886, -0.2828, 0.2828, -0.8623087, 0.2828, -0.28279996, -0.86230874, 0.28280002, -0.2828, 0.86230886, -0.2828, 0.2828, 0.8623087, 0.2828, 0.28280002, 0.86230874, -0.28279996, -0.039655853, -0.84665525, -0.38356552, 0.38356552, -0.84665513, -0.03965585, -0.28279996, 0.86230874, 0.28280002, 0.039583888, -0.8467211, -0.38359535, 0.38359535, -0.84672093, 0.03958388, 0.03958388, 0.84672093, 0.38359535, -0.039655853, 0.84665525, -0.38356552, -0.38356552, 0.84665525, -0.039655853, 0.38356552, 0.84665513, -0.03965585, -0.03965585, -0.84665513, 0.38356552)
 
-[node name="EnemyTest" type="CharacterBody3D"]
+[node name="EnemyTest" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_67vpr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -41,10 +50,12 @@ mesh = SubResource("CapsuleMesh_xb7yx")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_q8xid")
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+[node name="Sprite" type="AnimatedSprite3D" parent="."]
+unique_name_in_owner = true
 pixel_size = 0.015
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_67vpr")
+animation = &"hit"
 
 [node name="Hurtbox" type="Area3D" parent="."]
 collision_layer = 16
