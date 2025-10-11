@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=6 format=3 uid="uid://du3tuubqmh3i8"]
 
+[ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xb7yx"]
@@ -21,6 +22,7 @@ animations = [{
 }]
 
 [node name="EnemyTest" type="CharacterBody3D"]
+script = ExtResource("1_67vpr")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 visible = false
