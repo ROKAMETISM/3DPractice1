@@ -3,8 +3,8 @@ extends CharacterBody3D
 var speed : float
 const WALK_SPEED := 6.0
 const SPRINT_SPEED := 10.0
-const JUMP_VELOCITY := 5.0
-const JUMP_ACCEL := 7.0
+const JUMP_VELOCITY := 3.9
+const JUMP_ACCEL := 4.0
 const SENSITIVITY := 0.003
 const AIRCONTROL := 2.0
 const BASE_FOV := 90.0
@@ -12,7 +12,7 @@ const FOV_MODIFIER := 1.5
 const BULLET = preload("uid://duw3fo840ycjy")
 const BOTTOM_THRESHOLD := -50.0
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
-var gravity : float = 16.0
+var gravity : float = 12.0
 var jump_initial_acceleration := 0.0
 var previous_velocity_y := 0.0
 var acceleration_y := 0.0
@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 		if jump_initial_acceleration > 0:
 			velocity.y += jump_initial_acceleration * delta
-			jump_initial_acceleration -= delta * 3.5
+			jump_initial_acceleration -= delta * 10
 		elif jump_initial_acceleration < 0 :
 			jump_initial_acceleration = 0
 	#Handle jump.
@@ -65,9 +65,7 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 8.0)
 	if Input.is_action_pressed("fire_main"):
-		var bullet = BULLET.instantiate()
-		get_tree().current_scene.add_child(bullet)
-		bullet.global_position = headpivot.global_position
+		%WeaponManager.fire()
 	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()
