@@ -19,6 +19,8 @@ var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
+signal fire_main_pressed
+signal fire_main_released
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10
@@ -62,6 +64,10 @@ func _physics_process(delta: float) -> void:
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	if Input.is_action_pressed("fire_main"):
 		%WeaponManager.fire()
+	if Input.is_action_just_pressed("fire_main"):
+		fire_main_pressed.emit()
+	if Input.is_action_just_released("fire_main"):
+		fire_main_released.emit()
 	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()

@@ -18,3 +18,12 @@ func set_player(new_player : CharacterBody3D):
 	player = new_player
 	for weapon in weapons:
 		weapon.player = new_player
+func switch_weapon(weapon_index : int) -> void:
+	if weapon_index < 0 or weapon_index >= weapons.size() :
+		return
+	if not player:
+		return
+	if not weapons[current_weapon_index]:
+		return
+	current_weapon_index = weapon_index
+	
