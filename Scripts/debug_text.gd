@@ -1,5 +1,5 @@
 extends Label
-@onready var hud := self.get_parent()
+@onready var hud := get_parent()
 func update_text() -> void:
 	text = ""
 	text += "\nFPS:%.2f"%Engine.get_frames_per_second()
