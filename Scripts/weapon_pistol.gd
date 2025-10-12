@@ -1,14 +1,23 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.2
+const FIRE_RATE := 0.1
 const PISTOL_RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
 var fire_timer := 0.0
 var player : CharacterBody3D
 @onready var raycast := $RayCast3D
-func fire() -> void:
+func fire_main_repeated() -> void:
+	pass
+func fire_main_pressed() -> void:
+	_pistol_fire()
+func fire_main_released() -> void:
+	pass
+func _physics_process(delta: float) -> void:
+	if fire_timer > 0.0:
+		fire_timer = maxf(fire_timer - delta, 0.0)
+func _pistol_fire() -> void:
 	if not player:
 		return
 	if fire_timer > 0.0:
@@ -38,6 +47,3 @@ func fire() -> void:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
-func _physics_process(delta: float) -> void:
-	if fire_timer > 0.0:
-		fire_timer = maxf(fire_timer - delta, 0.0)

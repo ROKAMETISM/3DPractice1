@@ -25,6 +25,7 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10
 	%WeaponManager.set_player(self)
+	%WeaponManager.switch_weapon(0)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		headpivot.rotate_y(-event.relative.x * SENSITIVITY)
@@ -63,7 +64,7 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	if Input.is_action_pressed("fire_main"):
-		%WeaponManager.fire()
+		%WeaponManager.fire_main()
 	if Input.is_action_just_pressed("fire_main"):
 		fire_main_pressed.emit()
 	if Input.is_action_just_released("fire_main"):
