@@ -1,12 +1,10 @@
 extends MeshInstance3D
-const life := 1.0
-var lifetime := life
+const LIFE := 0.5
+var lifetime := LIFE
 func _process(delta: float) -> void:
 	lifetime -= delta
 	if mesh:
-		var material : Material = mesh.surface_get_material(0)
-		material.albedo_color.a = lifetime / life
-		mesh.surface_set_material(0,  material)
+		mesh.surface_get_material(0).albedo_color.a = lifetime / LIFE
 	if lifetime < 0:
 		queue_free()
 func update_points(points : Array[Vector3]) : 
@@ -17,5 +15,6 @@ func update_points(points : Array[Vector3]) :
 	immediate_mesh.surface_add_vertex(points[1])
 	immediate_mesh.surface_end()
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	material.albedo_color = Color.VIOLET
 	mesh = immediate_mesh
