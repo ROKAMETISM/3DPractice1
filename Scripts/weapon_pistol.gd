@@ -2,7 +2,7 @@ extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const FIRE_RATE := 0.1
-const PISTOL_RANGE := 30.0
+const RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
 const WEAPON_NAME := "Pistol"
@@ -24,7 +24,7 @@ func _pistol_fire() -> void:
 	if fire_timer > 0.0:
 		return
 	fire_timer = FIRE_RATE
-	raycast.target_position = player.pointing_vector * PISTOL_RANGE
+	raycast.target_position = player.pointing_vector * RANGE
 	raycast.force_raycast_update()
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()

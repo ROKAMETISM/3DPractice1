@@ -1,10 +1,12 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.1
-const PISTOL_RANGE := 30.0
-const BASE_DAMAGE := 5.0
+const FIRE_RATE := 0.8
+const RANGE := 25.0
+const BASE_DAMAGE := 4.0
 const DAMAGE_SPREAD := 1.0
+const PELLETS := 7
+const SPREAD_ANGLE := deg_to_rad(5.9)
 const WEAPON_NAME := "Shotgun"
 var fire_timer := 0.0
 var player : CharacterBody3D
@@ -12,19 +14,22 @@ var player : CharacterBody3D
 func fire_main_repeated() -> void:
 	pass
 func fire_main_pressed() -> void:
-	_pistol_fire()
+	_shotgun_fire()
 func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if fire_timer > 0.0:
 		fire_timer = maxf(fire_timer - delta, 0.0)
-func _pistol_fire() -> void:
+func _shotgun_fire() -> void:
 	if not player:
 		return
 	if fire_timer > 0.0:
 		return
 	fire_timer = FIRE_RATE
-	raycast.target_position = player.pointing_vector * PISTOL_RANGE
+	for i in range(0, PELLETS):
+		_fire_single_pellet()
+func _fire_single_pellet() -> void:
+	raycast.target_position = player.pointing_vector * RANGE
 	raycast.force_raycast_update()
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
