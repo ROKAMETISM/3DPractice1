@@ -5,6 +5,7 @@ const FIRE_RATE := 0.1
 const PISTOL_RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
+const WEAPON_NAME := "Pistol"
 var fire_timer := 0.0
 var player : CharacterBody3D
 @onready var raycast := $RayCast3D

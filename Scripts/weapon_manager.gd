@@ -27,8 +27,10 @@ func switch_weapon(weapon_index : int) -> void:
 	if not weapons[current_weapon_index]:
 		return
 	print("switching weapon")
-	player.fire_main_pressed.disconnect(weapons[current_weapon_index].fire_main_pressed)
-	player.fire_main_released.disconnect(weapons[current_weapon_index].fire_main_released)
+	if player.fire_main_pressed.has_connections():
+		player.fire_main_pressed.disconnect(weapons[current_weapon_index].fire_main_pressed)
+	if player.fire_main_released.has_connections():
+		player.fire_main_released.disconnect(weapons[current_weapon_index].fire_main_released)
 	current_weapon_index = weapon_index
 	player.fire_main_pressed.connect(weapons[current_weapon_index].fire_main_pressed)
 	player.fire_main_released.connect(weapons[current_weapon_index].fire_main_released)
