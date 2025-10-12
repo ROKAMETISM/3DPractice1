@@ -3,6 +3,7 @@ const PISTOLPRELOAD := preload("uid://kft8ejopthmq")
 var player : CharacterBody3D
 var weapons : Array[Node3D]
 var current_weapon_index := 0
+signal weapon_switched(new_weapon : Node3D)
 func _ready() -> void:
 	var pistol := PISTOLPRELOAD.instantiate()
 	add_child(pistol)
@@ -19,19 +20,18 @@ func set_player(new_player : CharacterBody3D):
 	for weapon in weapons:
 		weapon.player = new_player
 func switch_weapon(weapon_index : int) -> void:
-	print("switchweapon called")
 	if weapon_index < 0 or weapon_index >= weapons.size() :
 		return
 	if not player:
 		return
 	if not weapons[current_weapon_index]:
 		return
-	print("switching weapon")
 	if player.fire_main_pressed.has_connections():
 		player.fire_main_pressed.disconnect(weapons[current_weapon_index].fire_main_pressed)
 	if player.fire_main_released.has_connections():
 		player.fire_main_released.disconnect(weapons[current_weapon_index].fire_main_released)
+	print("weapon switched to "+str(weapons[current_weapon_index].WEAPON_NAME))
 	current_weapon_index = weapon_index
 	player.fire_main_pressed.connect(weapons[current_weapon_index].fire_main_pressed)
 	player.fire_main_released.connect(weapons[current_weapon_index].fire_main_released)
-	
+	weapon_switched.emit(weapons[current_weapon_index])

@@ -19,6 +19,7 @@ var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
+@onready var weapon_manager = %WeaponManager
 signal player_position_updated(new_position : Vector3)
 signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)
@@ -27,8 +28,8 @@ signal fire_main_released
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10
-	%WeaponManager.set_player(self)
-	%WeaponManager.switch_weapon(0)
+	weapon_manager.set_player(self)
+	weapon_manager.switch_weapon(0)
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		headpivot.rotate_y(-event.relative.x * SENSITIVITY)
@@ -67,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	if Input.is_action_pressed("fire_main"):
-		%WeaponManager.fire_main()
+		weapon_manager.fire_main()
 	if Input.is_action_just_pressed("fire_main"):
 		fire_main_pressed.emit()
 	if Input.is_action_just_released("fire_main"):
