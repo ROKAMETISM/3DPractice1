@@ -1,14 +1,18 @@
 extends Node3D
 const PISTOLPRELOAD := preload("uid://kft8ejopthmq")
+const SHOTGUNPRELOAD := preload("uid://bo54vd2yvkimn")
 var player : CharacterBody3D
 var weapons : Array[Node3D]
 var current_weapon_index := 0
 signal weapon_switched(new_weapon : Node3D)
 func _ready() -> void:
 	var pistol := PISTOLPRELOAD.instantiate()
-	add_child(pistol)
+	var shotgun := SHOTGUNPRELOAD.instantiate()
 	weapons.append(pistol)
-	pistol.player = player
+	weapons.append(shotgun)
+	for weapon in weapons:
+		add_child(weapon)
+		weapon.player = player
 func fire_main() -> void:
 	if not player:
 		return
