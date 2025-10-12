@@ -62,6 +62,15 @@ func _physics_process(delta: float) -> void:
 		else:
 			velocity.x = 0.0
 			velocity.z = 0.0
+	move_and_slide()
+	if global_position.y < BOTTOM_THRESHOLD:
+		get_tree().reload_current_scene()
+	acceleration_y = (velocity.y - previous_velocity_y) / delta
+	previous_velocity_y = velocity.y
+	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
+	player_position_updated.emit(global_position)
+	player_velocity_updated.emit(velocity)
+	player_y_acceleration_updated.emit(acceleration_y)
 	var horizontal_veolcity = velocity
 	horizontal_veolcity.y = 0.0
 	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, SPRINT_SPEED * 2)
@@ -73,12 +82,9 @@ func _physics_process(delta: float) -> void:
 		fire_main_pressed.emit()
 	if Input.is_action_just_released("fire_main"):
 		fire_main_released.emit()
-	move_and_slide()
-	if global_position.y < BOTTOM_THRESHOLD:
-		get_tree().reload_current_scene()
-	acceleration_y = (velocity.y - previous_velocity_y) / delta
-	previous_velocity_y = velocity.y
-	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
-	player_position_updated.emit(global_position)
-	player_velocity_updated.emit(velocity)
-	player_y_acceleration_updated.emit(acceleration_y)
+	if Input.is_action_just_pressed("switch_weapon_next"):
+		print("weapon to next")
+		weapon_manager.scroll_weapon(1)
+	if Input.is_action_just_pressed("switch_weapon_previous"):
+		print("weapon to prev")
+		weapon_manager.scroll_weapon(-1)

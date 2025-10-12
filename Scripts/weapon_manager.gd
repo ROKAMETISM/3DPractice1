@@ -39,3 +39,7 @@ func switch_weapon(weapon_index : int) -> void:
 	player.fire_main_pressed.connect(weapons[current_weapon_index].fire_main_pressed)
 	player.fire_main_released.connect(weapons[current_weapon_index].fire_main_released)
 	weapon_switched.emit(weapons[current_weapon_index])
+func scroll_weapon(index_delta : int) -> void:
+	var new_index := current_weapon_index + index_delta
+	new_index = posmod(new_index, weapons.size())
+	switch_weapon(new_index)
