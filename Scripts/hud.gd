@@ -1,0 +1,18 @@
+extends Control
+var player_position := Vector3.ZERO
+var player_velocity := Vector3.ZERO
+var player_y_acceleration := 0.0
+var current_weapon : Node3D
+@onready var debug_text := %DebugText
+func set_player_postion(new_position : Vector3) -> void:
+	player_position = new_position
+	debug_text.update_text() 
+func set_player_velocity(new_velocity : Vector3) -> void:
+	player_velocity = new_velocity
+	debug_text.update_text() 
+func set_player_y_acceleration(new_y_acceleration : float) -> void:
+	player_y_acceleration = new_y_acceleration
+	debug_text.update_text() 
+func set_current_weapon(new_weapon : Node3D) -> void:
+	current_weapon = new_weapon
+	debug_text.update_text()

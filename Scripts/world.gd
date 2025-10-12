@@ -1,11 +1,11 @@
 extends Node3D
 @onready var player := %Player
-@onready var debugtext := %DebugText
+@onready var hud := %HUD
 func _ready() -> void:
-	player.player_position_updated.connect(debugtext.set_player_postion)
-	player.player_velocity_updated.connect(debugtext.set_player_velocity)
-	player.player_y_acceleration_updated.connect(debugtext.set_player_y_acceleration)
-	player.weapon_manager.weapon_switched.connect(debugtext.set_current_weapon)
+	player.player_position_updated.connect(hud.set_player_postion)
+	player.player_velocity_updated.connect(hud.set_player_velocity)
+	player.player_y_acceleration_updated.connect(hud.set_player_y_acceleration)
+	player.weapon_manager.weapon_switched.connect(hud.set_current_weapon)
 	print("debug signal connected")
 	player.weapon_manager.switch_weapon(0)
 func _physics_process(delta: float) -> void:
