@@ -26,6 +26,7 @@ signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)
 signal fire_main_pressed
 signal fire_main_released
+signal player_fov_updated(new_fov : float)
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10
@@ -78,6 +79,7 @@ func _physics_process(delta: float) -> void:
 	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, SPRINT_SPEED * 2)
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
+	player_fov_updated.emit(camera.fov)
 	if Input.is_action_pressed("fire_main"):
 		weapon_manager.fire_main()
 	if Input.is_action_just_pressed("fire_main"):

@@ -4,6 +4,7 @@ var player_velocity := Vector3.ZERO
 var player_y_acceleration := 0.0
 var current_weapon : Node3D
 @onready var debug_text := %DebugText
+@onready var crosshair := %Crosshair
 func set_player_postion(new_position : Vector3) -> void:
 	player_position = new_position
 	debug_text.update_text() 
@@ -16,3 +17,4 @@ func set_player_y_acceleration(new_y_acceleration : float) -> void:
 func set_current_weapon(new_weapon : Node3D) -> void:
 	current_weapon = new_weapon
 	debug_text.update_text()
+	crosshair.set_weapon_spread(current_weapon.SPREAD_ANGLE)
