@@ -20,7 +20,7 @@ func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if _fire_timer > 0.0:
-		_fire_timer = maxf(_fire_timer - delta, 0.0)
+		_fire_timer = maxf(_fire_timer - delta, -0.1)
 func _shotgun_fire() -> void:
 	if _fire_timer > 0.0:
 		return
@@ -28,12 +28,13 @@ func _shotgun_fire() -> void:
 	for i in range(0, PELLETS):
 		_fire_single_pellet()
 func _fire_single_pellet() -> void:
-	raycast.target_position = pointing_vector * RANGE
-	raycast.force_raycast_update()
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
+	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
+	raycast.target_position = aim_vector * RANGE
+	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		#An Enemy or an Environment has been hit!
 		var ray_endpoint : Vector3 = raycast.get_collision_point()
@@ -52,3 +53,10 @@ func _fire_single_pellet() -> void:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
+func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
+	var result_vector := Vector3.FORWARD
+	var spread_rotation := Vector2(sqrt(randf())*spread, 0.0).rotated(randf_range(0.0, 2*PI))
+	var result_rotation := original_rotation + spread_rotation
+	result_vector = result_vector.rotated(Vector3.RIGHT, result_rotation.x)
+	result_vector = result_vector.rotated(Vector3.UP, result_rotation.y)
+	return result_vector

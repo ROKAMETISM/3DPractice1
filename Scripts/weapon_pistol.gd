@@ -1,18 +1,17 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.05
+const FIRE_RATE := 0.1
 const RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
-const SPREAD_ANGLE := deg_to_rad(10.0)
+const SPREAD_ANGLE := deg_to_rad(1.7)
 const WEAPON_NAME := "Pistol"
 var _fire_timer := 0.0
 var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
-	_pistol_fire()
 	pass
 func fire_main_pressed() -> void:
 	_pistol_fire()
@@ -21,7 +20,7 @@ func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if _fire_timer > 0.0:
-		_fire_timer = maxf(_fire_timer - delta, 0.0)
+		_fire_timer = maxf(_fire_timer - delta, -0.1)
 func _pistol_fire() -> void:
 	if _fire_timer > 0.0:
 		return
