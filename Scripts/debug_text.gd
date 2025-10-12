@@ -19,4 +19,6 @@ func update_text() -> void:
 	text += "%.2f, " %player_position.y
 	text += "%.2f]" %player_position.z
 	text += "\nPlayerSpeed:%.2f"%player_velocity.length()
+	text += "\nPlayerHSpeed:%.2f"%Vector2(player_velocity.x, player_velocity.z).length()
+	text += "\nPlayerVSpeed:%.2f"%absf(player_velocity.y)
 	text += "\nPlayerYAcceleration:%.2f"%player_y_acceleration
