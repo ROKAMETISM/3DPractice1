@@ -12,7 +12,6 @@ func _ready() -> void:
 	weapons.append(shotgun)
 	for weapon in weapons:
 		add_child(weapon)
-		weapon.player = player
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.pointing_vector = player.pointing_vector
@@ -25,8 +24,6 @@ func fire_main() -> void:
 	weapons[current_weapon_index].fire_main_repeated()
 func set_player(new_player : CharacterBody3D):
 	player = new_player
-	for weapon in weapons:
-		weapon.player = new_player
 func switch_weapon(weapon_index : int) -> void:
 	if weapon_index < 0 or weapon_index >= weapons.size() :
 		return

@@ -14,7 +14,7 @@ const CAMERA_INITIAL_POINTING := Vector3(0,0,-1)
 #Get the gravity from the project settings to be synced with Rigidbody nodes.
 var gravity : float = 12.0
 var _jump_initial_acceleration := 0.0
-var _previous_velocity_y := 0.0
+var previous_velocity_y := 0.0
 var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 var camera_rotation := Vector2.ZERO
@@ -67,8 +67,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()
-	acceleration_y = (velocity.y - _previous_velocity_y) / delta
-	_previous_velocity_y = velocity.y
+	acceleration_y = (velocity.y - previous_velocity_y) / delta
+	previous_velocity_y = velocity.y
 	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
 	player_position_updated.emit(global_position)
 	player_velocity_updated.emit(velocity)

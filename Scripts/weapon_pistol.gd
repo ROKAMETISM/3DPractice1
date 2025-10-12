@@ -1,7 +1,7 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.1
+const FIRE_RATE := 0.05
 const RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
@@ -12,6 +12,7 @@ var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
+	_pistol_fire()
 	pass
 func fire_main_pressed() -> void:
 	_pistol_fire()
@@ -50,8 +51,10 @@ func _pistol_fire() -> void:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
-func _get_aim_with_spread(adjusted_rotation:Vector2, spread:float)->Vector3:
+func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
 	var result_vector := Vector3.FORWARD
-	result_vector = result_vector.rotated(Vector3.RIGHT, adjusted_rotation.x)
-	result_vector = result_vector.rotated(Vector3.UP, adjusted_rotation.y)
+	var spread_rotation := Vector2(sqrt(randf())*spread, 0.0).rotated(randf_range(0.0, 2*PI))
+	var result_rotation := original_rotation + spread_rotation
+	result_vector = result_vector.rotated(Vector3.RIGHT, result_rotation.x)
+	result_vector = result_vector.rotated(Vector3.UP, result_rotation.y)
 	return result_vector

@@ -28,7 +28,7 @@ func _shotgun_fire() -> void:
 	for i in range(0, PELLETS):
 		_fire_single_pellet()
 func _fire_single_pellet() -> void:
-	raycast.target_position = player.pointing_vector * RANGE
+	raycast.target_position = pointing_vector * RANGE
 	raycast.force_raycast_update()
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
