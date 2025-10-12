@@ -14,6 +14,7 @@ https://github.com/theshaggydev/the-shaggy-dev-projects/tree/main/projects/godot
 
 https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
+
 ###Pathfinding, NavigationMap and 3DMapEditing
 
 ###Weapons : Sniper, GrenadeLauncher, PlasmaRifle, Machinegun, RocketLauncher
