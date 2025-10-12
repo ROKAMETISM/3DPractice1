@@ -1,0 +1,22 @@
+extends Label
+var player_position := Vector3.ZERO
+var player_velocity := Vector3.ZERO
+var player_y_acceleration := 0.0
+func set_player_postion(new_position : Vector3) -> void:
+	player_position = new_position
+	update_text() 
+func set_player_velocity(new_velocity : Vector3) -> void:
+	player_velocity = new_velocity
+	update_text() 
+func set_player_y_acceleration(new_y_acceleration : float) -> void:
+	player_y_acceleration = new_y_acceleration
+	update_text() 
+func update_text() -> void:
+	text = ""
+	text += "\nFPS:%.2f"%Engine.get_frames_per_second()
+	text += "\nPlayerGlobalPosition:["
+	text += "%.2f, " %player_position.x
+	text += "%.2f, " %player_position.y
+	text += "%.2f]" %player_position.z
+	text += "\nPlayerSpeed:%.2f"%player_velocity.length()
+	text += "\nPlayerYAcceleration:%.2f"%player_y_acceleration

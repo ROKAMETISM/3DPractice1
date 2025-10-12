@@ -19,6 +19,9 @@ var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
+signal player_position_updated(new_position : Vector3)
+signal player_velocity_updated(new_velocity : Vector3)
+signal player_y_acceleration_updated(new_y_acceleration : float)
 signal fire_main_pressed
 signal fire_main_released
 func _ready() -> void:
@@ -75,4 +78,6 @@ func _physics_process(delta: float) -> void:
 	acceleration_y = (velocity.y - previous_velocity_y) / delta
 	previous_velocity_y = velocity.y
 	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
-	
+	player_position_updated.emit(global_position)
+	player_velocity_updated.emit(velocity)
+	player_y_acceleration_updated.emit(acceleration_y)

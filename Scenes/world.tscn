@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bxcsfsbdynv4y"]
+[gd_scene load_steps=11 format=3 uid="uid://bxcsfsbdynv4y"]
 
 [ext_resource type="PackedScene" uid="uid://b81emnirlm0d0" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="Script" uid="uid://cxapm8es27fu7" path="res://Scripts/world.gd" id="1_go701"]
 [ext_resource type="Texture2D" uid="uid://bqu73gkfrbkqr" path="res://Sprites/sprite_crosshair.png" id="3_5a7ea"]
+[ext_resource type="Script" uid="uid://da37dy3f1pcqk" path="res://Scripts/debug_text.gd" id="3_fo5ed"]
 [ext_resource type="PackedScene" uid="uid://du3tuubqmh3i8" path="res://Scenes/enemy_test.tscn" id="4_8j60k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5a7ea"]
@@ -97,6 +98,7 @@ layout_mode = 1
 offset_right = 40.0
 offset_bottom = 23.0
 text = "DebugText"
+script = ExtResource("3_fo5ed")
 
 [node name="Crosshair" type="TextureRect" parent="UI/HUD"]
 layout_mode = 1
