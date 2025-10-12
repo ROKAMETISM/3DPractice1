@@ -8,8 +8,9 @@ const DAMAGE_SPREAD := 1.0
 const PELLETS := 7
 const SPREAD_ANGLE := deg_to_rad(5.9)
 const WEAPON_NAME := "Shotgun"
-var fire_timer := 0.0
-var player : CharacterBody3D
+var _fire_timer := 0.0
+var pointing_vector := Vector3.ONE
+var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
 	pass
@@ -18,14 +19,12 @@ func fire_main_pressed() -> void:
 func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
-	if fire_timer > 0.0:
-		fire_timer = maxf(fire_timer - delta, 0.0)
+	if _fire_timer > 0.0:
+		_fire_timer = maxf(_fire_timer - delta, 0.0)
 func _shotgun_fire() -> void:
-	if not player:
+	if _fire_timer > 0.0:
 		return
-	if fire_timer > 0.0:
-		return
-	fire_timer = FIRE_RATE
+	_fire_timer = FIRE_RATE
 	for i in range(0, PELLETS):
 		_fire_single_pellet()
 func _fire_single_pellet() -> void:

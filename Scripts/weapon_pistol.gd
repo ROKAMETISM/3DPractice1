@@ -7,11 +7,11 @@ const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
 const SPREAD_ANGLE := deg_to_rad(10.0)
 const WEAPON_NAME := "Pistol"
-var fire_timer := 0.0
-var player : CharacterBody3D
+var _fire_timer := 0.0
+var pointing_vector := Vector3.ONE
+var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
-	_pistol_fire()
 	pass
 func fire_main_pressed() -> void:
 	_pistol_fire()
@@ -19,21 +19,19 @@ func fire_main_pressed() -> void:
 func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
-	if fire_timer > 0.0:
-		fire_timer = maxf(fire_timer - delta, 0.0)
+	if _fire_timer > 0.0:
+		_fire_timer = maxf(_fire_timer - delta, 0.0)
 func _pistol_fire() -> void:
-	if not player:
+	if _fire_timer > 0.0:
 		return
-	if fire_timer > 0.0:
-		return
-	fire_timer = FIRE_RATE
-	var aim_vector : Vector3 = _get_aim_with_spread(player.pointing_vector, SPREAD_ANGLE)
-	raycast.target_position = aim_vector * RANGE
-	raycast.force_raycast_update()
+	_fire_timer = FIRE_RATE
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
+	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
+	raycast.target_position = aim_vector * RANGE
+	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		#An Enemy or an Environment has been hit!
 		var ray_endpoint : Vector3 = raycast.get_collision_point()
@@ -52,18 +50,8 @@ func _pistol_fire() -> void:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
-func _get_aim_with_spread(base_vector:Vector3, spread:float)->Vector3:
-	var rotator := Vector3.ZERO
-	var result_vector := base_vector
-	if base_vector.y == 0.0:
-		#keep y to 0, swap x and z
-		rotator.x = base_vector.z
-		rotator.z = -base_vector.x
-	else:
-		#set x to 0, swap y and z
-		rotator.y = base_vector.z
-		rotator.z = -base_vector.y
-	rotator = rotator.normalized()
-	rotator = rotator.rotated(base_vector, randf_range(0.0, 2*PI))
-	result_vector = base_vector.rotated(rotator, randf_range(-spread, spread))
+func _get_aim_with_spread(adjusted_rotation:Vector2, spread:float)->Vector3:
+	var result_vector := Vector3.FORWARD
+	result_vector = result_vector.rotated(Vector3.RIGHT, adjusted_rotation.x)
+	result_vector = result_vector.rotated(Vector3.UP, adjusted_rotation.y)
 	return result_vector

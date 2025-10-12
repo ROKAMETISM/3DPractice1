@@ -13,6 +13,10 @@ func _ready() -> void:
 	for weapon in weapons:
 		add_child(weapon)
 		weapon.player = player
+func _physics_process(delta: float) -> void:
+	for weapon in weapons:
+		weapon.pointing_vector = player.pointing_vector
+		weapon.adjusted_rotation = player.camera_rotation
 func fire_main() -> void:
 	if not player:
 		return
