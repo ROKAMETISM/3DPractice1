@@ -13,6 +13,7 @@ var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
+	_shotgun_fire()
 	pass
 func fire_main_pressed() -> void:
 	_shotgun_fire()

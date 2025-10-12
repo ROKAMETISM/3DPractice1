@@ -1,7 +1,7 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.1
+const FIRE_RATE := 0.3
 const RANGE := 30.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
@@ -12,6 +12,7 @@ var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
+	_pistol_fire()
 	pass
 func fire_main_pressed() -> void:
 	_pistol_fire()
