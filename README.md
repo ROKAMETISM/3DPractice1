@@ -6,15 +6,21 @@ https://www.youtube.com/watch?v=A3HLeyaBCq4&list=PLQZiuyZoMHcgqP-ERsVE4x4JSFojLd
 
 ##Todos
 
-FiniteStateMachine for Enemy and Player
+###FiniteStateMachine for Enemy and Player
 
-Pathfinding, NavigationMap and 3DMapEditing
+https://www.youtube.com/watch?v=bNdFXooM1MQ
 
-Weapons : Sniper, GrenadeLauncher, PlasmaRifle, Machinegun, RocketLauncher
+https://github.com/theshaggydev/the-shaggy-dev-projects/tree/main/projects/godot-4/advanced-state-machines
 
-Ammosystem
+https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
+###Pathfinding, NavigationMap and 3DMapEditing
 
+###Weapons : Sniper, GrenadeLauncher, PlasmaRifle, Machinegun, RocketLauncher
+
+###Ammosystem
+
+###Weapon Visualization on screen
 
 
 
