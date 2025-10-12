@@ -1,0 +1,9 @@
+[gd_resource type="PointMesh" load_steps=2 format=3 uid="uid://cx03ji6146wt8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnb1c"]
+albedo_color = Color(0.664823, 0, 0.040363364, 1)
+use_point_size = true
+point_size = 4.0
+
+[resource]
+material = SubResource("StandardMaterial3D_qnb1c")

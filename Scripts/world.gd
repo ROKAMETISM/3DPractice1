@@ -8,6 +8,7 @@ func _ready() -> void:
 	player.weapon_manager.weapon_switched.connect(hud.set_current_weapon)
 	print("debug signal connected")
 	player.weapon_manager.switch_weapon(0)
+	preload("uid://cx03ji6146wt8")
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()

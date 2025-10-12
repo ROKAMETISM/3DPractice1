@@ -1,15 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://pm7lgpgx10gl"]
+[gd_scene load_steps=3 format=3 uid="uid://pm7lgpgx10gl"]
 
+[ext_resource type="PointMesh" uid="uid://cx03ji6146wt8" path="res://Resources/mesh_shot_hit_particle.tres" id="1_o8fmb"]
 [ext_resource type="Script" uid="uid://b7dse32ycen1v" path="res://Scripts/shot_hit_particle.gd" id="1_ptua1"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qnb1c"]
-albedo_color = Color(0.664823, 0, 0.040363364, 1)
-use_point_size = true
-point_size = 4.0
-
-[sub_resource type="PointMesh" id="PointMesh_ptua1"]
-material = SubResource("StandardMaterial3D_qnb1c")
-
 [node name="ShotHitParticle" type="MeshInstance3D"]
-mesh = SubResource("PointMesh_ptua1")
+mesh = ExtResource("1_o8fmb")
 script = ExtResource("1_ptua1")

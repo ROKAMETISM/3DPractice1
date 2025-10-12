@@ -1,10 +1,11 @@
 extends MeshInstance3D
 const LIFE := 0.5
+const INITIAL_ALPHA := 0.75
 var lifetime := LIFE
 func _process(delta: float) -> void:
 	lifetime -= delta
 	if mesh:
-		mesh.surface_get_material(0).albedo_color.a = lifetime / LIFE
+		mesh.surface_get_material(0).albedo_color.a = INITIAL_ALPHA * lifetime / LIFE
 	if lifetime < 0:
 		queue_free()
 func update_points(points : Array[Vector3]) : 
