@@ -1,5 +1,5 @@
 extends MeshInstance3D
-const LIFE := 5.0
+const LIFE := 0.4
 const INITIAL_ALPHA := 0.75
 var lifetime := LIFE
 func _process(delta: float) -> void:

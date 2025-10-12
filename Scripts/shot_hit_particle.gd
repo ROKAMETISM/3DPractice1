@@ -1,6 +1,6 @@
 extends MeshInstance3D
 const SPEED := 3.5
-const GRAVITY := 9.8
+const GRAVITY := 13.0
 const RANDOMNESS := 1.5
 var lifetime := 0.5
 var velocity := Vector3.ZERO
