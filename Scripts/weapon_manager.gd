@@ -12,6 +12,7 @@ func _ready() -> void:
 	weapons.append(shotgun)
 	for weapon in weapons:
 		add_child(weapon)
+		weapon.position = Vector3(0.0, 0.581, 0.0)
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.pointing_vector = player.pointing_vector

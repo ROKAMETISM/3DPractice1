@@ -1,7 +1,7 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-const FIRE_RATE := 0.8
+const FIRE_RATE := 0.1
 const RANGE := 25.0
 const BASE_DAMAGE := 4.0
 const DAMAGE_SPREAD := 1.0
