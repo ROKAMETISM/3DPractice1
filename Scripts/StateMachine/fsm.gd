@@ -5,6 +5,7 @@ var current_states:Array[State]
 func init(parent:CharacterBody3D, move_data:MoveData, move_controller:MoveController) -> void:
 	for child : State in get_children():
 		child.parent = parent
+		child.fsm = self
 		child.move_data = move_data
 		child.move_controller = move_controller
 	var state_transition_array := []
