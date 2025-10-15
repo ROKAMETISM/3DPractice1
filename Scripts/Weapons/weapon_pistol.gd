@@ -12,7 +12,6 @@ var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
-	_pistol_fire()
 	pass
 func fire_main_pressed() -> void:
 	_pistol_fire()
@@ -20,8 +19,9 @@ func fire_main_pressed() -> void:
 func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
+	print(_fire_timer)
 	if _fire_timer > 0.0:
-		_fire_timer = maxf(_fire_timer - delta, -0.1)
+		_fire_timer = maxf(_fire_timer - delta, 0.0)
 func _pistol_fire() -> void:
 	if _fire_timer > 0.0:
 		return

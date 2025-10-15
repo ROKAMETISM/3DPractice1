@@ -35,6 +35,18 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
 		camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
+	if Input.is_action_pressed("fire_main"):
+		weapon_manager.fire_main()
+	if Input.is_action_just_pressed("fire_main"):
+		fire_main_pressed.emit()
+	if Input.is_action_just_released("fire_main"):
+		fire_main_released.emit()
+	if Input.is_action_just_pressed("switch_weapon_next"):
+		print("weapon to next")
+		weapon_manager.scroll_weapon(1)
+	if Input.is_action_just_pressed("switch_weapon_previous"):
+		print("weapon to prev")
+		weapon_manager.scroll_weapon(-1)
 func _physics_process(delta: float) -> void:
 	fsm.process_physics(delta)
 	if global_position.y < BOTTOM_THRESHOLD:
@@ -51,17 +63,5 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	player_fov_updated.emit(camera.fov)
-	if Input.is_action_pressed("fire_main"):
-		weapon_manager.fire_main()
-	if Input.is_action_just_pressed("fire_main"):
-		fire_main_pressed.emit()
-	if Input.is_action_just_released("fire_main"):
-		fire_main_released.emit()
-	if Input.is_action_just_pressed("switch_weapon_next"):
-		print("weapon to next")
-		weapon_manager.scroll_weapon(1)
-	if Input.is_action_just_pressed("switch_weapon_previous"):
-		print("weapon to prev")
-		weapon_manager.scroll_weapon(-1)
 func _process(delta: float) -> void:
 	fsm.process_frame(delta)

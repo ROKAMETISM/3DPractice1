@@ -12,7 +12,7 @@ func _ready() -> void:
 	weapons.append(shotgun)
 	for weapon in weapons:
 		add_child(weapon)
-		#weapon.position = Vector3(0.0, 0.581, 0.0)
+		weapon.position = Vector3(0.0, 0.581, 0.0)
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.pointing_vector = player.pointing_vector
@@ -36,11 +36,11 @@ func switch_weapon(weapon_index : int) -> void:
 		player.fire_main_pressed.disconnect(weapons[current_weapon_index].fire_main_pressed)
 	if player.fire_main_released.has_connections():
 		player.fire_main_released.disconnect(weapons[current_weapon_index].fire_main_released)
-	print("weapon switched to "+str(weapons[current_weapon_index].WEAPON_NAME))
 	current_weapon_index = weapon_index
 	player.fire_main_pressed.connect(weapons[current_weapon_index].fire_main_pressed)
 	player.fire_main_released.connect(weapons[current_weapon_index].fire_main_released)
 	weapon_switched.emit(weapons[current_weapon_index])
+	print("weapon switched to "+str(weapons[current_weapon_index].WEAPON_NAME))
 func scroll_weapon(index_delta : int) -> void:
 	var new_index := current_weapon_index + index_delta
 	new_index = posmod(new_index, weapons.size())

@@ -21,7 +21,7 @@ func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
 	if _fire_timer > 0.0:
-		_fire_timer = maxf(_fire_timer - delta, -0.1)
+		_fire_timer = maxf(_fire_timer - delta, 0.0)
 func _shotgun_fire() -> void:
 	if _fire_timer > 0.0:
 		return
