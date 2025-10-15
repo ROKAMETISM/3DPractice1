@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=22 format=3 uid="uid://du3tuubqmh3i8"]
 
 [ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
@@ -12,12 +12,15 @@
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/state_stand.gd" id="9_ueo34"]
 [ext_resource type="Script" uid="uid://cdsp1005q4xww" path="res://Scripts/StateMachine/States/state_walk.gd" id="10_33ul6"]
 [ext_resource type="Script" uid="uid://br47t3ekqnjdt" path="res://Scripts/StateMachine/Controllers/enemy_test_move_controller.gd" id="11_icysg"]
+[ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/state_death.gd" id="12_8sffl"]
 
 [sub_resource type="Resource" id="Resource_8sffl"]
 script = ExtResource("2_ecpaw")
-jump_velocity = 3.0
+jump_velocity = 4.0
 jump_gravity = 9.8
 fall_gravity = 9.8
+walk_speed = 2.0
+sprint_speed = 3.0
 metadata/_custom_type_script = "uid://cn36stk7m4rcc"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvmee"]
@@ -116,10 +119,11 @@ script = ExtResource("4_tvmee")
 starting_states = [NodePath("GroundedState"), NodePath("StandState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
-[node name="FallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state")]
+[node name="FallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state", "death_state")]
 script = ExtResource("5_icysg")
 jump_state = NodePath("../JumpState")
 grounded_state = NodePath("../GroundedState")
+death_state = NodePath("../DeathState")
 metadata/_custom_type_script = "uid://b15s566tbph2o"
 
 [node name="GroundedState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state")]
@@ -151,6 +155,10 @@ script = ExtResource("10_33ul6")
 stand_state = NodePath("../StandState")
 sprint_state = NodePath("../SprintState")
 metadata/_custom_type_script = "uid://cdsp1005q4xww"
+
+[node name="DeathState" type="Node" parent="Controllers/FSM"]
+script = ExtResource("12_8sffl")
+metadata/_custom_type_script = "uid://uv17e2g3f0fs"
 
 [node name="EnemyTestMoveController" type="Node" parent="Controllers"]
 unique_name_in_owner = true

@@ -6,3 +6,4 @@ extends Resource
 @export var walk_speed := 6.0
 @export var sprint_speed := 10.0
 @export var air_control := 2.0
+@export var fall_death_threshold := -50.0

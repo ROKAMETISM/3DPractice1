@@ -1,16 +1,9 @@
 extends CharacterBody3D
-const SPEED := 2.0
-const JUMP_VELOCITY := 4.5
 const MAX_HP := 10.0
 const HIT_ANIMATION_DURATION := 0.3
-const GRAVITY := 10.0
-const PAUSE_TIME := 8.0
-const PAUSE_TIME_SPREAD := 2.0
-const WANDER_RADIUS := 16.0
-const WANDER_DESTINATION_REACH_THRESHOLD := 5.0
+const BOTTOM_THRESHOLD := -50.0
 var current_hp := MAX_HP
 var hit_animation_timer := 0.0
-var wander_destination := Vector3.ZERO
 @onready var sprite = %Sprite
 @export var move_data : MoveData
 @onready var fsm = %FSM
@@ -18,6 +11,8 @@ var wander_destination := Vector3.ZERO
 func _ready() -> void:
 	sprite.animation = "default"
 	fsm.init(self, move_data, move_controller)
+	move_controller.init(self)
+	move_controller.set_home_position(global_position)
 func _physics_process(delta: float) -> void:
 	fsm.process_physics(delta)
 	hit_animation_timer -= delta

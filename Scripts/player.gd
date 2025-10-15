@@ -65,3 +65,5 @@ func _physics_process(delta: float) -> void:
 	player_fov_updated.emit(camera.fov)
 func _process(delta: float) -> void:
 	fsm.process_frame(delta)
+func _die() -> void:
+	queue_free()
