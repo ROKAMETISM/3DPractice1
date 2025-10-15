@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=21 format=3 uid="uid://du3tuubqmh3i8"]
 
 [ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
+[ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_ecpaw"]
 [ext_resource type="Texture2D" uid="uid://bvv3u6458bc2w" path="res://Sprites/sprite_enemy_test_hit.png" id="3_kxk0d"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="4_tvmee"]
 [ext_resource type="Script" uid="uid://b15s566tbph2o" path="res://Scripts/StateMachine/States/state_fall.gd" id="5_icysg"]
@@ -10,6 +11,28 @@
 [ext_resource type="Script" uid="uid://cf5cnu26g4qsj" path="res://Scripts/StateMachine/States/state_sprint.gd" id="8_k4f6d"]
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/state_stand.gd" id="9_ueo34"]
 [ext_resource type="Script" uid="uid://cdsp1005q4xww" path="res://Scripts/StateMachine/States/state_walk.gd" id="10_33ul6"]
+[ext_resource type="Script" uid="uid://br47t3ekqnjdt" path="res://Scripts/StateMachine/Controllers/enemy_test_move_controller.gd" id="11_icysg"]
+
+[sub_resource type="Resource" id="Resource_8sffl"]
+script = ExtResource("2_ecpaw")
+jump_velocity = 3.0
+jump_gravity = 9.8
+fall_gravity = 9.8
+metadata/_custom_type_script = "uid://cn36stk7m4rcc"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvmee"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kxk0d"]
+material = SubResource("StandardMaterial3D_tvmee")
+top_radius = 0.03
+bottom_radius = 0.01
+height = 1.0
+radial_segments = 8
+rings = 2
+cap_top = false
+cap_bottom = false
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_xb7yx"]
 radial_segments = 16
@@ -47,17 +70,13 @@ rings = 2
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kxk0d"]
 points = PackedVector3Array(0.38359535, 0.84672093, 0.03958388, -0.38356552, -0.84665525, -0.039655853, -0.38359535, -0.8467211, 0.039583888, -0.38359535, 0.8467211, 0.039583888, 0.039583888, 0.8467211, -0.38359535, 0.28280002, -0.86230874, -0.28279996, 0.03958388, -0.84672093, 0.38359535, -0.03965585, 0.84665513, 0.38356552, -0.2828, -0.86230886, -0.2828, 0.2828, -0.8623087, 0.2828, -0.28279996, -0.86230874, 0.28280002, -0.2828, 0.86230886, -0.2828, 0.2828, 0.8623087, 0.2828, 0.28280002, 0.86230874, -0.28279996, -0.039655853, -0.84665525, -0.38356552, 0.38356552, -0.84665513, -0.03965585, -0.28279996, 0.86230874, 0.28280002, 0.039583888, -0.8467211, -0.38359535, 0.38359535, -0.84672093, 0.03958388, 0.03958388, 0.84672093, 0.38359535, -0.039655853, 0.84665525, -0.38356552, -0.38356552, 0.84665525, -0.039655853, 0.38356552, 0.84665513, -0.03965585, -0.03965585, -0.84665513, 0.38356552)
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_kxk0d"]
-top_radius = 0.1
-bottom_radius = 0.01
-height = 1.0
-radial_segments = 8
-rings = 2
-cap_top = false
-cap_bottom = false
-
 [node name="EnemyTest" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_67vpr")
+move_data = SubResource("Resource_8sffl")
+
+[node name="DebugForwardMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.675, -0.48768955)
+mesh = SubResource("CylinderMesh_kxk0d")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -89,36 +108,51 @@ mesh = SubResource("CylinderMesh_67vpr")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
 shape = SubResource("ConvexPolygonShape3D_kxk0d")
 
-[node name="DebugForwardMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.675, -0.84)
-mesh = SubResource("CylinderMesh_kxk0d")
-
 [node name="Controllers" type="Node" parent="."]
 
-[node name="FSM" type="Node" parent="Controllers"]
+[node name="FSM" type="Node" parent="Controllers" node_paths=PackedStringArray("starting_states")]
+unique_name_in_owner = true
 script = ExtResource("4_tvmee")
+starting_states = [NodePath("GroundedState"), NodePath("StandState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
-[node name="FallState" type="Node" parent="Controllers/FSM"]
+[node name="FallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state")]
 script = ExtResource("5_icysg")
+jump_state = NodePath("../JumpState")
+grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://b15s566tbph2o"
 
-[node name="GroundedState" type="Node" parent="Controllers/FSM"]
+[node name="GroundedState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state")]
 script = ExtResource("6_ecpaw")
+fall_state = NodePath("../FallState")
+jump_state = NodePath("../JumpState")
 metadata/_custom_type_script = "uid://ca33m87xecino"
 
-[node name="JumpState" type="Node" parent="Controllers/FSM"]
+[node name="JumpState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "grounded_state")]
 script = ExtResource("7_8sffl")
+fall_state = NodePath("../FallState")
+grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://om2fuwunc6cv"
 
-[node name="SprintState" type="Node" parent="Controllers/FSM"]
+[node name="SprintState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("stand_state", "walk_state")]
 script = ExtResource("8_k4f6d")
+stand_state = NodePath("../StandState")
+walk_state = NodePath("../WalkState")
 metadata/_custom_type_script = "uid://cf5cnu26g4qsj"
 
-[node name="StandState" type="Node" parent="Controllers/FSM"]
+[node name="StandState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("walk_state", "sprint_state")]
 script = ExtResource("9_ueo34")
+walk_state = NodePath("../WalkState")
+sprint_state = NodePath("../SprintState")
 metadata/_custom_type_script = "uid://ccou8x21gdhnh"
 
-[node name="WalkState" type="Node" parent="Controllers/FSM"]
+[node name="WalkState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("stand_state", "sprint_state")]
 script = ExtResource("10_33ul6")
+stand_state = NodePath("../StandState")
+sprint_state = NodePath("../SprintState")
 metadata/_custom_type_script = "uid://cdsp1005q4xww"
+
+[node name="EnemyTestMoveController" type="Node" parent="Controllers"]
+unique_name_in_owner = true
+script = ExtResource("11_icysg")
+metadata/_custom_type_script = "uid://br47t3ekqnjdt"

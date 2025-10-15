@@ -19,7 +19,6 @@ func fire_main_pressed() -> void:
 func fire_main_released() -> void:
 	pass
 func _physics_process(delta: float) -> void:
-	print(_fire_timer)
 	if _fire_timer > 0.0:
 		_fire_timer = maxf(_fire_timer - delta, 0.0)
 func _pistol_fire() -> void:
