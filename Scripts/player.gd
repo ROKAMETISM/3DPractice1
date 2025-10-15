@@ -27,6 +27,7 @@ func _ready() -> void:
 	weapon_manager.set_player(self)
 	weapon_manager.switch_weapon(0)
 	fsm.init(self, move_data, move_controller)
+	move_controller.init(self)
 func _unhandled_input(event: InputEvent) -> void:
 	fsm.process_input(event)
 	if event is InputEventMouseMotion:
@@ -36,8 +37,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
 func _physics_process(delta: float) -> void:
 	fsm.process_physics(delta)
-	
-	move_and_slide()
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()
 	acceleration_y = (velocity.y - _previous_velocity_y) / delta
@@ -48,7 +47,7 @@ func _physics_process(delta: float) -> void:
 	player_y_acceleration_updated.emit(acceleration_y)
 	var horizontal_veolcity = velocity
 	horizontal_veolcity.y = 0.0
-	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, SPRINT_SPEED * 2)
+	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, move_data.sprint_speed * 2)
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	player_fov_updated.emit(camera.fov)
