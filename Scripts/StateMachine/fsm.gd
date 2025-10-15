@@ -2,6 +2,7 @@ extends Node
 class_name FSM
 @export var starting_states:Array[State]
 var current_states:Array[State]
+signal fsm_state_updated(new_states : Array[State])
 func init(parent:CharacterBody3D, move_data:MoveData, move_controller:MoveController) -> void:
 	for child : State in get_children():
 		child.parent = parent
@@ -25,6 +26,7 @@ func change_state(data:Array) -> void:
 					continue
 				current_states.erase(transition.new_state)
 				transition.new_state.exit()
+	fsm_state_updated.emit(current_states)
 func process_physics(delta: float) -> void:
 	for current_state_element in current_states:
 		var state_change_data = current_state_element.process_physics(delta)

@@ -16,3 +16,6 @@ func update_text() -> void:
 		text += hud.current_weapon.WEAPON_NAME
 	else:
 		text += "NULL"
+	text += "\nCurrentStates:"
+	for state:State in hud.player_fsm_states:
+		text += state.get_state_name() + "/"

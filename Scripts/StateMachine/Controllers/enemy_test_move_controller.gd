@@ -1,7 +1,8 @@
 class_name EnemyTestMoveController
 extends MoveController
 const WANDER_RANGE := 16.0
-const JUMP_RATE := 3.0
+const JUMP_RATE := 3.5
+const JUMP_RATE_SPREAD := 1.0
 var jump_timer := 2.0
 var want_jump := false
 var home_position := Vector3.ZERO
@@ -17,7 +18,7 @@ func _physics_process(delta: float) -> void:
 	if jump_timer > JUMP_RATE - 0.5:
 		want_jump = true
 	if jump_timer == 0.0:
-		jump_timer = JUMP_RATE
+		jump_timer = JUMP_RATE + randf_range(-JUMP_RATE_SPREAD, JUMP_RATE_SPREAD)
 func move_input() -> Vector2:
 	if not parent:
 		return Vector2.ZERO

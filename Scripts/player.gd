@@ -22,6 +22,7 @@ signal player_y_acceleration_updated(new_y_acceleration : float)
 signal fire_main_pressed
 signal fire_main_released
 signal player_fov_updated(new_fov : float)
+var signal_fsm_state_updated : Signal
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10
@@ -29,6 +30,7 @@ func _ready() -> void:
 	weapon_manager.switch_weapon(0)
 	fsm.init(self, move_data, move_controller)
 	move_controller.init(self)
+	signal_fsm_state_updated = fsm.fsm_state_updated
 func _unhandled_input(event: InputEvent) -> void:
 	fsm.process_input(event)
 	if event is InputEventMouseMotion:
