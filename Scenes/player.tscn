@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b81emnirlm0d0"]
 
 [ext_resource type="Script" uid="uid://cq2ch6kw1w2h7" path="res://Scripts/player.gd" id="1_v0iea"]
-[ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/weapon_manager.gd" id="2_cvnsp"]
+[ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/Weapons/weapon_manager.gd" id="2_cvnsp"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_vrkc0"]
 
