@@ -4,7 +4,6 @@ extends State
 @export var sprint_state: State
 func enter() -> void:
 	super()
-	parent.velocity.x = 0
 func process_input(event: InputEvent) -> Array:
 	var _output : Array
 	if get_move():
