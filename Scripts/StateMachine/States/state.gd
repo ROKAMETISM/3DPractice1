@@ -6,10 +6,10 @@ var fsm:FSM
 var move_data:MoveData
 var move_controller:MoveController
 func enter() -> void:
-	print("entered : " + get_state_name())
+	print("++entered : " + get_state_name())
 	pass
 func exit() -> void:
-	print("exiting : " + get_state_name())
+	print("--exiting : " + get_state_name())
 	pass
 func process_input(event: InputEvent) -> Array:
 	return []
