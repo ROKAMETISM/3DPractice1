@@ -9,6 +9,7 @@ var _previous_velocity_y := 0.0
 var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 var camera_rotation := Vector2.ZERO
+var _allow_weapon_switch := true
 @export var move_data : MoveData
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
@@ -41,13 +42,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		fire_main_pressed.emit()
 	if Input.is_action_just_released("fire_main"):
 		fire_main_released.emit()
-	if Input.is_action_just_pressed("switch_weapon_next"):
-		print("weapon to next")
+	if Input.is_action_just_pressed("switch_weapon_next") and _allow_weapon_switch:
 		weapon_manager.scroll_weapon(1)
-	if Input.is_action_just_pressed("switch_weapon_previous"):
-		print("weapon to prev")
+		_allow_weapon_switch = false
+	if Input.is_action_just_pressed("switch_weapon_previous") and _allow_weapon_switch:
 		weapon_manager.scroll_weapon(-1)
+		_allow_weapon_switch = false
 func _physics_process(delta: float) -> void:
+	_allow_weapon_switch = true
 	fsm.process_physics(delta)
 	if global_position.y < BOTTOM_THRESHOLD:
 		get_tree().reload_current_scene()

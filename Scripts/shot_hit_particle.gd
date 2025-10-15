@@ -5,8 +5,7 @@ const RANDOMNESS := 1.5
 var lifetime := 0.5
 var velocity := Vector3.ZERO
 var rand_velocity := Vector3.ZERO
-func _ready() -> void:
-	preload("uid://cx03ji6146wt8") #preload mesh data
+const shothit = preload("uid://cx03ji6146wt8")
 func _physics_process(delta: float) -> void:
 	lifetime -= delta
 	if lifetime < 0.0:
