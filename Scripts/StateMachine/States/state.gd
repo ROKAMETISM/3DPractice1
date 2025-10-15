@@ -1,15 +1,18 @@
 class_name State
 extends Node
 # Hold a reference to the parent so that it can be controlled by the state
+@export var state_log := false
 var parent:CharacterBody3D
 var fsm:FSM
 var move_data:MoveData
 var move_controller:MoveController
 func enter() -> void:
-	print("++entered : " + get_state_name())
+	if state_log:
+		print("++entered : " + get_state_name())
 	pass
 func exit() -> void:
-	print("--exiting : " + get_state_name())
+	if state_log:
+		print("--exiting : " + get_state_name())
 	pass
 func process_input(event: InputEvent) -> Array:
 	return []
