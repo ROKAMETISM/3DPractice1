@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://biq8247xoej2a"]
+
+[ext_resource type="Texture2D" uid="uid://2ftfs1lqsjkc" path="res://Sprites/sprite_projectile_plasma.png" id="1_ofhu2"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aga78"]
+radius = 0.15304142
+
+[node name="ProjectilePlasma" type="Area3D"]
+collision_layer = 0
+collision_mask = 9
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.015
+billboard = 2
+texture = ExtResource("1_ofhu2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_aga78")
