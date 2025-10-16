@@ -1,8 +1,8 @@
 extends Node3D
 const PROJECTILE_PLASMA := preload("uid://biq8247xoej2a")
 const FIRE_RATE := 0.1
-const RANGE := 30.0
-const PROJECTILE_SPEED := 10.0
+const RANGE := 35.0
+const PROJECTILE_SPEED := 15.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
 const SPREAD_ANGLE := deg_to_rad(2.5)
