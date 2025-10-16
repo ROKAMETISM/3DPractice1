@@ -11,16 +11,32 @@ var _fire_timer := 0.0
 var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
+var _is_fire_main_pressed := false
+var _is_fire_special_pressed := false
 func fire_main_repeated() -> void:
 	_plasma_rifle_fire()
-	return
+	pass
 func fire_main_pressed() -> void:
-	return
+	_is_fire_main_pressed = true
+	pass
 func fire_main_released() -> void:
-	return
+	_is_fire_main_pressed = false
+	pass
+func fire_special_repeated() -> void:
+	pass
+func fire_special_pressed() -> void:
+	_is_fire_special_pressed = true
+	pass
+func fire_special_released() -> void:
+	_is_fire_special_pressed = false
+	pass
 func _physics_process(delta: float) -> void:
 	if _fire_timer > 0.0:
 		_fire_timer = maxf(_fire_timer - delta, 0.0)
+	if _is_fire_main_pressed:
+		fire_main_repeated()
+	if _is_fire_special_pressed:
+		fire_special_repeated()
 func _plasma_rifle_fire() -> void:
 	if _fire_timer > 0.0:
 		return
@@ -38,3 +54,7 @@ func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
 	result_vector = result_vector.rotated(Vector3.RIGHT, result_rotation.x)
 	result_vector = result_vector.rotated(Vector3.UP, result_rotation.y)
 	return result_vector
+func reset() -> void:
+	_fire_timer = 0.0
+	_is_fire_main_pressed = false
+	_is_fire_special_pressed = false

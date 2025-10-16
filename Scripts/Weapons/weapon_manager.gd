@@ -16,12 +16,6 @@ func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.pointing_vector = player.pointing_vector
 		weapon.adjusted_rotation = player.camera_rotation
-func fire_main() -> void:
-	if not player:
-		return
-	if not weapons[current_weapon_index]:
-		return
-	weapons[current_weapon_index].fire_main_repeated()
 func set_player(new_player : CharacterBody3D):
 	player = new_player
 func switch_weapon(weapon_index : int) -> void:
@@ -35,9 +29,16 @@ func switch_weapon(weapon_index : int) -> void:
 		player.fire_main_pressed.disconnect(weapons[current_weapon_index].fire_main_pressed)
 	if player.fire_main_released.has_connections():
 		player.fire_main_released.disconnect(weapons[current_weapon_index].fire_main_released)
+	if player.fire_special_pressed.has_connections():
+		player.fire_special_pressed.disconnect(weapons[current_weapon_index].fire_special_pressed)
+	if player.fire_special_released.has_connections():
+		player.fire_special_released.disconnect(weapons[current_weapon_index].fire_special_released)
+	weapons[current_weapon_index].reset()
 	current_weapon_index = weapon_index
 	player.fire_main_pressed.connect(weapons[current_weapon_index].fire_main_pressed)
 	player.fire_main_released.connect(weapons[current_weapon_index].fire_main_released)
+	player.fire_special_pressed.connect(weapons[current_weapon_index].fire_special_pressed)
+	player.fire_special_released.connect(weapons[current_weapon_index].fire_special_released)
 	weapon_switched.emit(weapons[current_weapon_index])
 	print("weapon switched to "+str(weapons[current_weapon_index].WEAPON_NAME))
 func scroll_weapon(index_delta : int) -> void:

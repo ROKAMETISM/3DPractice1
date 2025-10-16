@@ -21,6 +21,8 @@ signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)
 signal fire_main_pressed
 signal fire_main_released
+signal fire_special_pressed
+signal fire_special_released
 signal player_fov_updated(new_fov : float)
 var signal_fsm_state_updated : Signal
 func _ready() -> void:
@@ -42,6 +44,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		fire_main_pressed.emit()
 	if Input.is_action_just_released("fire_main"):
 		fire_main_released.emit()
+	if Input.is_action_just_pressed("fire_special"):
+		fire_special_pressed.emit()
+	if Input.is_action_just_released("fire_special"):
+		fire_special_released.emit()
 	if Input.is_action_just_pressed("switch_weapon_next") and _allow_weapon_switch:
 		weapon_manager.scroll_weapon(1)
 		_allow_weapon_switch = false
@@ -65,8 +71,6 @@ func _physics_process(delta: float) -> void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	player_fov_updated.emit(camera.fov)
-	if Input.is_action_pressed("fire_main"):
-		weapon_manager.fire_main()
 func _process(delta: float) -> void:
 	fsm.process_frame(delta)
 func _die() -> void:
