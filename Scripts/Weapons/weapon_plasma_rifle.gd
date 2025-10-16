@@ -1,8 +1,8 @@
 extends Node3D
-const RAY := preload("uid://be2ixbaa5oacl")
-const HITPARTICLE := preload("uid://pm7lgpgx10gl")
+const PROJECTILE_PLASMA := preload("uid://biq8247xoej2a")
 const FIRE_RATE := 0.1
 const RANGE := 30.0
+const PROJECTILE_SPEED := 10.0
 const BASE_DAMAGE := 5.0
 const DAMAGE_SPREAD := 1.0
 const SPREAD_ANGLE := deg_to_rad(2.5)
@@ -12,7 +12,7 @@ var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
 @onready var raycast := $RayCast3D
 func fire_main_repeated() -> void:
-	_pistol_fire()
+	_plasma_rifle_fire()
 	pass
 func fire_main_pressed() -> void:
 	pass
@@ -21,36 +21,16 @@ func fire_main_released() -> void:
 func _physics_process(delta: float) -> void:
 	if _fire_timer > 0.0:
 		_fire_timer = maxf(_fire_timer - delta, 0.0)
-func _pistol_fire() -> void:
+func _plasma_rifle_fire() -> void:
 	if _fire_timer > 0.0:
 		return
-	print("fire")
 	_fire_timer = FIRE_RATE
-	var points : Array[Vector3]
-	var new_ray = RAY.instantiate()
-	points.append(global_position)
-	get_tree().current_scene.add_child(new_ray)
 	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
-	raycast.target_position = aim_vector * RANGE
-	raycast.force_raycast_update()
-	if raycast.is_colliding():
-		#An Enemy or an Environment has been hit!
-		var ray_endpoint : Vector3 = raycast.get_collision_point()
-		points.append(ray_endpoint)
-		var hit_particle : MeshInstance3D = HITPARTICLE.instantiate()
-		get_tree().current_scene.add_child(hit_particle)
-		hit_particle.global_position = ray_endpoint
-		hit_particle.set_direction(raycast.get_collision_normal())
-		#check if the collider is an enemy
-		var collider : Object = raycast.get_collider().get_parent()
-		if collider.is_in_group("Enemy"):
-			var damage := BASE_DAMAGE
-			damage += randf_range(-1.0, 1.0)*DAMAGE_SPREAD
-			collider.take_damage(damage)
-	else:
-		#out of range
-		points.append(global_position+raycast.target_position)
-	new_ray.update_points(points)
+	var projectile : Area3D = PROJECTILE_PLASMA.instantiate()
+	get_tree().current_scene.add_child(projectile)
+	projectile.global_position = global_position 
+	projectile.velocity = aim_vector.normalized()*PROJECTILE_SPEED
+	projectile.set_lifetime(RANGE / PROJECTILE_SPEED)
 func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
 	var result_vector := Vector3.FORWARD
 	var spread_rotation := Vector2(sqrt(randf())*spread, 0.0).rotated(randf_range(0.0, 2*PI))
