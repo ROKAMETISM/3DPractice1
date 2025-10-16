@@ -28,6 +28,11 @@ points = PackedVector3Array(-0.12520654, -0.532801, -0.4805069, 0.022783129, 0.4
 script = ExtResource("1_v0iea")
 move_data = SubResource("Resource_ukyrk")
 
+[node name="WeaponManager" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("2_cvnsp")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 mesh = SubResource("CapsuleMesh_vrkc0")
@@ -42,10 +47,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="HeadPivot"]
 unique_name_in_owner = true
-
-[node name="WeaponManager" type="Node3D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("2_cvnsp")
 
 [node name="Controllers" type="Node" parent="."]
 
