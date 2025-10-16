@@ -23,7 +23,6 @@ func fire_main_released() -> void:
 	_is_fire_main_pressed = false
 	pass
 func fire_special_repeated() -> void:
-	_pistol_fire()
 	pass
 func fire_special_pressed() -> void:
 	_is_fire_special_pressed = true

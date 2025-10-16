@@ -1,6 +1,8 @@
 extends Node3D
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
+const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
+const PROJECTILE_SPEED := 15.0
 const FIRE_RATE := 0.8
 const RANGE := 25.0
 const BASE_DAMAGE := 4.0
@@ -26,6 +28,7 @@ func fire_main_released() -> void:
 func fire_special_repeated() -> void:
 	pass
 func fire_special_pressed() -> void:
+	_grenade_fire()
 	_is_fire_special_pressed = true
 	pass
 func fire_special_released() -> void:
@@ -70,6 +73,13 @@ func _fire_single_pellet() -> void:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
+func _grenade_fire()->void:
+	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
+	var projectile : Area3D = PROJECTILE_GRENADE.instantiate()
+	get_tree().current_scene.add_child(projectile)
+	projectile.global_position = global_position 
+	projectile.velocity = aim_vector.normalized()*PROJECTILE_SPEED
+	projectile.set_lifetime(RANGE / PROJECTILE_SPEED)
 func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
 	var result_vector := Vector3.FORWARD
 	var spread_rotation := Vector2(sqrt(randf())*spread, 0.0).rotated(randf_range(0.0, 2*PI))

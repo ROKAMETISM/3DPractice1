@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqfxv0v35oiyu"]
+
+[ext_resource type="Script" uid="uid://cbcbo1nqupmmt" path="res://Scripts/projectile_grenade.gd" id="1_5iv6u"]
+[ext_resource type="Texture2D" uid="uid://bvmp0oey24vq2" path="res://Sprites/sprite_projectile_grenade.png" id="1_ggu03"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5iv6u"]
+radius = 0.07522953
+
+[node name="ProjectileGrenade" type="Area3D"]
+collision_layer = 0
+collision_mask = 18
+script = ExtResource("1_5iv6u")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.015
+billboard = 2
+texture = ExtResource("1_ggu03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5iv6u")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
