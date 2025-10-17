@@ -3,6 +3,7 @@ const ROCKET := preload("uid://db48pqrlchd3n")
 func fire_main_repeated() -> void:
 	super()
 	_fire_single_rocket()
+	apply_recoil()
 func _fire_single_rocket() -> void:
 	if _main_fire_timer > 0.0:
 		return

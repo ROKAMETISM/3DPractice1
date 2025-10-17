@@ -7,6 +7,7 @@ const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
 func fire_main_repeated() -> void:
 	super()
 	_shotgun_fire()
+	apply_recoil()
 func fire_special_pressed() -> void:
 	super()
 	_grenade_fire()

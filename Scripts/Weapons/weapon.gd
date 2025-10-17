@@ -8,6 +8,8 @@ extends Node3D
 @export var damage_spread := 1.0
 @export var spread_angle := 1.0
 @export var weapon_name := "WeaponName"
+##Recoil in degrees angle
+@export var recoil := 1.0
 var _main_fire_timer := 0.
 var _special_fire_timer := 0.0
 var _pointing_vector := Vector3.ONE
@@ -15,6 +17,8 @@ var _adjusted_rotation := Vector2.ZERO
 var _spread_angle := deg_to_rad(spread_angle)
 var _is_fire_main_pressed := false
 var _is_fire_special_pressed := false
+##recoil amount in radians
+signal weapon_recoil(angle : float)
 func _ready() -> void:
 	_spread_angle = deg_to_rad(spread_angle)
 func fire_main_repeated() -> void:
@@ -57,3 +61,5 @@ func get_spread_angle_rad()->float:
 	return deg_to_rad(spread_angle)
 func get_weapon_name()->String:
 	return weapon_name
+func apply_recoil()->void:
+	weapon_recoil.emit(deg_to_rad(recoil))

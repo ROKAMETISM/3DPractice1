@@ -5,6 +5,7 @@ const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 func fire_main_pressed() -> void:
 	super()
 	_pistol_fire()
+	apply_recoil()
 func _pistol_fire() -> void:
 	if _main_fire_timer > 0.0:
 		return

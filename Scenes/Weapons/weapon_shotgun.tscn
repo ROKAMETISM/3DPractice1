@@ -10,6 +10,7 @@ projectile_speed = 22.0
 base_damage = 4.0
 spread_angle = 5.9
 weapon_name = "Shotgun"
+recoil = 1.5
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false

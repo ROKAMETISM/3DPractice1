@@ -77,3 +77,7 @@ func _die() -> void:
 	queue_free()
 func take_damage(damage:float)->void:
 	pass
+func apply_weapon_recoil(recoil_amount:float)->void:
+	camera.rotate_x(recoil_amount)
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
+	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
