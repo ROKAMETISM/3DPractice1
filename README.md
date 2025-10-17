@@ -23,7 +23,13 @@ https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
 ###Weapon Visualization on screen
 
+Weapon Visualization is affected by camera FOV...
 
+Possible Solutions : 
+	
+	draw weapon_vis on canvaslayer
+	
+	use multiple cameras and combine them with subviewports
 
 ##InputMaps
 
