@@ -17,9 +17,11 @@ https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
 ###Pathfinding, NavigationMap and 3DMapEditing
 
-###Weapons : Sniper, GrenadeLauncher, PlasmaRifle, Machinegun, RocketLauncher
+###Weapons : Sniper, Machinegun, Ballista, BFG
 
 ###Ammosystem
+
+###Collectables
 
 ###Weapon Visualization on screen
 
@@ -31,7 +33,15 @@ Possible Solutions :
 	
 	use multiple cameras and combine them with subviewports
 
-##InputMaps
+###Refactor using Composition
+
+Implement Components as Resources. Attached them to scenes as @export var. Combine components to another component:EntityComposition
+
+###Enemy AI and enemy variations
+
+AI Behavior tree
+
+##==InputMaps==
 
 [WASD] : Player Movement
 
