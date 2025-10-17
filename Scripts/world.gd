@@ -27,6 +27,6 @@ func spawn_enemy_test(param : String)->void:
 		return
 	var spawn_location : Vector3 = Vector3(float(components[0]), float(components[1]), float(components[2]))
 	var new_enemy := ENEMY_TEST.instantiate()
-	new_enemy.global_position = spawn_location
 	add_child(new_enemy)
+	new_enemy.global_position = spawn_location
 	

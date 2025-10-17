@@ -75,5 +75,7 @@ Layer 5 (Area) : Enemy Hurtbox
 
 Layer 6 (Area) : Enemy Hitbox
 
+Layer 7 (Area) : Collectable Hurtbox so that player can grab these
+
 
 All Hitbox and Hurtbox are Area3Ds.
