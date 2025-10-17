@@ -1,7 +1,6 @@
 extends Weapon
-const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
-@onready var raycast := $RayCast3D
+@onready var hitscan := $RaycastHitscan
 func fire_main_pressed() -> void:
 	super()
 	if _pistol_fire():
@@ -10,29 +9,12 @@ func _pistol_fire() -> bool:
 	if _main_fire_timer > 0.0:
 		return false
 	_main_fire_timer = main_fire_rate
-	var points : Array[Vector3]
-	var new_ray = RAY.instantiate()
-	points.append(global_position)
-	get_tree().current_scene.add_child(new_ray)
-	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle)
-	raycast.target_position = aim_vector * weapon_range
-	raycast.force_raycast_update()
-	if raycast.is_colliding():
-		#An Enemy or an Environment has been hit!
-		var ray_endpoint : Vector3 = raycast.get_collision_point()
-		points.append(ray_endpoint)
+	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle).normalized()
+	hitscan.damage = base_damage + randf_range(-1.0, 1.0)*damage_spread
+	var collider = hitscan.hitscan(aim_vector * weapon_range)
+	if collider:
 		var hit_particle : MeshInstance3D = HITPARTICLE.instantiate()
 		get_tree().current_scene.add_child(hit_particle)
-		hit_particle.global_position = ray_endpoint
-		hit_particle.set_direction(raycast.get_collision_normal())
-		#check if the collider is an enemy
-		var collider : Object = raycast.get_collider().get_parent()
-		if collider.is_in_group("Enemy"):
-			var damage := base_damage
-			damage += randf_range(-1.0, 1.0)*damage_spread
-			collider.take_damage(damage)
-	else:
-		#out of weapon_range
-		points.append(global_position+raycast.target_position)
-	new_ray.update_points(points)
+		hit_particle.global_position = hitscan.ray_endpoint
+		hit_particle.set_direction(hitscan.collision_normal)
 	return true

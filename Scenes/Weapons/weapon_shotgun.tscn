@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo54vd2yvkimn"]
+[gd_scene load_steps=4 format=3 uid="uid://bo54vd2yvkimn"]
 
 [ext_resource type="Script" uid="uid://c688ak5vfhvwq" path="res://Scripts/Weapons/weapon_shotgun.gd" id="1_lelw8"]
 [ext_resource type="Texture2D" uid="uid://beo4tw80abpci" path="res://Sprites/sprite_weapon_vis_shotgun.png" id="2_jvgxd"]
+[ext_resource type="Script" uid="uid://cwhgohooakxp6" path="res://Scripts/Weapons/raycast_hitscan.gd" id="3_fqlb7"]
 
 [node name="WeaponShotgun" type="Node3D"]
 script = ExtResource("1_lelw8")
@@ -14,8 +15,6 @@ weapon_name = "Shotgun"
 recoil = 1.5
 weapon_vis_text = ExtResource("2_jvgxd")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
-enabled = false
-target_position = Vector3(0, 1, 0)
-collision_mask = 18
-collide_with_areas = true
+[node name="RaycastHitscan" type="RayCast3D" parent="."]
+script = ExtResource("3_fqlb7")
+metadata/_custom_type_script = "uid://cwhgohooakxp6"

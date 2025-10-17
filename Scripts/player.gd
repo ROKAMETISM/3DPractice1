@@ -1,4 +1,4 @@
-extends CharacterBody3D
+class_name Player extends CharacterBody3D
 
 const SENSITIVITY := 0.003
 const BASE_FOV := 90.0
@@ -10,6 +10,7 @@ var acceleration_y := 0.0
 var pointing_vector := CAMERA_INITIAL_POINTING
 var camera_rotation := Vector2.ZERO
 var _allow_weapon_switch := true
+var signal_fsm_state_updated : Signal
 @export var move_data : MoveData
 @onready var headpivot = %HeadPivot
 @onready var camera = %Camera3D
@@ -25,7 +26,6 @@ signal fire_main_released
 signal fire_special_pressed
 signal fire_special_released
 signal player_fov_updated(new_fov : float)
-var signal_fsm_state_updated : Signal
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	Console.font_size = 10

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://kft8ejopthmq"]
+[gd_scene load_steps=4 format=3 uid="uid://kft8ejopthmq"]
 
 [ext_resource type="Script" uid="uid://doudw8bmm7cji" path="res://Scripts/Weapons/weapon_pistol.gd" id="1_mimn3"]
 [ext_resource type="Texture2D" uid="uid://bmv504d1qsucy" path="res://Sprites/sprite_weapon_vis_pistol.png" id="2_iapk7"]
+[ext_resource type="Script" uid="uid://cwhgohooakxp6" path="res://Scripts/Weapons/raycast_hitscan.gd" id="3_febmi"]
 
 [node name="WeaponPistol" type="Node3D"]
 script = ExtResource("1_mimn3")
@@ -10,8 +11,9 @@ spread_angle = 1.7
 weapon_name = "Pistol"
 weapon_vis_text = ExtResource("2_iapk7")
 
-[node name="RayCast3D" type="RayCast3D" parent="."]
+[node name="RaycastHitscan" type="RayCast3D" parent="."]
 enabled = false
-target_position = Vector3(0, 1, 0)
 collision_mask = 18
 collide_with_areas = true
+script = ExtResource("3_febmi")
+metadata/_custom_type_script = "uid://cwhgohooakxp6"
