@@ -4,11 +4,11 @@ const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 @onready var raycast := $RayCast3D
 func fire_main_pressed() -> void:
 	super()
-	_pistol_fire()
-	apply_recoil()
-func _pistol_fire() -> void:
+	if _pistol_fire():
+		apply_recoil()
+func _pistol_fire() -> bool:
 	if _main_fire_timer > 0.0:
-		return
+		return false
 	_main_fire_timer = main_fire_rate
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
@@ -35,3 +35,4 @@ func _pistol_fire() -> void:
 		#out of weapon_range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
+	return true

@@ -6,17 +6,18 @@ const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
 @export var pellets := 8
 func fire_main_repeated() -> void:
 	super()
-	_shotgun_fire()
-	apply_recoil()
+	if _shotgun_fire():
+		apply_recoil()
 func fire_special_pressed() -> void:
 	super()
 	_grenade_fire()
-func _shotgun_fire() -> void:
+func _shotgun_fire() -> bool:
 	if _main_fire_timer > 0.0:
-		return
+		return false
 	_main_fire_timer = main_fire_rate
 	for i in range(0, pellets):
 		_fire_single_pellet()
+	return true
 func _fire_single_pellet() -> void:
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
