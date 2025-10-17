@@ -14,8 +14,7 @@ func _ready() -> void:
 		add_child(weapon)
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
-		weapon.pointing_vector = player.pointing_vector
-		weapon.adjusted_rotation = player.camera_rotation
+		weapon.set_direction(player.pointing_vector, player.camera_rotation)
 func set_player(new_player : CharacterBody3D):
 	player = new_player
 func switch_weapon(weapon_index : int) -> void:
@@ -40,7 +39,7 @@ func switch_weapon(weapon_index : int) -> void:
 	player.fire_special_pressed.connect(weapons[current_weapon_index].fire_special_pressed)
 	player.fire_special_released.connect(weapons[current_weapon_index].fire_special_released)
 	weapon_switched.emit(weapons[current_weapon_index])
-	print("weapon switched to "+str(weapons[current_weapon_index].WEAPON_NAME))
+	print("weapon switched to "+str(weapons[current_weapon_index].weapon_name))
 func scroll_weapon(index_delta : int) -> void:
 	var new_index := current_weapon_index + index_delta
 	new_index = posmod(new_index, weapons.size())

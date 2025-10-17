@@ -13,7 +13,7 @@ func update_text() -> void:
 	text += "\nPlayerYAcceleration:%.2f"%hud.player_y_acceleration
 	text += "\nCurrentWeapon:"
 	if hud.current_weapon:
-		text += hud.current_weapon.WEAPON_NAME
+		text += hud.current_weapon.get_weapon_name()
 	else:
 		text += "NULL"
 	text += "\nCurrentStates:"

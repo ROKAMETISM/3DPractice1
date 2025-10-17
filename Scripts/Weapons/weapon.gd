@@ -1,34 +1,35 @@
+class_name Weapon
 extends Node3D
 @export var main_fire_rate := 1.0
 @export var special_fire_rate := 1.0
 @export var range := 30.0
+@export var projectile_speed := 15.0
 @export var base_damage := 5.0
 @export var damage_spread := 1.0
-@export var spread_angle := deg_to_rad(1.0)
+@export var spread_angle := 1.0
 @export var weapon_name := "WeaponName"
 var _main_fire_timer := 0.
 var _special_fire_timer := 0.0
 var _pointing_vector := Vector3.ONE
 var _adjusted_rotation := Vector2.ZERO
+var _spread_angle := deg_to_rad(spread_angle)
 @onready var raycast := $RayCast3D
 var _is_fire_main_pressed := false
 var _is_fire_special_pressed := false
+func _ready() -> void:
+	_spread_angle = deg_to_rad(spread_angle)
 func fire_main_repeated() -> void:
 	pass
 func fire_main_pressed() -> void:
 	_is_fire_main_pressed = true
-	pass
 func fire_main_released() -> void:
 	_is_fire_main_pressed = false
-	pass
 func fire_special_repeated() -> void:
 	pass
 func fire_special_pressed() -> void:
 	_is_fire_special_pressed = true
-	pass
 func fire_special_released() -> void:
 	_is_fire_special_pressed = false
-	pass
 func _physics_process(delta: float) -> void:
 	if _main_fire_timer > 0.0:
 		_main_fire_timer = maxf(_main_fire_timer - delta, 0.0)
@@ -50,3 +51,10 @@ func reset() -> void:
 	_special_fire_timer = 0.0
 	_is_fire_main_pressed = false
 	_is_fire_special_pressed = false
+func set_direction(pointing_vector:Vector3, adjusted_rotation:Vector2)->void:
+	_pointing_vector = pointing_vector
+	_adjusted_rotation = adjusted_rotation
+func get_spread_angle_rad()->float:
+	return deg_to_rad(spread_angle)
+func get_weapon_name()->String:
+	return weapon_name

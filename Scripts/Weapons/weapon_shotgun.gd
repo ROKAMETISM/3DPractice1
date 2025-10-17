@@ -1,4 +1,4 @@
-extends Node3D
+extends Weapon
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
@@ -13,9 +13,6 @@ const WEAPON_NAME := "Shotgun"
 var _fire_timer := 0.0
 var pointing_vector := Vector3.ONE
 var adjusted_rotation := Vector2.ZERO
-@onready var raycast := $RayCast3D
-var _is_fire_main_pressed := false
-var _is_fire_special_pressed := false
 func fire_main_repeated() -> void:
 	_shotgun_fire()
 	pass

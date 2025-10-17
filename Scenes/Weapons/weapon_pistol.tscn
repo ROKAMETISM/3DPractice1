@@ -4,6 +4,9 @@
 
 [node name="WeaponPistol" type="Node3D"]
 script = ExtResource("1_mimn3")
+main_fire_rate = 0.3
+spread_angle = 1.7
+weapon_name = "Pistol"
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false
