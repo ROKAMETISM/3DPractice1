@@ -2,6 +2,7 @@ extends Weapon
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
+@onready var raycast := $RayCast3D
 @export var pellets := 8
 func fire_main_repeated() -> void:
 	super()

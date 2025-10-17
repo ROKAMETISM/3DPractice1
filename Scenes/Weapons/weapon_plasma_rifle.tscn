@@ -5,14 +5,9 @@
 [node name="WeaponPlasmaRifle" type="Node3D"]
 script = ExtResource("1_d8iqb")
 main_fire_rate = 0.1
-range = 35.0
+weapon_range = 40.0
+projectile_speed = 22.0
 base_damage = 2.0
 damage_spread = 0.5
 spread_angle = 2.5
 weapon_name = "PlasmaRifle"
-
-[node name="RayCast3D" type="RayCast3D" parent="."]
-enabled = false
-target_position = Vector3(0, 1, 0)
-collision_mask = 18
-collide_with_areas = true

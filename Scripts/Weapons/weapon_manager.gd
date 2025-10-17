@@ -2,6 +2,7 @@ extends Node3D
 const PISTOL := preload("uid://kft8ejopthmq")
 const SHOTGUN := preload("uid://bo54vd2yvkimn")
 const PLASMA_RIFLE := preload("uid://cbknwst0u60ac")
+const ROCKET_LAUNCHER := preload("uid://dl0bffygxg2xl")
 var player : CharacterBody3D
 var weapons : Array[Node3D]
 var current_weapon_index := 0
@@ -10,6 +11,7 @@ func _ready() -> void:
 	weapons.append(PISTOL.instantiate())
 	weapons.append(SHOTGUN.instantiate())
 	weapons.append(PLASMA_RIFLE.instantiate())
+	weapons.append(ROCKET_LAUNCHER.instantiate())
 	for weapon in weapons:
 		add_child(weapon)
 func _physics_process(delta: float) -> void:

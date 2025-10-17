@@ -13,7 +13,6 @@ var _special_fire_timer := 0.0
 var _pointing_vector := Vector3.ONE
 var _adjusted_rotation := Vector2.ZERO
 var _spread_angle := deg_to_rad(spread_angle)
-@onready var raycast := $RayCast3D
 var _is_fire_main_pressed := false
 var _is_fire_special_pressed := false
 func _ready() -> void:

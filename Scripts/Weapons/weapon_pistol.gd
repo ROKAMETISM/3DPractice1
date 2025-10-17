@@ -1,6 +1,7 @@
 extends Weapon
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
+@onready var raycast := $RayCast3D
 func fire_main_pressed() -> void:
 	super()
 	_pistol_fire()
