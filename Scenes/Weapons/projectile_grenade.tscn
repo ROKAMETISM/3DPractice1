@@ -7,6 +7,7 @@
 radius = 0.07522953
 
 [node name="ProjectileGrenade" type="Area3D"]
+collision_layer = 3
 collision_mask = 18
 script = ExtResource("1_5iv6u")
 
@@ -19,3 +20,4 @@ texture = ExtResource("1_ggu03")
 shape = SubResource("SphereShape3D_5iv6u")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

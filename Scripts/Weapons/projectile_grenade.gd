@@ -7,11 +7,14 @@ var base_damage := 2.5
 var damage_spread := 0.5
 var velocity := Vector3.ZERO
 var lifetime := lifetime_total
+var attached = false
 func _physics_process(delta: float) -> void:
-	velocity.y -= GRAVITY*delta
 	lifetime -= delta
 	if lifetime <= 0.0:
 		grenade_explode()
+	if attached:
+		return
+	velocity.y -= GRAVITY*delta
 	position += velocity*delta
 func _on_area_entered(area: Node3D) -> void:
 	#check if the collider is an enemy
@@ -31,9 +34,13 @@ func grenade_explode() -> void:
 	get_tree().current_scene.add_child(explosion)
 	explosion.global_position = global_position
 	explosion.affect_enemy(true)
-	explosion.set_damage(25)
+	explosion.set_damage(8.0)
 	explosion.explode()
 	queue_free()
 func set_lifetime(life : float)->void:
 	lifetime_total = life
 	lifetime = life
+
+
+func _on_body_entered(body: Node3D) -> void:
+	attached = true
