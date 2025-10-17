@@ -86,3 +86,4 @@ func apply_weapon_recoil(recoil_amount:float)->void:
 	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
 func update_weapon(new_weapon : Weapon):
 	weapon_vis.texture = new_weapon.weapon_vis_text
+	weapon_vis.visible = true
