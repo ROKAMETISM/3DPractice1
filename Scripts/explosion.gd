@@ -3,8 +3,6 @@ extends Area3D
 @export var explosion_range := 16.0
 const EXPLOSION_LINGER := 0.5
 const DAMAGE_PER_METER := 0.5
-func _ready() -> void:
-	print("EXPLOSION")
 func affect_player(flag : bool)->void:
 	set_collision_mask_value(3, flag)
 func affect_enemy(flag : bool)->void:
