@@ -18,7 +18,6 @@ func init(lifetime : float, damage:float)->void:
 	_lifetime = lifetime
 	_damage = damage
 func on_hit()->void:
-	print("Projectile Plasma:%.2f, %.2f"%[velocity.length(),_damage])
 	var hit_particle : MeshInstance3D = HITPARTICLE.instantiate()
 	get_tree().current_scene.add_child(hit_particle)
 	hit_particle.global_position = global_position
