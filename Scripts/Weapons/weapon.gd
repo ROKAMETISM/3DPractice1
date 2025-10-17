@@ -70,5 +70,5 @@ func fire_projectile(projectile_scene:PackedScene, damage:float,direction:Vector
 	get_tree().current_scene.add_child(projectile)
 	projectile.init(lifetime, damage)
 	projectile.global_position = global_position 
-	projectile.velocity = direction*projectile_speed
+	projectile.velocity = direction*projectile_speed+get_parent().player.velocity
 	return projectile

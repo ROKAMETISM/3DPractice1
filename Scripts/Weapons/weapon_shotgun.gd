@@ -4,6 +4,8 @@ const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
 @onready var raycast := $RayCast3D
 @export var pellets := 8
+@export var grenade_base_damage := 8.0
+@export var grenade_damage_spread := 0.3
 func fire_main_repeated() -> void:
 	super()
 	if _shotgun_fire():
@@ -45,9 +47,6 @@ func _fire_single_pellet() -> void:
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
 func _grenade_fire()->void:
-	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, 0.0)
-	var projectile : Area3D = PROJECTILE_GRENADE.instantiate()
-	get_tree().current_scene.add_child(projectile)
-	projectile.global_position = global_position 
-	projectile.velocity = aim_vector.normalized()*projectile_speed
-	projectile.set_lifetime(2.0)
+	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, 0.0).normalized()
+	var projectile_damage := grenade_base_damage+randf_range(-1.0,1.0)*grenade_damage_spread
+	var projectile : Area3D = fire_projectile(PROJECTILE_GRENADE, projectile_damage, aim_vector, 2.0)
