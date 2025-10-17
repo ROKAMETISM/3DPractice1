@@ -9,14 +9,14 @@ func _ready() -> void:
 	set_collision_mask_value(2, true)
 	set_collision_mask_value(5, true)
 	collide_with_areas = true
-func hitscan(target_global_position : Vector3)->Object:
+func hitscan(target_position_relative : Vector3)->Object:
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
-	target_position = target_global_position
+	target_position = target_position_relative
 	force_raycast_update()
-	ray_endpoint = target_global_position
+	ray_endpoint = global_position+target_position_relative
 	#An Enemy or an Environment has been hit!
 	if is_colliding():
 		collision_normal=get_collision_normal()
