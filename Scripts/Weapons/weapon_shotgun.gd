@@ -21,7 +21,7 @@ func _fire_single_pellet() -> void:
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
 	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle)
-	raycast.target_position = aim_vector * range
+	raycast.target_position = aim_vector * weapon_range
 	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		#An Enemy or an Environment has been hit!
@@ -38,13 +38,13 @@ func _fire_single_pellet() -> void:
 			damage += randf_range(-1.0, 1.0)*damage_spread
 			collider.take_damage(damage)
 	else:
-		#out of range
+		#out of weapon_range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
 func _grenade_fire()->void:
-	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle)
+	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, 0.0)
 	var projectile : Area3D = PROJECTILE_GRENADE.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position 
 	projectile.velocity = aim_vector.normalized()*projectile_speed
-	projectile.set_lifetime(range / projectile_speed)
+	projectile.set_lifetime(3.0)

@@ -35,12 +35,52 @@ script = ExtResource("1_go701")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_a02cp")
 
-[node name="Plane" type="CSGBox3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 3
+collision_mask = 3
+
+[node name="Plane" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.001, 0)
 use_collision = true
 collision_layer = 3
 size = Vector3(64, 0.002, 64)
 material = SubResource("StandardMaterial3D_go701")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.99999624, 0, 0.0027401634, 0, 1, 0, -0.0027401634, 0, 0.99999624, 8, 0.88964844, -12.815365)
+use_collision = true
+collision_layer = 3
+size = Vector3(4, 1.7792969, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8918562, 1.2429434, -12.815365)
+use_collision = true
+collision_layer = 3
+size = Vector3(4, 2.5120313, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0835905, 1.2429434, -12.784418)
+use_collision = true
+collision_layer = 3
+size = Vector3(4, 2.5120313, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(0.7664818, -0.64226604, 0, 0.64226604, 0.7664818, 0, 0, 0, 1, -6.832491, 0.25285542, -12.784418)
+use_collision = true
+collision_layer = 3
+size = Vector3(4, 2.5120313, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5113549, -12.815365)
+use_collision = true
+collision_layer = 3
+size = Vector3(4, 1.015, 4)
+material = SubResource("StandardMaterial3D_5a7ea")
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 unique_name_in_owner = true
@@ -50,41 +90,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17718875, 0)
 transform = Transform3D(1, 0, 0, 0, 0.8213882, 0.57036954, 0, -0.57036954, 0.8213882, 0, 34.07879, 0)
 shadow_opacity = 0.59
 shadow_blur = 2.475
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0.88964844, -12.815365)
-use_collision = true
-collision_layer = 3
-size = Vector3(4, 1.7792969, 4)
-material = SubResource("StandardMaterial3D_5a7ea")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8918562, 1.2429434, -12.815365)
-use_collision = true
-collision_layer = 3
-size = Vector3(4, 2.5120313, 4)
-material = SubResource("StandardMaterial3D_5a7ea")
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0835905, 1.2429434, -12.784418)
-use_collision = true
-collision_layer = 3
-size = Vector3(4, 2.5120313, 4)
-material = SubResource("StandardMaterial3D_5a7ea")
-
-[node name="CSGBox3D6" type="CSGBox3D" parent="."]
-transform = Transform3D(0.7664818, -0.64226604, 0, 0.64226604, 0.7664818, 0, 0, 0, 1, -6.832491, 0.25285542, -12.784418)
-use_collision = true
-collision_layer = 3
-size = Vector3(4, 2.5120313, 4)
-material = SubResource("StandardMaterial3D_5a7ea")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0.5113549, -12.815365)
-use_collision = true
-collision_layer = 3
-size = Vector3(4, 1.015, 4)
-material = SubResource("StandardMaterial3D_5a7ea")
 
 [node name="UI" type="CanvasLayer" parent="."]
 

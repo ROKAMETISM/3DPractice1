@@ -12,4 +12,4 @@ func _plasma_rifle_fire() -> void:
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position 
 	projectile.velocity = aim_vector.normalized()*projectile_speed
-	projectile.set_lifetime(range / projectile_speed)
+	projectile.set_lifetime(weapon_range / projectile_speed)

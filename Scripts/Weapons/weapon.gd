@@ -2,7 +2,7 @@ class_name Weapon
 extends Node3D
 @export var main_fire_rate := 1.0
 @export var special_fire_rate := 1.0
-@export var range := 30.0
+@export var weapon_range := 30.0
 @export var projectile_speed := 15.0
 @export var base_damage := 5.0
 @export var damage_spread := 1.0

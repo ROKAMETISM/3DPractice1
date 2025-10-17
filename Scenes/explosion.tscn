@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp3mahismsqco"]
+
+[ext_resource type="Script" uid="uid://bv7gfrpei1ysd" path="res://Scripts/explosion.gd" id="1_a801j"]
+[ext_resource type="Texture2D" uid="uid://cuh8dts7vkxw7" path="res://Sprites/sprite_explosion.png" id="2_4okmj"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k2xjm"]
+radius = 16.0
+
+[node name="Explosion" type="Area3D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_a801j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_k2xjm")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.02
+billboard = 2
+texture = ExtResource("2_4okmj")

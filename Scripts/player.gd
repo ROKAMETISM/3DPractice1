@@ -75,3 +75,5 @@ func _process(delta: float) -> void:
 	fsm.process_frame(delta)
 func _die() -> void:
 	queue_free()
+func take_damage(damage:float)->void:
+	pass
