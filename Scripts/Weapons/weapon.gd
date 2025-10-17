@@ -10,6 +10,7 @@ extends Node3D
 @export var weapon_name := "WeaponName"
 ##Recoil in degrees angle
 @export var recoil := 1.0
+@export var weapon_vis_text : Texture2D = null
 var _main_fire_timer := 0.
 var _special_fire_timer := 0.0
 var _pointing_vector := Vector3.ONE

@@ -16,6 +16,7 @@ var _allow_weapon_switch := true
 @onready var weapon_manager = %WeaponManager
 @onready var fsm = %FSM
 @onready var move_controller = %PlayerMoveController
+@onready var weapon_vis = %WeaponVisualization
 signal player_position_updated(new_position : Vector3)
 signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)
@@ -30,6 +31,7 @@ func _ready() -> void:
 	Console.font_size = 10
 	weapon_manager.set_player(self)
 	weapon_manager.switch_weapon(0)
+	weapon_manager.weapon_switched.connect(update_weapon)
 	fsm.init(self, move_data, move_controller)
 	move_controller.init(self)
 	signal_fsm_state_updated = fsm.fsm_state_updated
@@ -76,8 +78,11 @@ func _process(delta: float) -> void:
 func _die() -> void:
 	queue_free()
 func take_damage(damage:float)->void:
+	print(damage)
 	pass
 func apply_weapon_recoil(recoil_amount:float)->void:
 	camera.rotate_x(recoil_amount)
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
 	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
+func update_weapon(new_weapon : Weapon):
+	weapon_vis.texture = new_weapon.weapon_vis_text

@@ -6,7 +6,7 @@ const ROCKET_LAUNCHER := preload("uid://dl0bffygxg2xl")
 var player : CharacterBody3D
 var weapons : Array[Node3D]
 var current_weapon_index := 0
-signal weapon_switched(new_weapon : Node3D)
+signal weapon_switched(new_weapon : Weapon)
 func _ready() -> void:
 	weapons.append(PISTOL.instantiate())
 	weapons.append(SHOTGUN.instantiate())

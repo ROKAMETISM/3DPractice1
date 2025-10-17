@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://b81emnirlm0d0"]
+[gd_scene load_steps=17 format=3 uid="uid://b81emnirlm0d0"]
 
 [ext_resource type="Script" uid="uid://cq2ch6kw1w2h7" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/Weapons/weapon_manager.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_gymyn"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="3_x3wgy"]
 [ext_resource type="Script" uid="uid://b15s566tbph2o" path="res://Scripts/StateMachine/States/state_fall.gd" id="4_3smsa"]
+[ext_resource type="Texture2D" uid="uid://bcbwydxk0m7br" path="res://Sprites/sprite_weapon_vis_base.png" id="4_ukyrk"]
 [ext_resource type="Script" uid="uid://ca33m87xecino" path="res://Scripts/StateMachine/States/state_grounded.gd" id="5_8erm5"]
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/state_stand.gd" id="6_f1ek2"]
 [ext_resource type="Script" uid="uid://om2fuwunc6cv" path="res://Scripts/StateMachine/States/state_jump.gd" id="6_tx1dd"]
@@ -47,6 +48,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Camera3D" type="Camera3D" parent="HeadPivot"]
 unique_name_in_owner = true
+
+[node name="WeaponVisualization" type="Sprite3D" parent="HeadPivot/Camera3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.045, -0.1)
+billboard = 1
+fixed_size = true
+texture = ExtResource("4_ukyrk")
 
 [node name="Controllers" type="Node" parent="."]
 

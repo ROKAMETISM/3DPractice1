@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cbknwst0u60ac"]
+[gd_scene load_steps=3 format=3 uid="uid://cbknwst0u60ac"]
 
 [ext_resource type="Script" uid="uid://bdciyo0ijsq06" path="res://Scripts/Weapons/weapon_plasma_rifle.gd" id="1_d8iqb"]
+[ext_resource type="Texture2D" uid="uid://dv0mtsy6uwvu3" path="res://Sprites/sprite_weapon_vis_plasma_rifle.png" id="2_ag5kh"]
 
 [node name="WeaponPlasmaRifle" type="Node3D"]
 script = ExtResource("1_d8iqb")
@@ -11,3 +12,4 @@ base_damage = 2.0
 damage_spread = 0.5
 spread_angle = 2.5
 weapon_name = "PlasmaRifle"
+weapon_vis_text = ExtResource("2_ag5kh")

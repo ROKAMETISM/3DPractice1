@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo54vd2yvkimn"]
+[gd_scene load_steps=3 format=3 uid="uid://bo54vd2yvkimn"]
 
 [ext_resource type="Script" uid="uid://c688ak5vfhvwq" path="res://Scripts/Weapons/weapon_shotgun.gd" id="1_lelw8"]
+[ext_resource type="Texture2D" uid="uid://beo4tw80abpci" path="res://Sprites/sprite_weapon_vis_shotgun.png" id="2_jvgxd"]
 
 [node name="WeaponShotgun" type="Node3D"]
 script = ExtResource("1_lelw8")
@@ -11,6 +12,7 @@ base_damage = 4.0
 spread_angle = 5.9
 weapon_name = "Shotgun"
 recoil = 1.5
+weapon_vis_text = ExtResource("2_jvgxd")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false

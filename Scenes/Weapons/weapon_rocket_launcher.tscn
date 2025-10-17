@@ -1,8 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dl0bffygxg2xl"]
+[gd_scene load_steps=3 format=3 uid="uid://dl0bffygxg2xl"]
 
 [ext_resource type="Script" uid="uid://bcds03rrm8l7j" path="res://Scripts/Weapons/weapon_rocket_launcher.gd" id="1_3skbp"]
+[ext_resource type="Texture2D" uid="uid://co0wvlkjjsd7f" path="res://Sprites/sprite_weapon_vis_plasma_rocket_launcher.png" id="2_m5ci4"]
 
 [node name="WeaponRocketLauncher" type="Node3D"]
 script = ExtResource("1_3skbp")
 projectile_speed = 17.0
 weapon_name = "RocketLauncher"
+recoil = 3.0
+weapon_vis_text = ExtResource("2_m5ci4")
