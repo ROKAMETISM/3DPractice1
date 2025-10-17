@@ -4,6 +4,12 @@
 
 [node name="WeaponShotgun" type="Node3D"]
 script = ExtResource("1_lelw8")
+main_fire_rate = 0.55
+special_fire_rate = 1.1
+range = 27.5
+base_damage = 4.0
+spread_angle = 5.9
+weapon_name = "Shotgun"
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 enabled = false

@@ -2,55 +2,26 @@ extends Weapon
 const RAY := preload("uid://be2ixbaa5oacl")
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
-const PROJECTILE_SPEED := 15.0
-const FIRE_RATE := 0.8
-const RANGE := 25.0
-const BASE_DAMAGE := 4.0
-const DAMAGE_SPREAD := 1.0
-const PELLETS := 7
-const SPREAD_ANGLE := deg_to_rad(5.9)
-const WEAPON_NAME := "Shotgun"
-var _fire_timer := 0.0
-var pointing_vector := Vector3.ONE
-var adjusted_rotation := Vector2.ZERO
+@export var pellets := 8
 func fire_main_repeated() -> void:
+	super()
 	_shotgun_fire()
-	pass
-func fire_main_pressed() -> void:
-	_is_fire_main_pressed = true
-	pass
-func fire_main_released() -> void:
-	_is_fire_main_pressed = false
-	pass
-func fire_special_repeated() -> void:
-	pass
 func fire_special_pressed() -> void:
+	super()
 	_grenade_fire()
-	_is_fire_special_pressed = true
-	pass
-func fire_special_released() -> void:
-	_is_fire_special_pressed = false
-	pass
-func _physics_process(delta: float) -> void:
-	if _fire_timer > 0.0:
-		_fire_timer = maxf(_fire_timer - delta, 0.0)
-	if _is_fire_main_pressed:
-		fire_main_repeated()
-	if _is_fire_special_pressed:
-		fire_special_repeated()
 func _shotgun_fire() -> void:
-	if _fire_timer > 0.0:
+	if _main_fire_timer > 0.0:
 		return
-	_fire_timer = FIRE_RATE
-	for i in range(0, PELLETS):
+	_main_fire_timer = main_fire_rate
+	for i in range(0, pellets):
 		_fire_single_pellet()
 func _fire_single_pellet() -> void:
 	var points : Array[Vector3]
 	var new_ray = RAY.instantiate()
 	points.append(global_position)
 	get_tree().current_scene.add_child(new_ray)
-	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
-	raycast.target_position = aim_vector * RANGE
+	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle)
+	raycast.target_position = aim_vector * range
 	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		#An Enemy or an Environment has been hit!
@@ -63,28 +34,17 @@ func _fire_single_pellet() -> void:
 		#check if the collider is an enemy
 		var collider : Object = raycast.get_collider().get_parent()
 		if collider.is_in_group("Enemy"):
-			var damage := BASE_DAMAGE
-			damage += randf_range(-1.0, 1.0)*DAMAGE_SPREAD
+			var damage := base_damage
+			damage += randf_range(-1.0, 1.0)*damage_spread
 			collider.take_damage(damage)
 	else:
 		#out of range
 		points.append(global_position+raycast.target_position)
 	new_ray.update_points(points)
 func _grenade_fire()->void:
-	var aim_vector : Vector3 = _get_aim_with_spread(adjusted_rotation, SPREAD_ANGLE)
+	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, _spread_angle)
 	var projectile : Area3D = PROJECTILE_GRENADE.instantiate()
 	get_tree().current_scene.add_child(projectile)
 	projectile.global_position = global_position 
-	projectile.velocity = aim_vector.normalized()*PROJECTILE_SPEED
-	projectile.set_lifetime(RANGE / PROJECTILE_SPEED)
-func _get_aim_with_spread(original_rotation:Vector2, spread:float)->Vector3:
-	var result_vector := Vector3.FORWARD
-	var spread_rotation := Vector2(sqrt(randf())*spread, 0.0).rotated(randf_range(0.0, 2*PI))
-	var result_rotation := original_rotation + spread_rotation
-	result_vector = result_vector.rotated(Vector3.RIGHT, result_rotation.x)
-	result_vector = result_vector.rotated(Vector3.UP, result_rotation.y)
-	return result_vector
-func reset() -> void:
-	_fire_timer = 0.0
-	_is_fire_main_pressed = false
-	_is_fire_special_pressed = false
+	projectile.velocity = aim_vector.normalized()*projectile_speed
+	projectile.set_lifetime(range / projectile_speed)
