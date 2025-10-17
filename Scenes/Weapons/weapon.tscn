@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dn7r03gji7pon"]
+
+[ext_resource type="Script" uid="uid://dnrerd8qa2vm2" path="res://Scripts/Weapons/weapon.gd" id="1_sljtk"]
+
+[node name="Weapon" type="Node3D"]
+script = ExtResource("1_sljtk")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]

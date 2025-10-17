@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://pm7lgpgx10gl"]
 
 [ext_resource type="PointMesh" uid="uid://cx03ji6146wt8" path="res://Resources/mesh_shot_hit_particle.tres" id="1_o8fmb"]
-[ext_resource type="Script" uid="uid://b7dse32ycen1v" path="res://Scripts/shot_hit_particle.gd" id="1_ptua1"]
+[ext_resource type="Script" uid="uid://b7dse32ycen1v" path="res://Scripts/Weapons/shot_hit_particle.gd" id="1_ptua1"]
 
 [node name="ShotHitParticle" type="MeshInstance3D"]
 mesh = ExtResource("1_o8fmb")

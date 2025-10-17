@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://be2ixbaa5oacl"]
 
-[ext_resource type="Script" uid="uid://bkierwnj7tejn" path="res://Scripts/raycast_line.gd" id="1_bo8d7"]
+[ext_resource type="Script" uid="uid://bkierwnj7tejn" path="res://Scripts/Weapons/raycast_line.gd" id="1_bo8d7"]
 
 [node name="RaycastLine" type="MeshInstance3D"]
 cast_shadow = 0
