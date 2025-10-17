@@ -5,7 +5,10 @@
 
 [node name="WeaponRocketLauncher" type="Node3D"]
 script = ExtResource("1_3skbp")
+main_fire_rate = 1.5
 projectile_speed = 17.0
+base_damage = 11.0
+spread_angle = 0.5
 weapon_name = "RocketLauncher"
 recoil = 3.0
 weapon_vis_text = ExtResource("2_m5ci4")
