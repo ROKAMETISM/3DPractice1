@@ -10,7 +10,10 @@ func _ready() -> void:
 	hp_component.init(max_hp)
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
-	set_collision_layer_value(5, true)
+	if is_enemy:
+		set_collision_layer_value(5, true)
+	if is_player:
+		set_collision_layer_value(3, true)
 	hp_component.hp_updated.connect(_on_hp_updated)
 	hit_taken.connect(parent._on_hit_taken)
 	died.connect(parent._die)

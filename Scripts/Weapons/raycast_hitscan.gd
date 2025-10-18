@@ -3,6 +3,7 @@ const RAY := preload("uid://be2ixbaa5oacl")
 var ray_endpoint := position
 var collision_normal := Vector3.ONE
 var damage := 1.0
+var source:Node3D=null
 func _ready() -> void:
 	enabled = false
 	set_collision_mask_value(1, false)
@@ -21,9 +22,10 @@ func hitscan(target_position_relative : Vector3)->Object:
 	if is_colliding():
 		collision_normal=get_collision_normal()
 		ray_endpoint = get_collision_point()
-		var collider = get_collider().get_parent()
-		if collider.is_in_group("Enemy"):
-			collider.take_damage(damage)
+		var collider = get_collider()
+		if collider is EntityComponent:
+			if collider.is_enemy:
+				collider.take_hit(source, damage)
 	points.append(ray_endpoint)
 	new_ray.update_points(points)
 	return get_collider()

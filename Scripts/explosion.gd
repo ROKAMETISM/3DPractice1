@@ -3,6 +3,7 @@ extends Area3D
 @export var explosion_range := 16.0
 const EXPLOSION_LINGER := 0.8
 const DAMAGE_PER_METER := 2.5
+var source:Node3D=null
 func affect_player(flag : bool)->void:
 	set_collision_mask_value(3, flag)
 func affect_enemy(flag : bool)->void:
@@ -19,7 +20,7 @@ func explode()->void:
 		var distance = area.global_position - global_position
 		if area is EntityComponent:
 			if area.is_enemy:
-				area.take_hit(self, max(damage - distance.length()*DAMAGE_PER_METER, 0.0))
+				area.take_hit(source, max(damage - distance.length()*DAMAGE_PER_METER, 0.0))
 	monitorable = false
 	monitoring = false
 	await get_tree().create_timer(EXPLOSION_LINGER).timeout

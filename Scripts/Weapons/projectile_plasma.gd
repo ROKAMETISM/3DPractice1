@@ -2,7 +2,8 @@ extends Area3D
 const HITPARTICLE := preload("uid://pm7lgpgx10gl")
 var velocity := Vector3.ZERO
 var _damage := 2.5
-var _lifetime := 1.0
+var _lifetime := 1.00
+var source:Node3D=null
 func _physics_process(delta: float) -> void:
 	_lifetime -= delta
 	if _lifetime <= 0.0:
@@ -11,7 +12,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_entered(area: Node3D) -> void:
 	if area is EntityComponent:
 		if area.is_enemy:
-			area.take_hit(self, _damage)
+			area.take_hit(source, _damage)
 	on_hit()
 func init(lifetime : float, damage:float)->void:
 	_lifetime = lifetime
