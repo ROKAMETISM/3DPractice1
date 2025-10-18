@@ -6,6 +6,8 @@ const ROCKET_LAUNCHER := preload("uid://dl0bffygxg2xl")
 var player : CharacterBody3D
 var weapons : Array[Node3D]
 var current_weapon_index := 0
+@export var max_ammo : Dictionary[Weapon.AmmoType, int]
+var current_ammo : Dictionary[Weapon.AmmoType, int]
 signal weapon_switched(new_weapon : Weapon)
 func _ready() -> void:
 	weapons.append(PISTOL.instantiate())
@@ -14,6 +16,9 @@ func _ready() -> void:
 	weapons.append(ROCKET_LAUNCHER.instantiate())
 	for weapon in weapons:
 		add_child(weapon)
+	for ammo_type in Weapon.AmmoType.values():
+		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
+	print(current_ammo)
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.set_direction(player.pointing_vector, player.camera_rotation)

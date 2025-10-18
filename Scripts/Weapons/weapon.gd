@@ -1,5 +1,11 @@
 class_name Weapon
 extends Node3D
+enum AmmoType {
+	Inf,
+	ShotgunShell,
+	Plasma,
+	Rocket
+}
 @export var main_fire_rate := 1.0
 @export var special_fire_rate := 1.0
 @export var weapon_range := 30.0
@@ -7,9 +13,10 @@ extends Node3D
 @export var base_damage := 5.0
 @export var damage_spread := 1.0
 @export var spread_angle := 1.0
-@export var weapon_name := "WeaponName"
-##Recoil in degrees angle
 @export var recoil := 1.0
+@export var weapon_name := "WeaponName"
+@export var ammo_type : AmmoType
+##Recoil in degrees angle
 @export var weapon_vis_text : Texture2D = null
 var _main_fire_timer := 0.
 var _special_fire_timer := 0.0
