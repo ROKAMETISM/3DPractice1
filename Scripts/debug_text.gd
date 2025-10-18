@@ -20,6 +20,6 @@ func update_text() -> void:
 	for state:State in hud.player_fsm_states:
 		text += state.get_state_name() + "/"
 	text += "\nWeaponManagerCurrentAmmo:\n"
-	for ammo_type in hud.weapon_manager_current_ammo:
+	for ammo_type in hud.current_ammo:
 		text+=Weapon.AmmoType.keys().get(ammo_type)
-		text+=":%d\n"%hud.weapon_manager_current_ammo.get(ammo_type)
+		text+=":%d\n"%hud.current_ammo.get(ammo_type)

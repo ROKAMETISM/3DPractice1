@@ -13,9 +13,10 @@ func _ready() -> void:
 	player.weapon_manager.ammo_updated.connect(hud.set_ammo)
 	player.signal_fsm_state_updated.connect(hud.set_player_fsm_states)
 	player.entity_component.hp_component.hp_updated.connect(hud.set_player_hp)
-	player.weapon_manager.switch_weapon(0)
 	for ammo_type in Weapon.AmmoType.values():
 		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])
+		hud.set_max_ammo(ammo_type, player.weapon_manager.max_ammo[ammo_type])
+	player.weapon_manager.switch_weapon(0)
 	Console.add_command("spawn", _console_debug_spawn, 2)
 	Console.add_command("set_ammo", _console_set_ammo, 2)
 func _physics_process(delta: float) -> void:

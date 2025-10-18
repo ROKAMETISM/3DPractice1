@@ -20,7 +20,6 @@ func _ready() -> void:
 		weapon._weapon_manager = self
 	for ammo_type in Weapon.AmmoType.values():
 		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
-		ammo_updated.emit(ammo_type, current_ammo.get(ammo_type))
 		print("ammo init : %s - %d"%[get_ammo_type_name(ammo_type),current_ammo.get(ammo_type)])
 func _physics_process(delta: float) -> void:
 	for weapon : Weapon in weapons:
