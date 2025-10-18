@@ -21,6 +21,5 @@ func update_text() -> void:
 		text += state.get_state_name() + "/"
 	text += "\nWeaponManagerCurrentAmmo:\n"
 	for ammo_type in hud.weapon_manager_current_ammo:
-		print("A")
 		text+=Weapon.AmmoType.keys().get(ammo_type)
-		text+=":%d"%hud.weapon_manager_current_ammo.get(ammo_type)
+		text+=":%d\n"%hud.weapon_manager_current_ammo.get(ammo_type)

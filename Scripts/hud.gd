@@ -28,6 +28,5 @@ func set_player_hp(player_hp:HPComponent)->void:
 	player_hp_component = player_hp
 	hp_bar.update()
 func set_ammo(type:Weapon.AmmoType, value:int)->void:
-	print("setammo")
 	weapon_manager_current_ammo[type]= value
 	debug_text.update_text()
