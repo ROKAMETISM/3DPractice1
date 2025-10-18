@@ -13,7 +13,7 @@ var signal_fsm_state_updated : Signal
 @export var move_data : MoveData
 @onready var headpivot := %HeadPivot
 @onready var camera := %Camera3D
-@onready var weapon_manager := %WeaponManager
+@onready var weapon_manager : WeaponManager = %WeaponManager
 @onready var fsm := %FSM
 @onready var move_controller := %PlayerMoveController
 @onready var weapon_vis := %WeaponVisualization
@@ -57,6 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		weapon_manager.scroll_weapon(-1)
 		_allow_weapon_switch = false
 func _physics_process(delta: float) -> void:
+	is_on_wall()
 	_allow_weapon_switch = true
 	fsm.process_physics(delta)
 	acceleration_y = (velocity.y - _previous_velocity_y) / delta

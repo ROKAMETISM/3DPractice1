@@ -1,4 +1,4 @@
-extends Node3D
+class_name WeaponManager extends Node3D
 const PISTOL := preload("uid://kft8ejopthmq")
 const SHOTGUN := preload("uid://bo54vd2yvkimn")
 const PLASMA_RIFLE := preload("uid://cbknwst0u60ac")
@@ -15,14 +15,15 @@ func _ready() -> void:
 	weapons.append(SHOTGUN.instantiate())
 	weapons.append(PLASMA_RIFLE.instantiate())
 	weapons.append(ROCKET_LAUNCHER.instantiate())
-	for weapon in weapons:
+	for weapon : Weapon in weapons:
 		add_child(weapon)
+		weapon._weapon_manager = self
 	for ammo_type in Weapon.AmmoType.values():
 		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
 		ammo_updated.emit(ammo_type, current_ammo.get(ammo_type))
 		print("ammo init : %s - %d"%[get_ammo_type_name(ammo_type),current_ammo.get(ammo_type)])
 func _physics_process(delta: float) -> void:
-	for weapon in weapons:
+	for weapon : Weapon in weapons:
 		weapon.set_direction(player.pointing_vector, player.camera_rotation)
 func set_player(new_player : CharacterBody3D):
 	player = new_player

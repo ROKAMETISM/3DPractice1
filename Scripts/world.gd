@@ -16,7 +16,8 @@ func _ready() -> void:
 	player.weapon_manager.switch_weapon(0)
 	for ammo_type in Weapon.AmmoType.values():
 		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])
-	Console.add_command("spawn", debug_spawn, 2)
+	Console.add_command("spawn", _console_debug_spawn, 2)
+	Console.add_command("set_ammo", _console_set_ammo, 2)
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
@@ -25,7 +26,7 @@ func _physics_process(delta: float) -> void:
 		get_tree().reload_current_scene()
 		return
 
-func debug_spawn(param1 : String, param2 : String)->void:
+func _console_debug_spawn(param1 : String, param2 : String)->void:
 	var spawn_type : PackedScene
 	match param1:
 		"Test":
@@ -46,3 +47,10 @@ func debug_spawn(param1 : String, param2 : String)->void:
 	add_child(new_enemy)
 	new_enemy.global_position = spawn_location
 	
+func _console_set_ammo(param1 : String, param2 : String)->void:
+	var ammo_type : Weapon.AmmoType = Weapon.AmmoType.keys().find(param1) as Weapon.AmmoType
+	var amount : int = int(param2)
+	print(ammo_type)
+	print(amount)
+	player.weapon_manager.current_ammo.set(ammo_type, amount)
+	player.weapon_manager.ammo_updated.emit(ammo_type, amount)

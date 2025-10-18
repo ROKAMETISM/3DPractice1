@@ -18,6 +18,7 @@ enum AmmoType {
 @export var ammo_type : AmmoType
 ##Recoil in degrees angle
 @export var weapon_vis_text : Texture2D = null
+var _weapon_manager : WeaponManager
 var _main_fire_timer := 0.
 var _special_fire_timer := 0.0
 var _pointing_vector := Vector3.ONE
@@ -79,3 +80,8 @@ func fire_projectile(projectile_scene:PackedScene, damage:float,direction:Vector
 	projectile.global_position = global_position 
 	projectile.velocity = direction*projectile_speed+get_parent().player.velocity
 	return projectile
+func ammo_is_available(min_amount:int)->bool:
+	if not _weapon_manager:
+		return false
+	var current_ammo : int = _weapon_manager.get_current_ammo()
+	return current_ammo >= min_amount
