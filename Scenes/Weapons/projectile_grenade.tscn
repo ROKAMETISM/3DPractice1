@@ -9,6 +9,7 @@ radius = 0.07522953
 [node name="ProjectileGrenade" type="Area3D"]
 collision_layer = 0
 collision_mask = 18
+monitorable = false
 script = ExtResource("1_5iv6u")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]

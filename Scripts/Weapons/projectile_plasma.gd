@@ -10,9 +10,15 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	position += velocity * delta
 func _on_area_entered(area: Node3D) -> void:
+	if not get_tree():
+		return
 	if area is EntityComponent:
 		if area.is_enemy:
 			area.take_hit(source, _damage)
+	on_hit()
+func _on_body_entered(body: Node3D) -> void:
+	if not get_tree():
+		return
 	on_hit()
 func init(lifetime : float, damage:float)->void:
 	_lifetime = lifetime
@@ -23,5 +29,3 @@ func on_hit()->void:
 	hit_particle.global_position = global_position
 	hit_particle.set_direction(-velocity.normalized())
 	queue_free()
-func _on_body_entered(body: Node3D) -> void:
-	on_hit()
