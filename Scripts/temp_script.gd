@@ -27,3 +27,4 @@ func _physics_process(delta: float) -> void:
 	
 func my_func(arg : int)->void:
 	pass
+	
