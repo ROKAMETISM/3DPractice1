@@ -85,6 +85,7 @@ func update_weapon(new_weapon : Weapon):
 	weapon_vis.texture = new_weapon.weapon_vis_text
 	weapon_vis.visible = true
 func _on_pickup_range_area_entered(area: Area3D) -> void:
-	if not area is Collectable:
+	if not(area is Collectable):
+		print("object not collectable : %s"%area)
 		return
 	area.collect(self)

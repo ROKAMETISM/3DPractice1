@@ -208,24 +208,33 @@ shape = SubResource("ConcavePolygonShape3D_7yui6")
 mesh = SubResource("ArrayMesh_c5t2i")
 
 [node name="EnemyTest" parent="." instance=ExtResource("4_8j60k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8466434, 1.6845174, 7.722374)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8466434, 0.9079015, 7.722374)
 
 [node name="EnemyTest2" parent="." instance=ExtResource("4_8j60k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8299227, 1.2427411, -1.8339014)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8299227, 0.46612525, -1.8339014)
 
 [node name="EnemyTest3" parent="." instance=ExtResource("4_8j60k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4423046, 1.2565823, -3.7139292)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4423046, 0.4799664, -3.7139292)
 
 [node name="EnemyCacodemon" parent="." instance=ExtResource("7_k7acu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -1)
 
 [node name="DamageZone" parent="." instance=ExtResource("8_0fj1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.419295, 0.49999952, -0.5423155)
+damage_per_sec = 10.0
 
 [node name="HPPotion" parent="." instance=ExtResource("12_7yui6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.381172, -2)
-script = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.027306, 0.32000023, -1.9130616)
 
 [node name="HPPotion2" parent="." instance=ExtResource("12_7yui6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.326298, 0.32, -2.0482965)
-script = null
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.04313, 0.32000023, -1.8478732)
+
+[node name="HPPotion3" parent="." instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.999722, 0.32000023, -3.870329)
+
+[node name="HPPotion4" parent="." instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.012736, 0.31999975, -3.9186912)
+
+[node name="HPPotion5" parent="." instance=ExtResource("12_7yui6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.09008026, 0.31999785, -3.6706996)
+heal_amount = 50.0
