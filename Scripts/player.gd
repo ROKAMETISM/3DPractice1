@@ -85,3 +85,7 @@ func apply_weapon_recoil(recoil_amount:float)->void:
 func update_weapon(new_weapon : Weapon):
 	weapon_vis.texture = new_weapon.weapon_vis_text
 	weapon_vis.visible = true
+func _on_pickup_range_area_entered(area: Area3D) -> void:
+	if not area is Collectable:
+		return
+	area.collect(self)

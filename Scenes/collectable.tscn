@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs7jkkno73jdw"]
+
+[ext_resource type="Script" uid="uid://dx7v4ccs8fy5f" path="res://Scripts/collectable.gd" id="1_3rsma"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qf81a"]
+
+[node name="Collectable" type="Area3D"]
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_3rsma")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_qf81a")

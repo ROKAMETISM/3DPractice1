@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b81emnirlm0d0"]
+[gd_scene load_steps=20 format=3 uid="uid://b81emnirlm0d0"]
 
 [ext_resource type="Script" uid="uid://cq2ch6kw1w2h7" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/Weapons/weapon_manager.gd" id="2_cvnsp"]
@@ -26,6 +26,9 @@ metadata/_custom_type_script = "uid://cn36stk7m4rcc"
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_h4iuc"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_fd4e3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7dp3o"]
+radius = 1.0
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
@@ -55,6 +58,15 @@ metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_fd4e3")
+
+[node name="PickupRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PickupRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_7dp3o")
 
 [node name="HeadPivot" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -124,3 +136,5 @@ metadata/_custom_type_script = "uid://uv17e2g3f0fs"
 unique_name_in_owner = true
 script = ExtResource("9_pu2lt")
 metadata/_custom_type_script = "uid://1q0qk2k45731"
+
+[connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
