@@ -85,3 +85,11 @@ func ammo_is_available(min_amount:int)->bool:
 		return false
 	var current_ammo : int = _weapon_manager.get_current_ammo()
 	return current_ammo >= min_amount
+func use_ammo(amount:int)->void:
+	if not _weapon_manager:
+		return
+	if ammo_type == AmmoType.Inf:
+		return
+	if ammo_is_available(amount):
+		_weapon_manager.update_ammo(ammo_type, -amount)
+	

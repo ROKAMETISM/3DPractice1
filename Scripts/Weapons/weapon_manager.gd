@@ -66,3 +66,6 @@ func get_ammo_type_name(ammo_type:Weapon.AmmoType)->String:
 	return Weapon.AmmoType.keys().get(ammo_type)
 func get_current_ammo()->int:
 	return current_ammo.get(get_current_weapon_ammo_type())
+func update_ammo(ammo_type:Weapon.AmmoType, delta_amount:int)->void:
+	current_ammo[ammo_type] += delta_amount
+	ammo_updated.emit(ammo_type, current_ammo.get(ammo_type))

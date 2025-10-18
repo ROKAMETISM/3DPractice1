@@ -2,7 +2,10 @@ extends Weapon
 const PROJECTILE_PLASMA := preload("uid://biq8247xoej2a")
 func fire_main_repeated() -> void:
 	super()
-	_plasma_rifle_fire()
+	if not ammo_is_available(1):
+		return
+	if _plasma_rifle_fire():
+		use_ammo(1)
 func _plasma_rifle_fire() -> bool:
 	if _main_fire_timer > 0.0:
 		return false

@@ -2,7 +2,10 @@ extends Weapon
 const ROCKET := preload("uid://db48pqrlchd3n")
 func fire_main_repeated() -> void:
 	super()
+	if not ammo_is_available(1):
+		return
 	if _fire_single_rocket():
+		use_ammo(1)
 		apply_recoil()
 func _fire_single_rocket() -> bool:
 	if _main_fire_timer > 0.0:

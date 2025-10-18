@@ -8,11 +8,17 @@ const PROJECTILE_GRENADE := preload("uid://cqfxv0v35oiyu")
 @export var grenade_damage_spread := 0.3
 func fire_main_repeated() -> void:
 	super()
+	if not ammo_is_available(1):
+		return
 	if _shotgun_fire():
+		use_ammo(1)
 		apply_recoil()
 func fire_special_pressed() -> void:
 	super()
-	_grenade_fire()
+	if not ammo_is_available(2):
+		return
+	if _grenade_fire():
+		use_ammo(2)
 func _shotgun_fire() -> bool:
 	if _main_fire_timer > 0.0:
 		return false
@@ -29,7 +35,8 @@ func _fire_single_pellet() -> void:
 		get_tree().current_scene.add_child(hit_particle)
 		hit_particle.global_position = hitscan.ray_endpoint
 		hit_particle.set_direction(hitscan.collision_normal)
-func _grenade_fire()->void:
+func _grenade_fire()->bool:
 	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, 0.0).normalized()
 	var projectile_damage := grenade_base_damage+randf_range(-1.0,1.0)*grenade_damage_spread
 	var projectile : Area3D = fire_projectile(PROJECTILE_GRENADE, projectile_damage, aim_vector, 2.0)
+	return true
