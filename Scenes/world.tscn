@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bxcsfsbdynv4y"]
+[gd_scene load_steps=26 format=4 uid="uid://bxcsfsbdynv4y"]
 
 [ext_resource type="PackedScene" uid="uid://b81emnirlm0d0" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="Script" uid="uid://cxapm8es27fu7" path="res://Scripts/world.gd" id="1_go701"]
@@ -13,6 +13,8 @@
 [ext_resource type="Theme" uid="uid://se8yxgm8wpes" path="res://Resources/HPBar_theme.tres" id="7_ikia7"]
 [ext_resource type="PackedScene" uid="uid://dl5ombgjk23so" path="res://Scenes/enemy_cacodemon.tscn" id="7_k7acu"]
 [ext_resource type="PackedScene" uid="uid://dwh8ootpep33h" path="res://Scenes/damage_zone.tscn" id="8_0fj1v"]
+[ext_resource type="Texture2D" uid="uid://4v088nbqdupu" path="res://Sprites/sprite_ammo_inf.png" id="10_hgpy0"]
+[ext_resource type="Script" uid="uid://bky14xdc4kru7" path="res://Scripts/ammo_icon.gd" id="11_t2t4p"]
 [ext_resource type="PackedScene" uid="uid://bgpam4vncl7bb" path="res://Scenes/hp_potion.tscn" id="12_7yui6"]
 [ext_resource type="PackedScene" uid="uid://djfbwkue7u3fx" path="res://Scenes/armor_pickup.tscn" id="15_kn0ld"]
 
@@ -157,6 +159,21 @@ value = 1.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource("7_5v1tr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/PlayerInfo/BarsContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="AmmoIcon" type="TextureRect" parent="UI/HUD/PlayerInfo/BarsContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("10_hgpy0")
+script = ExtResource("11_t2t4p")
+
+[node name="AmmoText" type="Label" parent="UI/HUD/PlayerInfo/BarsContainer/HBoxContainer"]
+layout_mode = 2
+text = "123 / 123"
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 unique_name_in_owner = true
