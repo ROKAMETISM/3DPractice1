@@ -19,10 +19,8 @@ func _ready() -> void:
 	hit_taken.connect(parent._on_hit_taken)
 	died.connect(parent._die)
 func take_hit(hit_source:Node3D, damage:float)->void:
-	print("hit taken")
 	hp_component.take_damage(damage)
 	hit_taken.emit(hit_source)
 func _on_hp_updated(hp:HPComponent):
-	print(hp._hp)
 	if hp._hp <= 0.0:
 		died.emit()

@@ -20,7 +20,6 @@ func _ready() -> void:
 		weapon._weapon_manager = self
 	for ammo_type in Weapon.AmmoType.values():
 		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
-		print("ammo init : %s - %d"%[get_ammo_type_name(ammo_type),current_ammo.get(ammo_type)])
 func _physics_process(delta: float) -> void:
 	for weapon : Weapon in weapons:
 		weapon.set_direction(player.pointing_vector, player.camera_rotation)
@@ -54,7 +53,6 @@ func switch_weapon(weapon_index : int) -> void:
 	player.fire_special_released.connect(current_weapon.fire_special_released)
 	current_weapon.weapon_recoil.connect(player.apply_weapon_recoil)
 	weapon_switched.emit(current_weapon)
-	print("weapon switched to "+str(current_weapon.weapon_name))
 func scroll_weapon(index_delta : int) -> void:
 	var new_index := current_weapon_index + index_delta
 	new_index = posmod(new_index, weapons.size())
@@ -67,4 +65,5 @@ func get_current_ammo()->int:
 	return current_ammo.get(get_current_weapon_ammo_type())
 func update_ammo(ammo_type:Weapon.AmmoType, delta_amount:int)->void:
 	current_ammo[ammo_type] += delta_amount
+	current_ammo[ammo_type] = clamp(current_ammo[ammo_type], 0, max_ammo[ammo_type])
 	ammo_updated.emit(ammo_type, current_ammo.get(ammo_type))

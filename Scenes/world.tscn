@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bxcsfsbdynv4y"]
+[gd_scene load_steps=28 format=4 uid="uid://bxcsfsbdynv4y"]
 
 [ext_resource type="PackedScene" uid="uid://b81emnirlm0d0" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="Script" uid="uid://cxapm8es27fu7" path="res://Scripts/world.gd" id="1_go701"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bmb3ankgtjdi5" path="res://Scripts/ammo_text.gd" id="12_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://bgpam4vncl7bb" path="res://Scenes/hp_potion.tscn" id="12_7yui6"]
 [ext_resource type="PackedScene" uid="uid://djfbwkue7u3fx" path="res://Scenes/armor_pickup.tscn" id="15_kn0ld"]
+[ext_resource type="PackedScene" uid="uid://bjjvl4x8roh6v" path="res://Scenes/ammo_pickup.tscn" id="19_axeuq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5a7ea"]
 sky_top_color = Color(1, 1, 1, 1)
@@ -185,6 +186,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.17718875, 0)
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 process_mode = 4
 physics_interpolation_mode = 2
+visible = false
 use_collision = true
 collision_layer = 3
 collision_mask = 3
@@ -290,3 +292,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.946243, 0.16, 1.0118084)
 
 [node name="ArmorPickup6" parent="." instance=ExtResource("15_kn0ld")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.036307, 0.15999952, 0.9467354)
+
+[node name="AmmoPickup" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.56557, 0.32000095, 5.3082504)
+
+[node name="AmmoPickup2" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.053009, 0.32, 5.0271378)
+
+[node name="AmmoPickup3" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.859304, 0.32, 4.9565363)
+
+[node name="AmmoPickup4" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.189635, 0.31999713, 8.025223)
+ammo_type = 2
+
+[node name="AmmoPickup5" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.734552, 0.32, 7.948257)
+ammo_type = 2
+
+[node name="AmmoPickup6" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.394256, 0.32, 8.15803)
+ammo_type = 2
+
+[node name="AmmoPickup7" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.879814, 0.32, 9.912672)
+ammo_type = 3
+
+[node name="AmmoPickup8" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.866035, 0.3199976, 10.189115)
+ammo_type = 3
+
+[node name="AmmoPickup9" parent="." instance=ExtResource("19_axeuq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.73005, 0.32, 9.996883)
+ammo_type = 3
