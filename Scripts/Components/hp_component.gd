@@ -5,7 +5,10 @@ var _hp := max_hp
 var _armor := max_armor
 signal hp_updated(HPComponent)
 func take_damage(damage:float)->void:
-	_hp-=damage
+	_armor -= damage
+	if _armor < 0.0:
+		_hp += _armor
+		_armor = 0.0
 	hp_updated.emit(self)
 func heal(amount:float)->void:
 	_hp+=amount

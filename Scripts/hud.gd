@@ -9,6 +9,7 @@ var weapon_manager_current_ammo : Dictionary[Weapon.AmmoType, int]
 @onready var debug_text := %DebugText
 @onready var crosshair := %Crosshair
 @onready var hp_bar := %HPBar
+@onready var armor_bar := %ArmorBar
 func set_player_postion(new_position : Vector3) -> void:
 	player_position = new_position
 	debug_text.update_text() 
@@ -26,6 +27,7 @@ func set_player_fsm_states(new_states : Array[State]):
 	player_fsm_states = new_states
 func set_player_hp(player_hp:HPComponent)->void:
 	player_hp_component = player_hp
+	armor_bar.update()
 	hp_bar.update()
 func set_ammo(type:Weapon.AmmoType, value:int)->void:
 	weapon_manager_current_ammo[type]= value

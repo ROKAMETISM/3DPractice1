@@ -8,7 +8,7 @@ keep_rounding_remainders = false
 bg_color = Color(1, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyrvv"]
-bg_color = Color(0, 0.972549, 0, 1)
+bg_color = Color(0, 1, 1, 1)
 
 [resource]
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)

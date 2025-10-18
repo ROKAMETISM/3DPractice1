@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dngemhq4pdgva"]
+
+[sub_resource type="SystemFont" id="SystemFont_btsqm"]
+font_names = PackedStringArray("Arial")
+keep_rounding_remainders = false
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0x5tu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aas6t"]
+bg_color = Color(0, 1, 0, 1)
+
+[resource]
+ProgressBar/constants/outline_size = 1
+ProgressBar/font_sizes/font_size = 13
+ProgressBar/fonts/font = SubResource("SystemFont_btsqm")
+ProgressBar/styles/background = SubResource("StyleBoxEmpty_0x5tu")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_aas6t")
