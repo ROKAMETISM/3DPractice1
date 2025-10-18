@@ -1,6 +1,7 @@
 extends Node3D
 const ENEMY_TEST := preload("uid://du3tuubqmh3i8")
 const ENEMY_CACODEMON := preload("uid://dl5ombgjk23so")
+const HPPotion := preload("uid://bgpam4vncl7bb")
 @onready var player := %Player
 @onready var hud := %HUD
 func _ready() -> void:
@@ -31,6 +32,8 @@ func debug_spawn(param1 : String, param2 : String)->void:
 			spawn_type = ENEMY_TEST
 		"Cacodemon":
 			spawn_type = ENEMY_CACODEMON
+		"HPPotion":
+			spawn_type = HPPotion
 		_:
 			Console.print_line("Invalid type")
 			return
