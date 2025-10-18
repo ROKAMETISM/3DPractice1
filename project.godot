@@ -111,3 +111,4 @@ switch_weapon_previous={
 3d_physics/layer_4="Player Hitbox"
 3d_physics/layer_5="Enemy Hurtbox"
 3d_physics/layer_6="Enemy Hitbox"
+3d_physics/layer_7="Collectable Hitbox"

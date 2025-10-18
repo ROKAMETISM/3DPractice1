@@ -59,6 +59,7 @@ script = ExtResource("4_7dp3o")
 is_enemy = false
 is_player = true
 max_hp = 100.0
+max_armor = 50.0
 metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="EntityComponent"]

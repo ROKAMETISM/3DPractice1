@@ -22,5 +22,8 @@ func _physics_process(delta: float) -> void:
 		mytimer.wait_time = self_move[2]
 		mytimer.start()
 	
+	var new_position:=Vector2.ZERO
+	print("new_position:%d, positon:%d"%[new_position, global_position])
+	
 func my_func(arg : int)->void:
 	pass

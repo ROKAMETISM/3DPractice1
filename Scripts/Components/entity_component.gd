@@ -2,12 +2,13 @@ class_name EntityComponent extends Area3D
 @export var is_enemy := true
 @export var is_player := false
 @export var max_hp := 1.0
+@export var max_armor:=0.0
 @onready var parent := get_parent()
 @onready var hp_component := HPComponent.new()
 signal hit_taken(hit_source:Node3D)
 signal died
 func _ready() -> void:
-	hp_component.init(max_hp)
+	hp_component.init(max_hp,  max_armor)
 	set_collision_layer_value(1, false)
 	set_collision_mask_value(1, false)
 	if is_enemy:
