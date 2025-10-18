@@ -11,8 +11,9 @@ special_fire_rate = 1.1
 projectile_speed = 22.0
 base_damage = 4.0
 spread_angle = 5.9
-weapon_name = "Shotgun"
 recoil = 1.5
+weapon_name = "Shotgun"
+ammo_type = 1
 weapon_vis_text = ExtResource("2_jvgxd")
 
 [node name="RaycastHitscan" type="RayCast3D" parent="."]

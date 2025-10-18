@@ -12,4 +12,5 @@ base_damage = 2.0
 damage_spread = 0.5
 spread_angle = 2.5
 weapon_name = "PlasmaRifle"
+ammo_type = 2
 weapon_vis_text = ExtResource("2_ag5kh")
