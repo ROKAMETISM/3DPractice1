@@ -1,7 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://dl5ombgjk23so"]
+[gd_scene load_steps=23 format=3 uid="uid://dl5ombgjk23so"]
 
-[ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_6ot8c"]
+[ext_resource type="Script" uid="uid://323t1hhe8i0d" path="res://Scripts/enemy_cacodemon.gd" id="1_cdjiu"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_wdq73"]
+[ext_resource type="Script" uid="uid://ceyuywa48f0n2" path="res://Scripts/Components/entity_component.gd" id="3_6ot8c"]
 [ext_resource type="Texture2D" uid="uid://d0kgj40vkt31v" path="res://Sprites/Cacodemon.png" id="3_cdjiu"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="5_ubbc5"]
 [ext_resource type="Script" uid="uid://b15s566tbph2o" path="res://Scripts/StateMachine/States/state_fall.gd" id="6_xep6y"]
@@ -13,13 +14,8 @@
 [ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/state_death.gd" id="12_iiylf"]
 [ext_resource type="Script" uid="uid://br47t3ekqnjdt" path="res://Scripts/StateMachine/Controllers/enemy_test_move_controller.gd" id="13_fe7se"]
 
-[sub_resource type="Resource" id="Resource_8sffl"]
+[sub_resource type="Resource" id="Resource_6ot8c"]
 script = ExtResource("2_wdq73")
-jump_velocity = 4.0
-jump_gravity = 9.8
-fall_gravity = 9.8
-walk_speed = 2.0
-sprint_speed = 3.0
 metadata/_custom_type_script = "uid://cn36stk7m4rcc"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvmee"]
@@ -74,8 +70,8 @@ animations = [{
 radius = 0.6416555
 
 [node name="EnemyCacodemon" type="CharacterBody3D" groups=["Enemy"]]
-script = ExtResource("1_6ot8c")
-move_data = SubResource("Resource_8sffl")
+script = ExtResource("1_cdjiu")
+move_data = SubResource("Resource_6ot8c")
 
 [node name="DebugForwardMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.675, -0.48768955)
@@ -98,13 +94,12 @@ billboard = 2
 sprite_frames = SubResource("SpriteFrames_67vpr")
 animation = &"hit"
 
-[node name="Hurtbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 16
-collision_mask = 0
+[node name="EntityComponent" type="Area3D" parent="."]
+script = ExtResource("3_6ot8c")
+metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
 shape = SubResource("SphereShape3D_cdjiu")
 
 [node name="Controllers" type="Node" parent="."]
