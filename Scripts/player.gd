@@ -1,5 +1,4 @@
 class_name Player extends CharacterBody3D
-
 const SENSITIVITY := 0.003
 const BASE_FOV := 90.0
 const FOV_MODIFIER := 1.5
