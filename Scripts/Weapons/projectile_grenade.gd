@@ -15,13 +15,10 @@ func _physics_process(delta: float) -> void:
 	velocity.y -= GRAVITY*delta
 	position += velocity*delta
 func _on_area_entered(area: Node3D) -> void:
-	var collider : Node3D = area.get_parent()
-	if not collider.is_in_group("Enemy"):
-		return
 	set_attached()
 	var original_position = global_position
 	get_parent().remove_child(self)
-	collider.add_child(self)
+	area.add_child(self)
 	global_position = original_position
 func grenade_explode() -> void:
 	var explosion : Area3D = EXPLOSION.instantiate()
@@ -38,6 +35,10 @@ func set_lifetime(life : float)->void:
 	_lifetime = life
 func _on_body_entered(body: Node3D) -> void:
 	set_attached()
+	var original_position = global_position
+	get_parent().remove_child(self)
+	body.add_child(self)
+	global_position = original_position
 func set_attached()->void:
 	attached = true
 	set_lifetime(attached_detonation_time)

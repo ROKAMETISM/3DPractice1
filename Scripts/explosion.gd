@@ -17,7 +17,9 @@ func explode()->void:
 	await get_tree().create_timer(0.05).timeout
 	for area:Area3D in get_overlapping_areas():
 		var distance = area.global_position - global_position
-		area.get_parent().take_damage(max(damage - distance.length()*DAMAGE_PER_METER, 0.0))
+		if area is EntityComponent:
+			if area.is_enemy:
+				area.take_hit(self, max(damage - distance.length()*DAMAGE_PER_METER, 0.0))
 	monitorable = false
 	monitoring = false
 	await get_tree().create_timer(EXPLOSION_LINGER).timeout

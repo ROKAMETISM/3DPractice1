@@ -9,10 +9,9 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 	position += velocity * delta
 func _on_area_entered(area: Node3D) -> void:
-	#check if the collider is an enemy
-	var collider : Object = area.get_parent()
-	if collider.is_in_group("Enemy"):
-		collider.take_damage(_damage)
+	if area is EntityComponent:
+		if area.is_enemy:
+			area.take_hit(self, _damage)
 	on_hit()
 func init(lifetime : float, damage:float)->void:
 	_lifetime = lifetime

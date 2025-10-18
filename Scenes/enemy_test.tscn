@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://du3tuubqmh3i8"]
+[gd_scene load_steps=21 format=3 uid="uid://du3tuubqmh3i8"]
 
 [ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_67vpr"]
 [ext_resource type="Texture2D" uid="uid://c88t6rnoiofhv" path="res://Sprites/sprite_enemy_test.png" id="1_q8xid"]
@@ -38,12 +38,7 @@ rings = 2
 cap_top = false
 cap_bottom = false
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xb7yx"]
-radial_segments = 16
-rings = 2
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_q8xid"]
-points = PackedVector3Array(-0.21248302, -0.49983475, -0.44776493, 0.022680596, 0.47277224, 0.49548286, 0.17038397, 0.47294942, 0.4660657, -0.007097496, 0.90355, -0.27804086, 0.4677229, -0.5933556, -0.03644146, -0.44758406, -0.52909994, 0.19899394, -0.42873138, 0.75288874, -0.006949703, 0.08302874, -0.7522993, 0.4142152, 0.40685183, 0.502367, -0.27267465, 0.1724648, -0.74833477, -0.39610448, 0.37903437, 0.7421948, 0.20091408, -0.036622133, 0.5356903, -0.48315567, -0.3986595, -0.75304914, -0.15759808, -0.24462505, 0.7427528, 0.34964463, -0.44777864, 0.49984723, -0.21246246, 0.3768968, -0.50174797, 0.317859, 0.053763043, -0.97961307, 0.05381988, -0.15525945, -0.50440395, 0.4678995, 0.08303108, 0.9027872, 0.26372796, -0.35897946, 0.49896547, 0.34553823, 0.4660536, 0.47275126, 0.17044473, -0.2764894, -0.7785801, 0.292341, 0.34560645, -0.4990477, -0.35893396, 0.2636657, -0.9028371, 0.08309335, 0.26305577, 0.9006833, -0.097012736, 0.19893846, 0.5291334, -0.44761053, 0.08207052, -0.5049944, -0.48231807, -0.19036895, 0.9461247, 0.05368432, -0.30644816, 0.7487299, -0.3064298, -0.12721057, -0.9013001, -0.24733658, 0.17038397, -0.47294942, 0.4660657, -0.44777864, -0.49984723, -0.21246246)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k4f6d"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_67vpr"]
 animations = [{
@@ -64,15 +59,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_67vpr"]
-top_radius = 0.4
-bottom_radius = 0.4
-height = 1.8
-radial_segments = 8
-rings = 2
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_kxk0d"]
-points = PackedVector3Array(0.38359535, 0.84672093, 0.03958388, -0.38356552, -0.84665525, -0.039655853, -0.38359535, -0.8467211, 0.039583888, -0.38359535, 0.8467211, 0.039583888, 0.039583888, 0.8467211, -0.38359535, 0.28280002, -0.86230874, -0.28279996, 0.03958388, -0.84672093, 0.38359535, -0.03965585, 0.84665513, 0.38356552, -0.2828, -0.86230886, -0.2828, 0.2828, -0.8623087, 0.2828, -0.28279996, -0.86230874, 0.28280002, -0.2828, 0.86230886, -0.2828, 0.2828, 0.8623087, 0.2828, 0.28280002, 0.86230874, -0.28279996, -0.039655853, -0.84665525, -0.38356552, 0.38356552, -0.84665513, -0.03965585, -0.28279996, 0.86230874, 0.28280002, 0.039583888, -0.8467211, -0.38359535, 0.38359535, -0.84672093, 0.03958388, 0.03958388, 0.84672093, 0.38359535, -0.039655853, 0.84665525, -0.38356552, -0.38356552, 0.84665525, -0.039655853, 0.38356552, 0.84665513, -0.03965585, -0.03965585, -0.84665513, 0.38356552)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ueo34"]
 
 [node name="EnemyTest" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_67vpr")
@@ -82,15 +69,9 @@ move_data = SubResource("Resource_8sffl")
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.675, -0.48768955)
 mesh = SubResource("CylinderMesh_kxk0d")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("CapsuleMesh_xb7yx")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_q8xid")
+shape = SubResource("CapsuleShape3D_k4f6d")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="."]
 unique_name_in_owner = true
@@ -99,19 +80,16 @@ pixel_size = 0.015
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_67vpr")
 
-[node name="Hurtbox" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 16
+[node name="EntityComponent" type="Area3D" parent="."]
+collision_layer = 0
 collision_mask = 0
+script = ExtResource("5_ueo34")
+max_hp = 20.0
+metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-visible = false
-mesh = SubResource("CylinderMesh_67vpr")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
-shape = SubResource("ConvexPolygonShape3D_kxk0d")
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CylinderShape3D_ueo34")
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -166,7 +144,3 @@ metadata/_custom_type_script = "uid://uv17e2g3f0fs"
 unique_name_in_owner = true
 script = ExtResource("11_icysg")
 metadata/_custom_type_script = "uid://br47t3ekqnjdt"
-
-[node name="EntityComponent" type="Area3D" parent="."]
-script = ExtResource("5_ueo34")
-metadata/_custom_type_script = "uid://ceyuywa48f0n2"

@@ -1,13 +1,11 @@
 extends CharacterBody3D
-const MAX_HP := 10.0
 const HIT_ANIMATION_DURATION := 0.3
 const BOTTOM_THRESHOLD := -50.0
-var current_hp := MAX_HP
 var hit_animation_timer := 0.0
-@onready var sprite = %Sprite
+@onready var sprite := %Sprite
 @export var move_data : MoveData
-@onready var fsm = %FSM
-@onready var move_controller = %EnemyTestMoveController
+@onready var fsm := %FSM
+@onready var move_controller := %EnemyTestMoveController
 func _ready() -> void:
 	sprite.animation = "default"
 	fsm.init(self, move_data, move_controller)
@@ -19,11 +17,7 @@ func _physics_process(delta: float) -> void:
 	if hit_animation_timer < 0.0:
 		hit_animation_timer = 0.0
 		sprite.animation = "default"
-func take_damage(damage : float) -> void:
-	current_hp -= damage
-	if current_hp <= 0.0:
-		_die()
-		return
+func _on_hit_taken(source:Node3D)->void:
 	sprite.animation = "hit"
 	hit_animation_timer = HIT_ANIMATION_DURATION
 func _die() -> void:
