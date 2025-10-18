@@ -45,6 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_h4iuc")
 
 [node name="EntityComponent" type="Area3D" parent="."]
+unique_name_in_owner = true
 script = ExtResource("4_7dp3o")
 is_enemy = false
 is_player = true

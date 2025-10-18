@@ -12,12 +12,13 @@ var camera_rotation := Vector2.ZERO
 var _allow_weapon_switch := true
 var signal_fsm_state_updated : Signal
 @export var move_data : MoveData
-@onready var headpivot = %HeadPivot
-@onready var camera = %Camera3D
-@onready var weapon_manager = %WeaponManager
-@onready var fsm = %FSM
-@onready var move_controller = %PlayerMoveController
-@onready var weapon_vis = %WeaponVisualization
+@onready var headpivot := %HeadPivot
+@onready var camera := %Camera3D
+@onready var weapon_manager := %WeaponManager
+@onready var fsm := %FSM
+@onready var move_controller := %PlayerMoveController
+@onready var weapon_vis := %WeaponVisualization
+@onready var entity_component := %EntityComponent
 signal player_position_updated(new_position : Vector3)
 signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)

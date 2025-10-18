@@ -10,6 +10,7 @@ func _ready() -> void:
 	player.player_fov_updated.connect(hud.crosshair.set_fov)
 	player.signal_fsm_state_updated.connect(hud.set_player_fsm_states)
 	player.weapon_manager.switch_weapon(0)
+	player.entity_component.hp_component.hp_updated.connect(hud.set_player_hp)
 	Console.add_command("SpawnEnemyTest", spawn_enemy_test, 1)
 
 func _physics_process(delta: float) -> void:

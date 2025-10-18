@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://se8yxgm8wpes"]
+
+[sub_resource type="SystemFont" id="SystemFont_dc3m0"]
+font_names = PackedStringArray("Arial")
+keep_rounding_remainders = false
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ke083"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyrvv"]
+bg_color = Color(0, 0.972549, 0, 1)
+
+[resource]
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/constants/outline_size = 2
+ProgressBar/font_sizes/font_size = 13
+ProgressBar/fonts/font = SubResource("SystemFont_dc3m0")
+ProgressBar/styles/background = SubResource("StyleBoxFlat_ke083")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_yyrvv")

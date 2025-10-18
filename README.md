@@ -1,4 +1,4 @@
-# 3dfps-practice-1
+# 3DFPS Practice1
 
 Practicing 3D programming in Godot by implementing DOOM-Like FPS.
 
@@ -14,7 +14,6 @@ https://github.com/theshaggydev/the-shaggy-dev-projects/tree/main/projects/godot
 
 https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
-
 ###Pathfinding, NavigationMap and 3DMapEditing
 
 ###Weapons : Sniper, Machinegun, Ballista, BFG
@@ -29,13 +28,9 @@ Weapon Visualization is affected by camera FOV...
 
 Possible Solutions : 
 	
-	draw weapon_vis on canvaslayer
+	- draw weapon_vis on canvaslayer
 	
-	use multiple cameras and combine them with subviewports
-
-###Refactor using Composition
-
-Implement Components as Resources. Attached them to scenes as @export var. Combine components to another component:EntityComposition
+	- use multiple cameras and combine them with subviewports
 
 ###Enemy AI and enemy variations
 
