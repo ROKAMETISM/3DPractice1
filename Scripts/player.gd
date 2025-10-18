@@ -59,8 +59,6 @@ func _unhandled_input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	_allow_weapon_switch = true
 	fsm.process_physics(delta)
-	if global_position.y < BOTTOM_THRESHOLD:
-		get_tree().reload_current_scene()
 	acceleration_y = (velocity.y - _previous_velocity_y) / delta
 	_previous_velocity_y = velocity.y
 	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
@@ -75,11 +73,10 @@ func _physics_process(delta: float) -> void:
 	player_fov_updated.emit(camera.fov)
 func _process(delta: float) -> void:
 	fsm.process_frame(delta)
+func _on_hit_taken(source:Node3D)->void:
+	print("player hurt")
 func _die() -> void:
-	queue_free()
-func take_damage(damage:float)->void:
-	print(damage)
-	pass
+	get_tree().reload_current_scene()
 func apply_weapon_recoil(recoil_amount:float)->void:
 	camera.rotate_x(recoil_amount)
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))

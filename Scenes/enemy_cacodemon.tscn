@@ -96,6 +96,7 @@ animation = &"hit"
 
 [node name="EntityComponent" type="Area3D" parent="."]
 script = ExtResource("3_6ot8c")
+max_hp = 30.0
 metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityComponent"]
