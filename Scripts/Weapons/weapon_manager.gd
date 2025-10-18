@@ -9,6 +9,7 @@ var current_weapon_index := 0
 @export var max_ammo : Dictionary[Weapon.AmmoType, int]
 var current_ammo : Dictionary[Weapon.AmmoType, int]
 signal weapon_switched(new_weapon : Weapon)
+signal ammo_updated(type:Weapon.AmmoType, value:int)
 func _ready() -> void:
 	weapons.append(PISTOL.instantiate())
 	weapons.append(SHOTGUN.instantiate())
@@ -18,7 +19,8 @@ func _ready() -> void:
 		add_child(weapon)
 	for ammo_type in Weapon.AmmoType.values():
 		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
-	print(current_ammo)
+		ammo_updated.emit(ammo_type, current_ammo.get(ammo_type))
+		print("ammo init : %s - %d"%[get_ammo_type_name(ammo_type),current_ammo.get(ammo_type)])
 func _physics_process(delta: float) -> void:
 	for weapon in weapons:
 		weapon.set_direction(player.pointing_vector, player.camera_rotation)
@@ -57,3 +59,9 @@ func scroll_weapon(index_delta : int) -> void:
 	var new_index := current_weapon_index + index_delta
 	new_index = posmod(new_index, weapons.size())
 	switch_weapon(new_index)
+func get_current_weapon_ammo_type()->Weapon.AmmoType:
+	return weapons[current_weapon_index].ammo_type
+func get_ammo_type_name(ammo_type:Weapon.AmmoType)->String:
+	return Weapon.AmmoType.keys().get(ammo_type)
+func get_current_ammo()->int:
+	return current_ammo.get(get_current_weapon_ammo_type())

@@ -6,13 +6,15 @@ func _ready() -> void:
 	player.player_position_updated.connect(hud.set_player_postion)
 	player.player_velocity_updated.connect(hud.set_player_velocity)
 	player.player_y_acceleration_updated.connect(hud.set_player_y_acceleration)
-	player.weapon_manager.weapon_switched.connect(hud.set_current_weapon)
 	player.player_fov_updated.connect(hud.crosshair.set_fov)
+	player.weapon_manager.weapon_switched.connect(hud.set_current_weapon)
+	player.weapon_manager.ammo_updated.connect(hud.set_ammo)
 	player.signal_fsm_state_updated.connect(hud.set_player_fsm_states)
-	player.weapon_manager.switch_weapon(0)
 	player.entity_component.hp_component.hp_updated.connect(hud.set_player_hp)
+	player.weapon_manager.switch_weapon(0)
+	for ammo_type in Weapon.AmmoType.values():
+		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])
 	Console.add_command("SpawnEnemyTest", spawn_enemy_test, 1)
-
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
