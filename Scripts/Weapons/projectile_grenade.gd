@@ -2,10 +2,13 @@ extends Area3D
 const EXPLOSION := preload("uid://bp3mahismsqco")
 const GRAVITY := 6.0
 @export var attached_detonation_time := 0.4
+@onready var sprite := $Sprite3D
 var velocity := Vector3.ZERO
 var _damage := 8.0
 var _lifetime := 1.0
 var attached = false
+func _ready() -> void:
+	sprite.animation = "default"
 func _physics_process(delta: float) -> void:
 	_lifetime -= delta
 	if _lifetime <= 0.0:
@@ -41,4 +44,5 @@ func _on_body_entered(body: Node3D) -> void:
 	global_position = original_position
 func set_attached()->void:
 	attached = true
+	sprite.animation = "attached"
 	set_lifetime(attached_detonation_time)
