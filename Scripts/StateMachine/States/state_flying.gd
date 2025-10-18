@@ -4,18 +4,12 @@ extends State
 @export var jump_state: State
 func enter() -> void:
 	super()
-	parent.velocity.y = 0
+	parent.velocity = Vector3.ZERO
 func process_physics(delta: float) -> Array:
 	var _output : Array
-	parent.velocity.y = 0.0
+	if Engine.get_physics_frames()%60==0:
+		parent.velocity = Vector3(randf_range(-5, 5), randf_range(0, 5), randf_range(-5, 5))
 	parent.move_and_slide()
-	if get_jump() and parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(jump_state, Transition.Type.Enter))
-		return _output
-	if !parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(fall_state, Transition.Type.Enter))
 	return _output
 func get_state_name()->String:
 	return "Flying"
