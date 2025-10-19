@@ -1,6 +1,6 @@
 [gd_scene load_steps=20 format=3 uid="uid://b62kpx3gwq6k7"]
 
-[ext_resource type="Script" uid="uid://cggh0wji6do4y" path="res://Scripts/enemy_test.gd" id="1_057k3"]
+[ext_resource type="Script" uid="uid://b5nudij5w8t65" path="res://Scripts/enemy_fsm_test.gd" id="1_lb84l"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_a0f70"]
 [ext_resource type="Texture2D" uid="uid://bwlf2pmfy2soy" path="res://Sprites/sprite_enemy_fsm_test.png" id="3_f5q8c"]
 [ext_resource type="Script" uid="uid://ceyuywa48f0n2" path="res://Scripts/Components/entity_component.gd" id="5_x7iv6"]
@@ -11,16 +11,14 @@
 [ext_resource type="Script" uid="uid://cf5cnu26g4qsj" path="res://Scripts/StateMachine/States/state_sprint.gd" id="10_v02n6"]
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/state_stand.gd" id="11_42ikj"]
 [ext_resource type="Script" uid="uid://cdsp1005q4xww" path="res://Scripts/StateMachine/States/state_walk.gd" id="12_sydtr"]
+[ext_resource type="Script" uid="uid://dd5xuf3cii1cd" path="res://Scripts/StateMachine/Controllers/enemy_fsm_test_move_controller.gd" id="13_f5q8c"]
 [ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/state_death.gd" id="13_j3f75"]
-[ext_resource type="Script" uid="uid://br47t3ekqnjdt" path="res://Scripts/StateMachine/Controllers/enemy_test_move_controller.gd" id="14_p5bkf"]
 
-[sub_resource type="Resource" id="Resource_8sffl"]
+[sub_resource type="Resource" id="Resource_f5q8c"]
 script = ExtResource("2_a0f70")
-jump_velocity = 4.0
-jump_gravity = 9.8
-fall_gravity = 9.8
-walk_speed = 2.0
-sprint_speed = 3.0
+jump_velocity = 3.0
+walk_speed = 1.0
+sprint_speed = 2.0
 metadata/_custom_type_script = "uid://cn36stk7m4rcc"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tvmee"]
@@ -52,9 +50,9 @@ animations = [{
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ueo34"]
 
-[node name="EnemyTest" type="CharacterBody3D" groups=["Enemy"]]
-script = ExtResource("1_057k3")
-move_data = SubResource("Resource_8sffl")
+[node name="EnemyFSMTest" type="CharacterBody3D" groups=["Enemy"]]
+script = ExtResource("1_lb84l")
+move_data = SubResource("Resource_f5q8c")
 
 [node name="DebugForwardMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1.675, -0.48768955)
@@ -75,7 +73,7 @@ sprite_frames = SubResource("SpriteFrames_057k3")
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("5_x7iv6")
-max_hp = 20.0
+max_hp = 40.0
 metadata/_custom_type_script = "uid://ceyuywa48f0n2"
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="EntityComponent"]
@@ -131,7 +129,7 @@ metadata/_custom_type_script = "uid://cdsp1005q4xww"
 script = ExtResource("13_j3f75")
 metadata/_custom_type_script = "uid://uv17e2g3f0fs"
 
-[node name="EnemyTestMoveController" type="Node" parent="Controllers"]
+[node name="EnemyFSMTestMoveController" type="Node" parent="Controllers"]
 unique_name_in_owner = true
-script = ExtResource("14_p5bkf")
-metadata/_custom_type_script = "uid://br47t3ekqnjdt"
+script = ExtResource("13_f5q8c")
+metadata/_custom_type_script = "uid://dd5xuf3cii1cd"

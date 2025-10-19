@@ -30,7 +30,7 @@ func _on_player_y_acceleration_updated(new_y_acceleration : float) -> void:
 ##triggers on player fov_updated siganl
 ##updates crosshair
 func _on_player_fov_updated(new_fov:float)->void:
-	crosshair.set_hov(new_fov)
+	crosshair.set_fov(new_fov)
 func _on_weapon_switched(new_weapon : Node3D) -> void:
 	debug_text.current_weapon = new_weapon
 	ammo_text.current_weapon = new_weapon

@@ -26,6 +26,7 @@ func _ready() -> void:
 		hud.set_max_ammo(ammo_type, player.weapon_manager.max_ammo[ammo_type])
 	#set player weapon to weapon[0] so that connected signals initialize.
 	player.weapon_manager.switch_weapon(0)
+	player.fov_updated.emit(player.BASE_FOV)
 	#setup console commands
 	Console.add_command("spawn", _console_debug_spawn, 2)
 	Console.add_command("set_ammo", _console_set_ammo, 2)

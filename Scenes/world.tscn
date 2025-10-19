@@ -327,5 +327,5 @@ ammo_type = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.73005, 0.32, 9.996883)
 ammo_type = 3
 
-[node name="EnemyTest4" parent="." instance=ExtResource("20_1cojt")]
+[node name="EnemyFSMTest" parent="." instance=ExtResource("20_1cojt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.886783, 0, 16.259148)
