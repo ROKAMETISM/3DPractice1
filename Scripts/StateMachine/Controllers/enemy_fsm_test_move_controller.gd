@@ -1,5 +1,5 @@
-class_name EnemyFSMTestMoveController
-extends MoveController
+class_name EnemyFSMTestMoveController extends MoveController
+var target : CharacterBody3D = null
 var want_sprint := false
 var want_jump := false
 func _physics_process(delta: float) -> void:
@@ -8,6 +8,9 @@ func _physics_process(delta: float) -> void:
 func move_input() -> Vector2:
 	if not parent:
 		return Vector2.ZERO
+	if not target:
+		return Vector2.ZERO
+	parent.look_at(target.global_position)
 	var direction := -parent.transform.basis.z
 	return Vector2(direction.x, direction.z)
 func sprint_input() -> bool:

@@ -7,14 +7,12 @@ func enter() -> void:
 func process_input(event: InputEvent) -> Array:
 	var _output : Array
 	if get_move():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(walk_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  walk_state)
 	return _output
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	if get_move():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(walk_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  walk_state)
 	parent.move_and_slide()
 	return _output
 func get_state_name()->String:

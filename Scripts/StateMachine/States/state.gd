@@ -37,3 +37,6 @@ func _apply_gravity(delta:float)->void:
 		parent.velocity.y -= move_data.jump_gravity * delta
 	else:
 		parent.velocity.y -= move_data.fall_gravity * delta
+func _set_single_state_transition(output:Array, new_state:State)->void:
+	output.append(Transition.new(self, Transition.Type.Exit))
+	output.append(Transition.new(new_state, Transition.Type.Enter))

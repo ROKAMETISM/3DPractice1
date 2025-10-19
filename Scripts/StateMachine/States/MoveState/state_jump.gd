@@ -10,12 +10,10 @@ func process_physics(delta: float) -> Array:
 	_apply_gravity(delta)
 	parent.move_and_slide()
 	if parent.velocity.y <= 0.0:
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(fall_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  fall_state)
 		return _output
 	if parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(grounded_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  grounded_state)
 		return _output
 	return _output
 func get_state_name()->String:

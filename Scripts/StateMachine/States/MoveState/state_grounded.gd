@@ -8,20 +8,17 @@ func enter() -> void:
 func process_input(event: InputEvent) -> Array:
 	var _output : Array
 	if get_jump() and parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(jump_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  jump_state)
 	return _output
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	parent.velocity.y = 0.0
 	parent.move_and_slide()
 	if get_jump() and parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(jump_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  jump_state)
 		return _output
 	if !parent.is_on_floor():
-		_output.append(Transition.new(self, Transition.Type.Exit))
-		_output.append(Transition.new(fall_state, Transition.Type.Enter))
+		_set_single_state_transition(_output,  fall_state)
 	return _output
 func get_state_name()->String:
 	return "Grounded"
