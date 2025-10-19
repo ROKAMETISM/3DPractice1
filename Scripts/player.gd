@@ -19,8 +19,6 @@ var pointing_vector := CAMERA_INITIAL_POINTING
 var camera_rotation := Vector2.ZERO
 #internal variable used for restricting weapon switch to only happen once per physics frame.
 var _allow_weapon_switch := true
-#same as fsm.fsm_state_updated:Signal, but I don't know why I have this as variable here.
-var signal_fsm_state_updated : Signal
 #MoveData used for FSM 
 @export var move_data : MoveData
 #boolean for toggling dynamic fov
@@ -34,16 +32,16 @@ var signal_fsm_state_updated : Signal
 @onready var weapon_vis := %WeaponVisualization
 @onready var entity_component := %EntityComponent
 #signals carrying player information for debug purpose
-signal player_position_updated(new_position : Vector3)
-signal player_velocity_updated(new_velocity : Vector3)
-signal player_y_acceleration_updated(new_y_acceleration : float)
+signal position_updated(new_position : Vector3)
+signal velocity_updated(new_velocity : Vector3)
+signal y_acceleration_updated(new_y_acceleration : float)
 #signals that trigger WeaponManager and current weapon's firing functions
 signal fire_main_pressed
 signal fire_main_released
 signal fire_special_pressed
 signal fire_special_released
 #triggers when fov changes so that crosshair can be updated
-signal player_fov_updated(new_fov : float)
+signal fov_updated(new_fov : float)
 func _ready() -> void:
 	#window captures mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -55,7 +53,6 @@ func _ready() -> void:
 	weapon_manager.weapon_switched.connect(update_weapon)
 	#initialized fsm
 	fsm.init(self, move_data, move_controller)
-	signal_fsm_state_updated = fsm.fsm_state_updated
 	#initialize move controller
 	move_controller.init(self)
 	#initialize camera fov
@@ -84,9 +81,9 @@ func _physics_process(delta: float) -> void:
 	acceleration_y = (velocity.y - _previous_velocity_y) / delta
 	_previous_velocity_y = velocity.y
 	#player information signals for debug purpose
-	player_position_updated.emit(global_position)
-	player_velocity_updated.emit(velocity)
-	player_y_acceleration_updated.emit(acceleration_y)
+	position_updated.emit(global_position)
+	velocity_updated.emit(velocity)
+	y_acceleration_updated.emit(acceleration_y)
 	#process dynamic fov
 	if dynamic_fov:
 		_dynamic_fov(delta)
@@ -166,4 +163,4 @@ func _dynamic_fov(delta:float)->void:
 	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, move_data.sprint_speed * 2)
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
-	player_fov_updated.emit(camera.fov)
+	fov_updated.emit(camera.fov)

@@ -5,13 +5,13 @@ const HPPotion := preload("uid://bgpam4vncl7bb")
 @onready var player := %Player
 @onready var hud := %HUD
 func _ready() -> void:
-	player.player_position_updated.connect(hud._on_player_position_updated)
-	player.player_velocity_updated.connect(hud._on_player_velocity_updated)
-	player.player_y_acceleration_updated.connect(hud._on_player_y_acceleration_updated)
-	player.player_fov_updated.connect(hud._on_player_fov_updated)
+	player.position_updated.connect(hud._on_player_position_updated)
+	player.velocity_updated.connect(hud._on_player_velocity_updated)
+	player.y_acceleration_updated.connect(hud._on_player_y_acceleration_updated)
+	player.fov_updated.connect(hud._on_player_fov_updated)
 	player.weapon_manager.weapon_switched.connect(hud._on_weapon_switched)
 	player.weapon_manager.ammo_updated.connect(hud._on_ammo_updated)
-	player.signal_fsm_state_updated.connect(hud._on_fsm_state_updated)
+	player.fsm.state_updated.connect(hud._on_player_fsm_state_updated)
 	player.entity_component.hp_component.hp_updated.connect(hud._on_player_hp_updated)
 	for ammo_type in Weapon.AmmoType.values():
 		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])

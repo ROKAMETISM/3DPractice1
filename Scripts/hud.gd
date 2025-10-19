@@ -28,7 +28,7 @@ func _on_ammo_updated(type:Weapon.AmmoType, value:int)->void:
 	debug_text.update_text()
 	ammo_text.current_ammo[type]= value
 	ammo_text.update()
-func _on_fsm_state_updated(new_states : Array[State]):
+func _on_player_fsm_state_updated(new_states : Array[State]):
 	debug_text.player_fsm_states = new_states
 func _on_player_hp_updated(player_hp:HPComponent)->void:
 	armor_bar.player_hp_component = player_hp
