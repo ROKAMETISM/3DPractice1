@@ -5,6 +5,7 @@ func enter() -> void:
 	super()
 	move_controller.target = null
 	move_controller.want_jump = true
+	move_controller.move_direction = Vector2.ZERO
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	if player_detector.get_overlapping_areas().is_empty():

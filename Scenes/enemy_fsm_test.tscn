@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://b62kpx3gwq6k7"]
+[gd_scene load_steps=26 format=3 uid="uid://b62kpx3gwq6k7"]
 
 [ext_resource type="Script" uid="uid://b5nudij5w8t65" path="res://Scripts/enemy_fsm_test.gd" id="1_lb84l"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_a0f70"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://bsyyajegkilac" path="res://Scripts/StateMachine/States/BehaviorState/state_spawn.gd" id="14_057k3"]
 [ext_resource type="Script" uid="uid://c7q27glw5efw2" path="res://Scripts/StateMachine/States/BehaviorState/state_idle.gd" id="15_a0f70"]
 [ext_resource type="Script" uid="uid://biwlr0aymp1ns" path="res://Scripts/StateMachine/States/BehaviorState/state_chase.gd" id="17_oxce1"]
+[ext_resource type="Script" uid="uid://bxshkbhrrcrqr" path="res://Scripts/StateMachine/States/BehaviorState/state_melee_attack.gd" id="17_x7iv6"]
 
 [sub_resource type="Resource" id="Resource_f5q8c"]
 script = ExtResource("2_a0f70")
@@ -56,6 +57,8 @@ animations = [{
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_a0f70"]
 height = 5.0
 radius = 8.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n3ue7"]
 
 [node name="EnemyFSMTest" type="CharacterBody3D" groups=["Enemy"]]
 script = ExtResource("1_lb84l")
@@ -104,6 +107,15 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("CylinderShape3D_a0f70")
+
+[node name="MeleeRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeRange"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+shape = SubResource("BoxShape3D_n3ue7")
 
 [node name="Controllers" type="Node" parent="."]
 
@@ -166,10 +178,9 @@ script = ExtResource("6_emit1")
 starting_states = [NodePath("SpawnState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
-[node name="SpawnState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state")]
+[node name="SpawnState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("next_state")]
 script = ExtResource("14_057k3")
-idle_state = NodePath("../IDLEState")
-state_log = null
+next_state = NodePath("../IDLEState")
 metadata/_custom_type_script = "uid://bsyyajegkilac"
 
 [node name="IDLEState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("chase_state", "player_detector")]
@@ -178,7 +189,15 @@ chase_state = NodePath("../ChaseState")
 player_detector = NodePath("../../../../PlayerDetector")
 metadata/_custom_type_script = "uid://c7q27glw5efw2"
 
-[node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state")]
+[node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "melee_attack_state", "melee_range")]
 script = ExtResource("17_oxce1")
 idle_state = NodePath("../IDLEState")
+melee_attack_state = NodePath("../MeleeAttackState")
+melee_range = NodePath("../../../../MeleeRange")
 metadata/_custom_type_script = "uid://biwlr0aymp1ns"
+
+[node name="MeleeAttackState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "chase_state")]
+script = ExtResource("17_x7iv6")
+idle_state = NodePath("../IDLEState")
+chase_state = NodePath("../ChaseState")
+metadata/_custom_type_script = "uid://bxshkbhrrcrqr"
