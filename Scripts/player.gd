@@ -83,7 +83,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	fsm.process_input(event)
 	#rotate camera according to mouse movement
 	if event is InputEventMouseMotion:
-		_rotate_camera(event)
+		_rotate_camera_on_mouse_motion(event)
 	#handle weapon firing inputs
 	_process_weapon_fire_input()
 	#handle weapon switching.
@@ -136,11 +136,13 @@ func _on_pickup_range_area_entered(area: Area3D) -> void:
 	if not(area is Collectable):
 		print("object not collectable : %s"%area)
 		return
+	#cast area as Collectable just for code autocompletion and compiler helps
+	var collectable : Collectable = area as Collectable
 	#every Collectable object has this function : Collectable.collect(Node)
 	#Collectable handles what happens when player picks it up.
-	area.collect(self)
+	collectable.collect(self)
 ##rotate camera using mouse motion. event should be InputEventMouseMotion.
-func _rotate_camera(event : InputEventMouseMotion)->void:
+func _rotate_camera_on_mouse_motion(event : InputEventMouseMotion)->void:
 	headpivot.rotate_y(-event.relative.x * SENSITIVITY)
 	camera.rotate_x(-event.relative.y * SENSITIVITY)
 	#cap vertical rotation to -89 degrees and +90 degrees
@@ -176,6 +178,7 @@ func _process_weapon_switch_input()->void:
 		_allow_weapon_switch = false
 		return
 ##Change FOV dynamically using horizontal velocity
+##only call this function if dynamic_fov is true.
 func _dynamic_fov(delta:float)->void:
 	var horizontal_veolcity = velocity
 	horizontal_veolcity.y = 0.0
