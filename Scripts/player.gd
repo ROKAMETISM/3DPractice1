@@ -11,6 +11,7 @@ var camera_rotation := Vector2.ZERO
 var _allow_weapon_switch := true
 var signal_fsm_state_updated : Signal
 @export var move_data : MoveData
+@export var dynamic_fov := false
 @onready var headpivot := %HeadPivot
 @onready var camera := %Camera3D
 @onready var weapon_manager : WeaponManager = %WeaponManager
@@ -35,6 +36,8 @@ func _ready() -> void:
 	fsm.init(self, move_data, move_controller)
 	move_controller.init(self)
 	signal_fsm_state_updated = fsm.fsm_state_updated
+	camera.fov = BASE_FOV
+	_dynamic_fov(0.0)
 func _unhandled_input(event: InputEvent) -> void:
 	fsm.process_input(event)
 	if event is InputEventMouseMotion:
@@ -66,12 +69,8 @@ func _physics_process(delta: float) -> void:
 	player_position_updated.emit(global_position)
 	player_velocity_updated.emit(velocity)
 	player_y_acceleration_updated.emit(acceleration_y)
-	var horizontal_veolcity = velocity
-	horizontal_veolcity.y = 0.0
-	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, move_data.sprint_speed * 2)
-	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
-	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
-	player_fov_updated.emit(camera.fov)
+	if dynamic_fov:
+		_dynamic_fov(delta)
 func _process(delta: float) -> void:
 	fsm.process_frame(delta)
 func _on_hit_taken(source:Node3D)->void:
@@ -90,3 +89,10 @@ func _on_pickup_range_area_entered(area: Area3D) -> void:
 		print("object not collectable : %s"%area)
 		return
 	area.collect(self)
+func _dynamic_fov(delta:float)->void:
+	var horizontal_veolcity = velocity
+	horizontal_veolcity.y = 0.0
+	var velocity_clamped = clamp(horizontal_veolcity.length(), 0.5, move_data.sprint_speed * 2)
+	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
+	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
+	player_fov_updated.emit(camera.fov)
