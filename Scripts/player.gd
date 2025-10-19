@@ -67,12 +67,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	fsm.process_input(event)
 	#rotate camera according to mouse movement
 	if event is InputEventMouseMotion:
-		headpivot.rotate_y(-event.relative.x * SENSITIVITY)
-		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		#cap vertical rotation to -89 degrees and +90 degrees
-		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
-		#save camera rotation data to Vector2 camera_rotation
-		camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
+		_rotate_camera(event)
 	#handle weawpon firing inputs and transfer them to weapon manager using signals
 	if Input.is_action_just_pressed("fire_main"):
 		fire_main_pressed.emit()
@@ -119,6 +114,14 @@ func _on_pickup_range_area_entered(area: Area3D) -> void:
 		print("object not collectable : %s"%area)
 		return
 	area.collect(self)
+##rotate camera using mouse motion. event should be InputEventMouseMotion.
+func _rotate_camera(event : InputEventMouseMotion)->void:
+	headpivot.rotate_y(-event.relative.x * SENSITIVITY)
+	camera.rotate_x(-event.relative.y * SENSITIVITY)
+	#cap vertical rotation to -89 degrees and +90 degrees
+	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
+	#save camera rotation data to Vector2 camera_rotation
+	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
 func _dynamic_fov(delta:float)->void:
 	var horizontal_veolcity = velocity
 	horizontal_veolcity.y = 0.0
