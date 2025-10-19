@@ -12,15 +12,23 @@ extends Control
 @onready var ammo_icon := %AmmoIcon
 ##reference to the corresponding node.
 @onready var ammo_text := %AmmoText
+##triggers on player position_updated siganl
+##updates debug text
 func _on_player_position_updated(new_position : Vector3) -> void:
 	debug_text.player_position = new_position
 	debug_text.update_text() 
+##triggers on player velocity_updated siganl
+##updates debug text
 func _on_player_velocity_updated(new_velocity : Vector3) -> void:
 	debug_text.player_velocity = new_velocity
 	debug_text.update_text() 
+##triggers on player y_acceleration_updated siganl
+##updates debug text
 func _on_player_y_acceleration_updated(new_y_acceleration : float) -> void:
 	debug_text.player_y_acceleration = new_y_acceleration
 	debug_text.update_text() 
+##triggers on player fov_updated siganl
+##updates crosshair
 func _on_player_fov_updated(new_fov:float)->void:
 	crosshair.set_hov(new_fov)
 func _on_weapon_switched(new_weapon : Node3D) -> void:

@@ -18,10 +18,6 @@ https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
 ###Weapons : Sniper, Machinegun, Ballista, BFG
 
-###Ammosystem
-
-###Collectables
-
 ###Weapon Visualization on screen
 
 Weapon Visualization is affected by camera FOV...
