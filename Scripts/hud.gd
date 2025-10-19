@@ -1,9 +1,16 @@
+##GDScript for HUD < Control.
 extends Control
+##reference to the corresponding node.
 @onready var debug_text := %DebugText
+##reference to the corresponding node.
 @onready var crosshair := %Crosshair
+##reference to the corresponding node.
 @onready var hp_bar := %HPBar
+##reference to the corresponding node.
 @onready var armor_bar := %ArmorBar
+##reference to the corresponding node.
 @onready var ammo_icon := %AmmoIcon
+##reference to the corresponding node.
 @onready var ammo_text := %AmmoText
 func _on_player_position_updated(new_position : Vector3) -> void:
 	debug_text.player_position = new_position
