@@ -14,13 +14,13 @@ https://github.com/theshaggydev/the-shaggy-dev-projects/tree/main/projects/godot
 
 https://shaggydev.com/2023/11/28/godot-4-advanced-state-machines/
 
-###Enemy AI and enemy variations
-
-AI Behavior tree
-
 ###Pathfinding, NavigationMap and 3DMapEditing
 
 ###Weapons : Sniper, Machinegun, Ballista, BFG
+
+###Ammosystem
+
+###Collectables
 
 ###Weapon Visualization on screen
 
@@ -32,6 +32,9 @@ Possible Solutions :
 	
 	- use multiple cameras and combine them with subviewports
 
+###Enemy AI and enemy variations
+
+AI Behavior tree
 
 ##==InputMaps==
 
