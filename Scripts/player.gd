@@ -33,7 +33,7 @@ var signal_fsm_state_updated : Signal
 @onready var move_controller := %PlayerMoveController
 @onready var weapon_vis := %WeaponVisualization
 @onready var entity_component := %EntityComponent
-#signals carrying player information for debug perpose
+#signals carrying player information for debug purpose
 signal player_position_updated(new_position : Vector3)
 signal player_velocity_updated(new_velocity : Vector3)
 signal player_y_acceleration_updated(new_y_acceleration : float)
@@ -68,51 +68,60 @@ func _unhandled_input(event: InputEvent) -> void:
 	#rotate camera according to mouse movement
 	if event is InputEventMouseMotion:
 		_rotate_camera(event)
-	#handle weawpon firing inputs and transfer them to weapon manager using signals
-	if Input.is_action_just_pressed("fire_main"):
-		fire_main_pressed.emit()
-	if Input.is_action_just_released("fire_main"):
-		fire_main_released.emit()
-	if Input.is_action_just_pressed("fire_special"):
-		fire_special_pressed.emit()
-	if Input.is_action_just_released("fire_special"):
-		fire_special_released.emit()
-	#handle weapon switching. _allow_weapon_switch resets to true every physics frame
-	if Input.is_action_just_pressed("switch_weapon_next") and _allow_weapon_switch:
-		weapon_manager.scroll_weapon(1)
-		_allow_weapon_switch = false
-	if Input.is_action_just_pressed("switch_weapon_previous") and _allow_weapon_switch:
-		weapon_manager.scroll_weapon(-1)
-		_allow_weapon_switch = false
+	#handle weapon firing inputs
+	_process_weapon_fire_input()
+	#handle weapon switching.
+	_process_weapon_switch_input()
 func _physics_process(delta: float) -> void:
-	is_on_wall()
+	#reset _allow_weapon_switch to true so that player can switch weapon again next physics frame.
 	_allow_weapon_switch = true
+	#call FSM physics process
 	fsm.process_physics(delta)
+	#set pointing vector by rotating it with camera rotation data.
+	#Maybe it can be improved using transform.basis?
+	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
+	#calculate Y acceleration for debug purpose
 	acceleration_y = (velocity.y - _previous_velocity_y) / delta
 	_previous_velocity_y = velocity.y
-	pointing_vector = CAMERA_INITIAL_POINTING.rotated(Vector3.RIGHT, camera.rotation.x).rotated(Vector3.UP, headpivot.rotation.y)
+	#player information signals for debug purpose
 	player_position_updated.emit(global_position)
 	player_velocity_updated.emit(velocity)
 	player_y_acceleration_updated.emit(acceleration_y)
+	#process dynamic fov
 	if dynamic_fov:
 		_dynamic_fov(delta)
 func _process(delta: float) -> void:
+	#call FSM frame process
 	fsm.process_frame(delta)
-func _on_hit_taken(source:Node3D)->void:
+##Function connected to EntityComponent.hit_taken signal.
+func _on_hit_taken(_source:Node3D)->void:
+	#need this function to be defined for EntityComponent to work, but currently do nothing with it.
+	#Connect hurt animation and effect on this function in the future.
 	print("player hurt")
+##Function connected to EntityComponent.died signal
 func _die() -> void:
+	#reload game when player dies.
+	#Connect Game over scene on this function in the future
 	get_tree().reload_current_scene()
+##Apply weapon recoil(in radians) as camera vertical rotation. 
 func apply_weapon_recoil(recoil_amount:float)->void:
 	camera.rotate_x(recoil_amount)
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
 	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
+##Connected to WeaponManager.weapon_switched signal.
+##Update Weapon visualization on screen.
 func update_weapon(new_weapon : Weapon):
 	weapon_vis.texture = new_weapon.weapon_vis_text
 	weapon_vis.visible = true
+##Process picking up collectables.
 func _on_pickup_range_area_entered(area: Area3D) -> void:
+	#check if colliding Area3D is actually a collectable.
+	#I won't need this thanks to collision layers, but just in case.
 	if not(area is Collectable):
 		print("object not collectable : %s"%area)
 		return
+	#every Collectable object has this function : Collectable.collect(Node)
+	#Collectable handles what happens when player picks it up.
 	area.collect(self)
 ##rotate camera using mouse motion. event should be InputEventMouseMotion.
 func _rotate_camera(event : InputEventMouseMotion)->void:
@@ -122,6 +131,35 @@ func _rotate_camera(event : InputEventMouseMotion)->void:
 	camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(90))
 	#save camera rotation data to Vector2 camera_rotation
 	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
+##handle weawpon firing inputs and transfer them to weapon manager using signals.
+##since this function is called every unhandled input, assume that no input is simultaneous.
+func _process_weapon_fire_input()->void:
+	if Input.is_action_just_pressed("fire_main"):
+		fire_main_pressed.emit()
+		return
+	if Input.is_action_just_released("fire_main"):
+		fire_main_released.emit()
+		return
+	if Input.is_action_just_pressed("fire_special"):
+		fire_special_pressed.emit()
+		return
+	if Input.is_action_just_released("fire_special"):
+		fire_special_released.emit()
+		return
+##handle weapon switching inputs. _allow_weapon_switch resets to true every physics frame
+func _process_weapon_switch_input()->void:
+	#if _allow_weapon_switch == false then do not switch
+	if not _allow_weapon_switch:
+		return
+	if Input.is_action_just_pressed("switch_weapon_next"):
+		weapon_manager.scroll_weapon(1)
+		_allow_weapon_switch = false
+		return
+	if Input.is_action_just_pressed("switch_weapon_previous"):
+		weapon_manager.scroll_weapon(-1)
+		_allow_weapon_switch = false
+		return
+##Change FOV dynamically using horizontal velocity
 func _dynamic_fov(delta:float)->void:
 	var horizontal_veolcity = velocity
 	horizontal_veolcity.y = 0.0
