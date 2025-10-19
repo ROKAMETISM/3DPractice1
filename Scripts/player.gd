@@ -1,46 +1,65 @@
+##GDScript for Player < CharacterBody3D.
 class_name Player extends CharacterBody3D
-#camera movement mouse sensitivity
+##camera movement mouse sensitivity
 const SENSITIVITY := 0.003
-#default FOV for camera
+##default FOV for camera
 const BASE_FOV := 90.0
-#FOV modifier for dynamically changing FOV based on horizontal speed. Only used when DynamicFOV is true
+##FOV modifier for dynamically changing FOV based on horizontal speed.
+##Only used when DynamicFOV is true
 const FOV_MODIFIER := 1.5
-#reload the game if player falls below this threshold
+##reload the game if player falls below this threshold
 const BOTTOM_THRESHOLD := -35.0
-#vector3 indicating the "forward" direction of camera. Not really important, could have used Vector3.FORWARD instead.
+##vector3 indicating the "forward" direction of camera.
+##Not really important, could have used Vector3.FORWARD instead.
 const CAMERA_INITIAL_POINTING := Vector3(0,0,-1)
-#internal variable for calculating y acceleration
+##internal variable for calculating y acceleration
 var _previous_velocity_y := 0.0
-#y acceleration calculated by (delta_velocity.y / delta_time). used for debug
+##y acceleration calculated by (delta_velocity.y / delta_time)
+##used for debug
 var acceleration_y := 0.0
-#vector pointing the direction of camera
+##vector pointing the direction of camera
 var pointing_vector := CAMERA_INITIAL_POINTING
-#rotation data of camera. Vector2.x for rotate_x and Vector2.y for rotate_y and you get same rotation as camera.
+##rotation data of camera.
+##camera_rotation.x for rotate_x and
+##camera_rotation.y for rotate_y then
+##you get same rotation as camera.
 var camera_rotation := Vector2.ZERO
-#internal variable used for restricting weapon switch to only happen once per physics frame.
+##internal variable used for restricting
+##weapon switch to only happen once per physics frame.
 var _allow_weapon_switch := true
-#MoveData used for FSM 
+##MoveData used for FSM 
 @export var move_data : MoveData
-#boolean for toggling dynamic fov
+##boolean for toggling dynamic fov
 @export var dynamic_fov := false
-#references to child classes
-@onready var headpivot := %HeadPivot
-@onready var camera := %Camera3D
+##reference to child node
+@onready var headpivot :Node3D= %HeadPivot
+##reference to child node
+@onready var camera :Camera3D= %Camera3D
+##reference to child node
 @onready var weapon_manager : WeaponManager = %WeaponManager
-@onready var fsm := %FSM
-@onready var move_controller := %PlayerMoveController
-@onready var weapon_vis := %WeaponVisualization
-@onready var entity_component := %EntityComponent
-#signals carrying player information for debug purpose
+##reference to child node
+@onready var fsm :FSM= %FSM
+##reference to child node
+@onready var move_controller :PlayerMoveController= %PlayerMoveController
+##reference to child node
+@onready var weapon_vis :Sprite3D= %WeaponVisualization
+##reference to child node
+@onready var entity_component :EntityComponent= %EntityComponent
+##signal carrying player information for debug purpose
 signal position_updated(new_position : Vector3)
+##signal carrying player information for debug purpose
 signal velocity_updated(new_velocity : Vector3)
+##signal carrying player information for debug purpose
 signal y_acceleration_updated(new_y_acceleration : float)
-#signals that trigger WeaponManager and current weapon's firing functions
+##signal that trigger WeaponManager's firing functions
 signal fire_main_pressed
+##signal that trigger WeaponManager's firing functions
 signal fire_main_released
+##signal that trigger WeaponManager's firing functions
 signal fire_special_pressed
+##signal that trigger WeaponManager's firing functions
 signal fire_special_released
-#triggers when fov changes so that crosshair can be updated
+##triggers when fov changes so that crosshair can be updated
 signal fov_updated(new_fov : float)
 func _ready() -> void:
 	#window captures mouse
@@ -49,8 +68,8 @@ func _ready() -> void:
 	Console.font_size = 10
 	#initialize weapon manager dependencies
 	weapon_manager.set_player(self)
+	weapon_manager.weapon_switched.connect(_on_weapon_switched)
 	weapon_manager.switch_weapon(0)
-	weapon_manager.weapon_switched.connect(update_weapon)
 	#initialized fsm
 	fsm.init(self, move_data, move_controller)
 	#initialize move controller
@@ -107,7 +126,7 @@ func apply_weapon_recoil(recoil_amount:float)->void:
 	camera_rotation = Vector2(camera.rotation.x, headpivot.rotation.y)
 ##Connected to WeaponManager.weapon_switched signal.
 ##Update Weapon visualization on screen.
-func update_weapon(new_weapon : Weapon):
+func _on_weapon_switched(new_weapon : Weapon):
 	weapon_vis.texture = new_weapon.weapon_vis_text
 	weapon_vis.visible = true
 ##Process picking up collectables.

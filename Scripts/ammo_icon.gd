@@ -1,4 +1,6 @@
+##GDScript for AmmoIcon < TextureRect
 extends TextureRect
+##hold 
 const SPRITE_INF := preload("uid://4v088nbqdupu")
 const SPRITE_SHOTGUNSHELL := preload("uid://dk8vgbdaymhwb")
 const SPRITE_ROCKET := preload("uid://cjk56strmtbjs")
