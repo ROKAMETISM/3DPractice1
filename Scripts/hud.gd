@@ -1,44 +1,42 @@
 extends Control
-var player_position := Vector3.ZERO
-var player_velocity := Vector3.ZERO
-var player_y_acceleration := 0.0
-var current_weapon : Weapon
-var player_fsm_states : Array[State]
-var player_hp_component : HPComponent
-var current_ammo : Dictionary[Weapon.AmmoType, int]
-var max_ammo : Dictionary[Weapon.AmmoType, int]
 @onready var debug_text := %DebugText
 @onready var crosshair := %Crosshair
 @onready var hp_bar := %HPBar
 @onready var armor_bar := %ArmorBar
 @onready var ammo_icon := %AmmoIcon
 @onready var ammo_text := %AmmoText
-func set_player_postion(new_position : Vector3) -> void:
-	player_position = new_position
+func _on_player_position_updated(new_position : Vector3) -> void:
+	debug_text.player_position = new_position
 	debug_text.update_text() 
-func set_player_velocity(new_velocity : Vector3) -> void:
-	player_velocity = new_velocity
+func _on_player_velocity_updated(new_velocity : Vector3) -> void:
+	debug_text.player_velocity = new_velocity
 	debug_text.update_text() 
-func set_player_y_acceleration(new_y_acceleration : float) -> void:
-	player_y_acceleration = new_y_acceleration
+func _on_player_y_acceleration_updated(new_y_acceleration : float) -> void:
+	debug_text.player_y_acceleration = new_y_acceleration
 	debug_text.update_text() 
-func set_current_weapon(new_weapon : Node3D) -> void:
-	current_weapon = new_weapon
+func _on_player_fov_updated(new_fov:float)->void:
+	crosshair.set_hov(new_fov)
+func _on_weapon_switched(new_weapon : Node3D) -> void:
+	debug_text.current_weapon = new_weapon
+	ammo_text.current_weapon = new_weapon
 	debug_text.update_text()
-	crosshair.set_weapon_spread(current_weapon.get_spread_angle_rad())
-	ammo_icon.set_icon(current_weapon.ammo_type)
+	crosshair.set_weapon_spread(new_weapon.get_spread_angle_rad())
+	ammo_icon.set_icon(new_weapon.ammo_type)
 	ammo_text.update()
-func set_player_fsm_states(new_states : Array[State]):
-	player_fsm_states = new_states
-func set_player_hp(player_hp:HPComponent)->void:
-	player_hp_component = player_hp
+func _on_ammo_updated(type:Weapon.AmmoType, value:int)->void:
+	debug_text.current_ammo[type]= value
+	debug_text.update_text()
+	ammo_text.current_ammo[type]= value
+	ammo_text.update()
+func _on_fsm_state_updated(new_states : Array[State]):
+	debug_text.player_fsm_states = new_states
+func _on_player_hp_updated(player_hp:HPComponent)->void:
+	armor_bar.player_hp_component = player_hp
+	hp_bar.player_hp_component = player_hp
 	armor_bar.update()
 	hp_bar.update()
 func set_max_ammo(type:Weapon.AmmoType, value:int)->void:
-	max_ammo[type]= value
-	debug_text.update_text()
-	ammo_text.update()
-func set_ammo(type:Weapon.AmmoType, value:int)->void:
-	current_ammo[type]= value
+	debug_text.max_ammo[type]= value
+	ammo_text.max_ammo[type]=value
 	debug_text.update_text()
 	ammo_text.update()

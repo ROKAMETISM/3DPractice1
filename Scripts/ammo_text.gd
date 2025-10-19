@@ -1,10 +1,12 @@
 extends Label
-@onready var hud := %HUD
+var current_weapon : Weapon
+var current_ammo : Dictionary[Weapon.AmmoType, int]
+var max_ammo : Dictionary[Weapon.AmmoType, int]
 func update()->void:
-	if not hud.current_weapon:
+	if not current_weapon:
 		text = ""
 		return
-	if hud.current_weapon.ammo_type == Weapon.AmmoType.Inf:
+	if current_weapon.ammo_type == Weapon.AmmoType.Inf:
 		text = ""
 		return
-	text = "%d / %d"%[hud.current_ammo[hud.current_weapon.ammo_type], hud.max_ammo[hud.current_weapon.ammo_type]]
+	text = "%d / %d"%[current_ammo[current_weapon.ammo_type], max_ammo[current_weapon.ammo_type]]

@@ -1,8 +1,8 @@
 extends TextureRect
 const CIRCLE_COLOR := Color(0.0, 1.0, 1.0, 0.7)
+var current_weapon : Weapon
 var _weapon_spread := -1.0
 var _fov := 75.0
-
 func _draw() -> void:
 	if _weapon_spread <= 0.0:
 		return

@@ -162,18 +162,18 @@ allow_greater = true
 allow_lesser = true
 script = ExtResource("7_5v1tr")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/PlayerInfo/BarsContainer"]
+[node name="AmmoBox" type="HBoxContainer" parent="UI/HUD/PlayerInfo/BarsContainer"]
 custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
 
-[node name="AmmoIcon" type="TextureRect" parent="UI/HUD/PlayerInfo/BarsContainer/HBoxContainer"]
+[node name="AmmoIcon" type="TextureRect" parent="UI/HUD/PlayerInfo/BarsContainer/AmmoBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("10_hgpy0")
 script = ExtResource("11_t2t4p")
 
-[node name="AmmoText" type="Label" parent="UI/HUD/PlayerInfo/BarsContainer/HBoxContainer"]
+[node name="AmmoText" type="Label" parent="UI/HUD/PlayerInfo/BarsContainer/AmmoBox"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "123 / 123"

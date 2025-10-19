@@ -5,14 +5,14 @@ const HPPotion := preload("uid://bgpam4vncl7bb")
 @onready var player := %Player
 @onready var hud := %HUD
 func _ready() -> void:
-	player.player_position_updated.connect(hud.set_player_postion)
-	player.player_velocity_updated.connect(hud.set_player_velocity)
-	player.player_y_acceleration_updated.connect(hud.set_player_y_acceleration)
-	player.player_fov_updated.connect(hud.crosshair.set_fov)
-	player.weapon_manager.weapon_switched.connect(hud.set_current_weapon)
-	player.weapon_manager.ammo_updated.connect(hud.set_ammo)
-	player.signal_fsm_state_updated.connect(hud.set_player_fsm_states)
-	player.entity_component.hp_component.hp_updated.connect(hud.set_player_hp)
+	player.player_position_updated.connect(hud._on_player_position_updated)
+	player.player_velocity_updated.connect(hud._on_player_velocity_updated)
+	player.player_y_acceleration_updated.connect(hud._on_player_y_acceleration_updated)
+	player.player_fov_updated.connect(hud._on_player_fov_updated)
+	player.weapon_manager.weapon_switched.connect(hud._on_weapon_switched)
+	player.weapon_manager.ammo_updated.connect(hud._on_ammo_updated)
+	player.signal_fsm_state_updated.connect(hud._on_fsm_state_updated)
+	player.entity_component.hp_component.hp_updated.connect(hud._on_player_hp_updated)
 	for ammo_type in Weapon.AmmoType.values():
 		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])
 		hud.set_max_ammo(ammo_type, player.weapon_manager.max_ammo[ammo_type])

@@ -1,5 +1,5 @@
 extends ProgressBar
-@onready var hud := %HUD
+var player_hp_component : HPComponent
 func update()->void:
-	max_value = hud.player_hp_component.get_max_hp()
-	value = hud.player_hp_component.get_current_hp()
+	max_value = player_hp_component.get_max_hp()
+	value = player_hp_component.get_current_hp()
