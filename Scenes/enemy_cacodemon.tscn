@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://chp6rguwrqeb7" path="res://Sprites/sprite_cacodemon_default.png" id="3_wdq73"]
 [ext_resource type="Texture2D" uid="uid://cc0ygcucb5inf" path="res://Sprites/sprite_cacodemon_hit.png" id="4_tjxqa"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="5_ubbc5"]
-[ext_resource type="Script" uid="uid://cfagymal3r0o8" path="res://Scripts/StateMachine/States/state_flying.gd" id="8_jaea1"]
-[ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/state_death.gd" id="12_iiylf"]
+[ext_resource type="Script" uid="uid://cfagymal3r0o8" path="res://Scripts/StateMachine/States/MoveState/state_flying.gd" id="8_jaea1"]
+[ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/MoveState/state_death.gd" id="12_iiylf"]
 [ext_resource type="Script" uid="uid://br47t3ekqnjdt" path="res://Scripts/StateMachine/Controllers/enemy_test_move_controller.gd" id="13_fe7se"]
 
 [sub_resource type="Resource" id="Resource_6ot8c"]
