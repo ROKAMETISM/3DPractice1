@@ -3,6 +3,8 @@ class_name ChaseState extends State
 @export var attack_interval := 2.0
 @export var idle_state : State
 @export var try_attack_state : State
+@export var melee_attack_state : State
+@export var melee_range : Area3D
 var attack_timer := attack_interval
 func enter() -> void:
 	super()
@@ -23,6 +25,8 @@ func process_physics(delta: float) -> Array:
 	if attack_timer < 0.0:
 		_set_single_state_transition(_output, try_attack_state)
 		return _output
+	if not melee_range.get_overlapping_areas().is_empty():
+		_set_single_state_transition(_output, melee_attack_state)
 	return _output
 func get_state_name()->String:
 	return "Chase"

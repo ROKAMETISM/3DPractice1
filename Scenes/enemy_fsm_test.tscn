@@ -191,10 +191,12 @@ chase_state = NodePath("../ChaseState")
 player_detector = NodePath("../../../../PlayerDetector")
 metadata/_custom_type_script = "uid://c7q27glw5efw2"
 
-[node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "try_attack_state")]
+[node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "try_attack_state", "melee_attack_state", "melee_range")]
 script = ExtResource("17_oxce1")
 idle_state = NodePath("../IDLEState")
 try_attack_state = NodePath("../TryAttackState")
+melee_attack_state = NodePath("../MeleeAttackState")
+melee_range = NodePath("../../../../MeleeRange")
 metadata/_custom_type_script = "uid://biwlr0aymp1ns"
 
 [node name="TryAttackState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("chase_state", "melee_attack_state", "ranged_attack_state", "melee_range")]
