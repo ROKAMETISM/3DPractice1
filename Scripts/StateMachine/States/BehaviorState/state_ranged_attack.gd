@@ -1,4 +1,4 @@
-class_name MeleeAttackState extends State
+class_name RangedAttackState extends State
 @export var idle_state : State
 @export var chase_state : State
 @export var attack_duration := 0.7
@@ -15,4 +15,4 @@ func process_physics(delta: float) -> Array:
 		return _output
 	return _output
 func get_state_name()->String:
-	return "MeleeAttack"
+	return "RangedAttack"
