@@ -4,6 +4,7 @@ var self_move := [0,0,0]
 var colliding_bodies : Array[CharacterBody2D]
 signal my_signal
 signal another_signal
+@onready var parent = get_parent()
 func _ready() -> void:
 	my_signal.connect(my_func.bind(3))
 	another_signal.connect(my_func)

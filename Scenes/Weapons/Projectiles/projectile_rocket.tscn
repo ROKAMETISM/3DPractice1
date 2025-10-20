@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://db48pqrlchd3n"]
+[gd_scene load_steps=5 format=3 uid="uid://db48pqrlchd3n"]
 
 [ext_resource type="Script" uid="uid://cxkd8suacvony" path="res://Scripts/Weapons/Projectiles/projectile_rocket.gd" id="1_6l611"]
 [ext_resource type="PackedScene" uid="uid://d1bjvarg11rha" path="res://Scenes/Weapons/Projectiles/projectile.tscn" id="1_hijj5"]
 [ext_resource type="Texture2D" uid="uid://df8wtrxgh8fnp" path="res://Sprites/sprite_projectile_rocket.png" id="2_6l611"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_qd1jl"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h347w"]
 animations = [{
@@ -19,9 +17,6 @@ animations = [{
 
 [node name="ProjectileRocket" instance=ExtResource("1_hijj5")]
 script = ExtResource("1_6l611")
-
-[node name="CollisionShape3D" parent="." index="0"]
-shape = SubResource("SphereShape3D_qd1jl")
 
 [node name="Sprite3D" parent="." index="2"]
 sprite_frames = SubResource("SpriteFrames_h347w")

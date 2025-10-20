@@ -22,9 +22,8 @@ func _physics_process(delta: float) -> void:
 	_lifetime -= delta
 	if _lifetime <= 0.0:
 		_on_lifetime_expired()
-	position += _velocity * delta
 	raycast.target_position = -_velocity * delta * 2
-	raycast.force_raycast_update()
+	position += _velocity * delta
 	if raycast.is_colliding():
 		global_position = raycast.get_collision_point()
 		_on_hit(raycast.get_collider())
