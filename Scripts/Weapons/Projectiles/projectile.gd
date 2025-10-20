@@ -21,28 +21,30 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_lifetime -= delta
 	if _lifetime <= 0.0:
-		queue_free()
+		_on_lifetime_expired()
 	position += _velocity * delta
-	raycast.target_position = -_velocity * delta
+	raycast.target_position = -_velocity * delta * 2
 	raycast.force_raycast_update()
 	if raycast.is_colliding():
 		global_position = raycast.get_collision_point()
-		_on_hit()
+		_on_hit(raycast.get_collider())
 func _on_area_entered(area: Node3D) -> void:
 	if not get_tree():
 		return
 	if area is EntityComponent:
 		if direct_hit and area.is_enemy:
 			area.take_hit(_source, _damage)
-	_on_hit()
-func _on_body_entered(_body: Node3D) -> void:
+	_on_hit(area)
+func _on_body_entered(body: Node3D) -> void:
 	if not get_tree():
 		return
-	_on_hit()
+	_on_hit(body)
 func init(velocity:Vector3, lifetime : float, damage:float, source:Node3D)->void:
 	_velocity = velocity
 	_lifetime = lifetime
 	_damage = damage
 	_source = source
-func _on_hit()->void:
+func _on_hit(collider : Node3D)->void:
 	queue_free()
+func _on_lifetime_expired()->void:
+		queue_free()

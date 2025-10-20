@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqfxv0v35oiyu"]
+[gd_scene load_steps=7 format=3 uid="uid://cqfxv0v35oiyu"]
 
 [ext_resource type="Script" uid="uid://cbcbo1nqupmmt" path="res://Scripts/Weapons/Projectiles/projectile_grenade.gd" id="1_5iv6u"]
+[ext_resource type="PackedScene" uid="uid://d1bjvarg11rha" path="res://Scenes/Weapons/Projectiles/projectile.tscn" id="1_artt7"]
 [ext_resource type="Texture2D" uid="uid://bvmp0oey24vq2" path="res://Sprites/sprite_projectile_grenade.png" id="1_ggu03"]
 [ext_resource type="Texture2D" uid="uid://617eu75nk1cf" path="res://Sprites/sprite_projectile_grenade_attached.png" id="2_840w7"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_6n74i"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_blwtb"]
+radius = 0.1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0v0vm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -23,22 +27,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_5iv6u"]
-radius = 0.07522953
-
-[node name="ProjectileGrenade" type="Area3D"]
-collision_layer = 0
-collision_mask = 18
-monitorable = false
+[node name="ProjectileGrenade" instance=ExtResource("1_artt7")]
 script = ExtResource("1_5iv6u")
+attached_detonation_time = 0.4
+direct_hit = false
 
-[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
-pixel_size = 0.025
-billboard = 2
-sprite_frames = SubResource("SpriteFrames_6n74i")
+[node name="CollisionShape3D" parent="." index="0"]
+shape = SubResource("SphereShape3D_blwtb")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_5iv6u")
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="Sprite3D" parent="." index="2"]
+sprite_frames = SubResource("SpriteFrames_0v0vm")
