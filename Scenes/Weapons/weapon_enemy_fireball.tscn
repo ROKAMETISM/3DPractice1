@@ -5,3 +5,11 @@
 
 [node name="WeaponEnemyFireball" instance=ExtResource("1_tbc4b")]
 script = ExtResource("2_nseqw")
+main_fire_rate = 0.0
+special_fire_rate = 0.0
+projectile_speed = 20.0
+base_damage = 10.0
+damage_spread = 2.0
+spread_angle = 0.0
+recoil = 0.0
+weapon_name = "EnemyFireball"
