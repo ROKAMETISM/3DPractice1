@@ -4,7 +4,7 @@ class_name IDLEState extends State
 func enter() -> void:
 	super()
 	move_controller.target = null
-	move_controller.want_jump = true
+	move_controller.want_jump = false
 	move_controller.want_sprint = false
 	move_controller.move_direction = Vector2.ZERO
 func process_physics(delta: float) -> Array:
