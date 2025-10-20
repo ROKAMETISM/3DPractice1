@@ -18,8 +18,6 @@ func _ready() -> void:
 	hp_component.hp_updated.connect(_on_hp_updated)
 	hit_taken.connect(parent._on_hit_taken)
 	died.connect(parent._die)
-	print(collision_layer)
-	print(collision_mask)
 func take_hit(hit_source:Node3D, damage:float)->void:
 	hp_component.take_damage(damage)
 	hit_taken.emit(hit_source)
