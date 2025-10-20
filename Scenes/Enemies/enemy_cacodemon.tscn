@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://dl5ombgjk23so"]
 
-[ext_resource type="Script" uid="uid://323t1hhe8i0d" path="res://Scripts/enemy_cacodemon.gd" id="1_cdjiu"]
+[ext_resource type="Script" uid="uid://323t1hhe8i0d" path="res://Scripts/Enemies/enemy_cacodemon.gd" id="1_cdjiu"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_wdq73"]
 [ext_resource type="Script" uid="uid://ceyuywa48f0n2" path="res://Scripts/Components/entity_component.gd" id="3_6ot8c"]
 [ext_resource type="Texture2D" uid="uid://chp6rguwrqeb7" path="res://Sprites/sprite_cacodemon_default.png" id="3_wdq73"]

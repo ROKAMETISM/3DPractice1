@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgpam4vncl7bb"]
 
-[ext_resource type="PackedScene" uid="uid://cs7jkkno73jdw" path="res://Scenes/collectable.tscn" id="1_js8mp"]
+[ext_resource type="PackedScene" uid="uid://cs7jkkno73jdw" path="res://Scenes/Collectables/collectable.tscn" id="1_js8mp"]
 [ext_resource type="Texture2D" uid="uid://c11f1eq28qrup" path="res://Sprites/sprite_hp_potion.png" id="2_mxrd7"]
-[ext_resource type="Script" uid="uid://c7pjbwxgirvm6" path="res://Scripts/hp_potion.gd" id="2_o1fkq"]
+[ext_resource type="Script" uid="uid://c7pjbwxgirvm6" path="res://Scripts/Collectables/hp_potion.gd" id="2_o1fkq"]
 
 [node name="HPPotion" instance=ExtResource("1_js8mp")]
 script = ExtResource("2_o1fkq")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://biq8247xoej2a"]
 
-[ext_resource type="Script" uid="uid://c3mhgtdv7l3oc" path="res://Scripts/Weapons/projectile_plasma.gd" id="1_aga78"]
+[ext_resource type="Script" uid="uid://c3mhgtdv7l3oc" path="res://Scripts/Weapons/Projectiles/projectile_plasma.gd" id="1_aga78"]
 [ext_resource type="Texture2D" uid="uid://2ftfs1lqsjkc" path="res://Sprites/sprite_projectile_plasma.png" id="1_ofhu2"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_aga78"]
@@ -19,6 +19,8 @@ texture = ExtResource("1_ofhu2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_aga78")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

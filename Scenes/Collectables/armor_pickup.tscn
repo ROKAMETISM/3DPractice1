@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://djfbwkue7u3fx"]
 
-[ext_resource type="PackedScene" uid="uid://cs7jkkno73jdw" path="res://Scenes/collectable.tscn" id="1_yxknw"]
-[ext_resource type="Script" uid="uid://c38eh6ejijjh4" path="res://Scripts/armor_pickup.gd" id="2_7wydx"]
+[ext_resource type="PackedScene" uid="uid://cs7jkkno73jdw" path="res://Scenes/Collectables/collectable.tscn" id="1_yxknw"]
+[ext_resource type="Script" uid="uid://c38eh6ejijjh4" path="res://Scripts/Collectables/armor_pickup.gd" id="2_7wydx"]
 [ext_resource type="Texture2D" uid="uid://bvedy0uskpnm2" path="res://Sprites/sprite_armor_pickup.png" id="2_tudes"]
 
 [node name="ArmorPickup" instance=ExtResource("1_yxknw")]

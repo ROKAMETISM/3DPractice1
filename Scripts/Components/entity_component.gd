@@ -9,8 +9,8 @@ signal hit_taken(hit_source:Node3D)
 signal died
 func _ready() -> void:
 	hp_component.init(max_hp,  max_armor)
-	set_collision_layer_value(1, false)
-	set_collision_mask_value(1, false)
+	collision_layer = 0b0
+	collision_mask = 0b0
 	if is_enemy:
 		set_collision_layer_value(5, true)
 	if is_player:
@@ -18,6 +18,8 @@ func _ready() -> void:
 	hp_component.hp_updated.connect(_on_hp_updated)
 	hit_taken.connect(parent._on_hit_taken)
 	died.connect(parent._die)
+	print(collision_layer)
+	print(collision_mask)
 func take_hit(hit_source:Node3D, damage:float)->void:
 	hp_component.take_damage(damage)
 	hit_taken.emit(hit_source)
