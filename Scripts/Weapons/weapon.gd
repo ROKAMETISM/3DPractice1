@@ -74,11 +74,10 @@ func apply_recoil()->void:
 	weapon_recoil.emit(deg_to_rad(recoil))
 ##Instantiate and initialize a given projectile. direction must be normalized.
 func fire_projectile(projectile_scene:PackedScene, damage:float,direction:Vector3,lifetime:float)->Node3D:
-	var projectile : Node3D = projectile_scene.instantiate()
+	var projectile : Projectile = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(projectile)
-	projectile.init(lifetime, damage)
+	projectile.init(direction*projectile_speed+get_parent().player.velocity, lifetime, damage, _weapon_manager.player)
 	projectile.global_position = global_position 
-	projectile.velocity = direction*projectile_speed+get_parent().player.velocity
 	return projectile
 func ammo_is_available(min_amount:int)->bool:
 	if not _weapon_manager:
