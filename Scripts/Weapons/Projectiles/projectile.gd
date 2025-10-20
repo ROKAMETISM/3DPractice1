@@ -17,7 +17,7 @@ func _ready() -> void:
 	if hit_enemy:
 		set_collision_mask_value(5, true)
 	if hit_player:
-		set_collision_layer_value(3, true)
+		set_collision_mask_value(3, true)
 func _physics_process(delta: float) -> void:
 	_lifetime -= delta
 	if _lifetime <= 0.0:
@@ -31,7 +31,7 @@ func _on_area_entered(area: Node3D) -> void:
 	if not get_tree():
 		return
 	if area is EntityComponent:
-		if direct_hit and area.is_enemy:
+		if direct_hit and can_hit(area):
 			area.take_hit(_source, _damage)
 	_on_hit(area)
 func _on_body_entered(body: Node3D) -> void:
@@ -46,4 +46,10 @@ func init(velocity:Vector3, lifetime : float, damage:float, source:Node3D)->void
 func _on_hit(collider : Node3D)->void:
 	queue_free()
 func _on_lifetime_expired()->void:
-		queue_free()
+	queue_free()
+func can_hit(collider:Node3D)->bool:
+	if collider.is_enemy and hit_enemy:
+		return true
+	if collider.is_player and hit_player:
+		return true
+	return false

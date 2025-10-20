@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://0cqkloljdf8k"]
+
+[ext_resource type="PackedScene" uid="uid://dn7r03gji7pon" path="res://Scenes/Weapons/weapon.tscn" id="1_tbc4b"]
+[ext_resource type="Script" uid="uid://c0ay0vqg3vo3" path="res://Scripts/Weapons/weapon_enemy_fireball.gd" id="2_nseqw"]
+
+[node name="WeaponEnemyFireball" instance=ExtResource("1_tbc4b")]
+script = ExtResource("2_nseqw")

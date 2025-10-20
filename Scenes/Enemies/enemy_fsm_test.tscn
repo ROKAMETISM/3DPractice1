@@ -1,9 +1,10 @@
-[gd_scene load_steps=28 format=3 uid="uid://b62kpx3gwq6k7"]
+[gd_scene load_steps=29 format=3 uid="uid://b62kpx3gwq6k7"]
 
 [ext_resource type="Script" uid="uid://b5nudij5w8t65" path="res://Scripts/Enemies/enemy_fsm_test.gd" id="1_lb84l"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_a0f70"]
 [ext_resource type="Texture2D" uid="uid://bwlf2pmfy2soy" path="res://Sprites/sprite_enemy_fsm_test.png" id="3_f5q8c"]
 [ext_resource type="Script" uid="uid://ceyuywa48f0n2" path="res://Scripts/Components/entity_component.gd" id="5_x7iv6"]
+[ext_resource type="PackedScene" uid="uid://0cqkloljdf8k" path="res://Scenes/Weapons/weapon_enemy_fireball.tscn" id="5_xum0v"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="6_emit1"]
 [ext_resource type="Script" uid="uid://b15s566tbph2o" path="res://Scripts/StateMachine/States/MoveState/state_fall.gd" id="7_gsebs"]
 [ext_resource type="Script" uid="uid://ca33m87xecino" path="res://Scripts/StateMachine/States/MoveState/state_grounded.gd" id="8_30iu4"]
@@ -119,6 +120,10 @@ monitorable = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
 shape = SubResource("BoxShape3D_n3ue7")
 
+[node name="WeaponEnemyFireball" parent="." instance=ExtResource("5_xum0v")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3109858, 0)
+
 [node name="Controllers" type="Node" parent="."]
 
 [node name="FSM" type="Node" parent="Controllers" node_paths=PackedStringArray("starting_states")]
@@ -193,6 +198,7 @@ metadata/_custom_type_script = "uid://c7q27glw5efw2"
 
 [node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "try_attack_state", "melee_attack_state", "melee_range")]
 script = ExtResource("17_oxce1")
+attack_interval = 0.5
 idle_state = NodePath("../IDLEState")
 try_attack_state = NodePath("../TryAttackState")
 melee_attack_state = NodePath("../MeleeAttackState")

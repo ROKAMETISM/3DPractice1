@@ -7,6 +7,7 @@ func enter() -> void:
 	super()
 	attack_timer = attack_duration
 	move_controller.move_direction = Vector2.ZERO
+	parent.weapon_fireball.fire_main_pressed()
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	attack_timer -= delta

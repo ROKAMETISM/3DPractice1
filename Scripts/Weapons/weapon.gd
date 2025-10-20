@@ -15,7 +15,7 @@ enum AmmoType {
 @export var spread_angle := 1.0
 @export var recoil := 1.0
 @export var weapon_name := "WeaponName"
-@export var ammo_type : AmmoType
+@export var ammo_type : AmmoType = AmmoType.Inf
 ##Recoil in degrees angle
 @export var weapon_vis_text : Texture2D = null
 var _weapon_manager : WeaponManager
@@ -76,7 +76,10 @@ func apply_recoil()->void:
 func fire_projectile(projectile_scene:PackedScene, damage:float,direction:Vector3,lifetime:float)->Node3D:
 	var projectile : Projectile = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(projectile)
-	projectile.init(direction*projectile_speed+get_parent().player.velocity, lifetime, damage, _weapon_manager.player)
+	var source : Node3D = null
+	if _weapon_manager:
+		source = _weapon_manager.player
+	projectile.init(direction*projectile_speed, lifetime, damage, source)
 	projectile.global_position = global_position 
 	return projectile
 func ammo_is_available(min_amount:int)->bool:
