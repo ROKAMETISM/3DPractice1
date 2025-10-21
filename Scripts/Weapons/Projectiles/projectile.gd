@@ -43,7 +43,7 @@ func init(velocity:Vector3, lifetime : float, damage:float, source:Node3D)->void
 	_lifetime = lifetime
 	_damage = damage
 	_source = source
-func _on_hit(collider : Node3D)->void:
+func _on_hit(_collider : Node3D)->void:
 	queue_free()
 func _on_lifetime_expired()->void:
 	queue_free()

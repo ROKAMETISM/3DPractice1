@@ -20,7 +20,7 @@ func _ready() -> void:
 		weapon._weapon_manager = self
 	for ammo_type in Weapon.AmmoType.values():
 		current_ammo.set(ammo_type, max_ammo.get(ammo_type))
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for weapon : Weapon in weapons:
 		weapon.set_direction(player.pointing_vector, player.camera_rotation)
 func set_player(new_player : CharacterBody3D):

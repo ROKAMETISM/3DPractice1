@@ -4,12 +4,12 @@ extends State
 @export var walk_state: State
 func enter() -> void:
 	super()
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	var _output : Array
 	if !get_sprint():
 		_set_single_state_transition(_output,  walk_state)
 	return _output
-func process_physics(delta: float) -> Array:
+func process_physics(_delta: float) -> Array:
 	var _output : Array
 	parent.velocity.x = move_data.sprint_speed * get_move().x
 	parent.velocity.z = move_data.sprint_speed * get_move().y

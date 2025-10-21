@@ -38,5 +38,5 @@ func _fire_single_pellet() -> void:
 func _grenade_fire()->bool:
 	var aim_vector : Vector3 = _get_aim_with_spread(_adjusted_rotation, 0.0).normalized()
 	var projectile_damage := grenade_base_damage+randf_range(-1.0,1.0)*grenade_damage_spread
-	var projectile : Area3D = fire_projectile(PROJECTILE_GRENADE, projectile_damage, aim_vector, 2.0)
+	fire_projectile(PROJECTILE_GRENADE, projectile_damage, aim_vector, 2.0)
 	return true
