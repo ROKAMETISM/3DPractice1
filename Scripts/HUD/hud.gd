@@ -12,6 +12,8 @@ extends Control
 @onready var ammo_icon := %AmmoIcon
 ##reference to the corresponding node.
 @onready var ammo_text := %AmmoText
+##reference to the corresponding node.
+@onready var jump_midair_icon := %JumpMidAir
 ##triggers on player position_updated siganl
 ##updates debug text
 func _on_player_position_updated(new_position : Vector3) -> void:
@@ -55,3 +57,5 @@ func set_max_ammo(type:Weapon.AmmoType, value:int)->void:
 	ammo_text.max_ammo[type]=value
 	debug_text.update_text()
 	ammo_text.update()
+func _on_player_can_jump_midair_updated(can_jump_midair:bool)->void:
+	jump_midair_icon._set_state(can_jump_midair)

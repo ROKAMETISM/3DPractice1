@@ -7,7 +7,7 @@ const ENEMY_CACODEMON := preload("uid://dl5ombgjk23so")
 ##Const holding HPPotion : PackedScene resource
 const HPPotion := preload("uid://bgpam4vncl7bb")
 ##reference to child node : Player
-@onready var player := %Player
+@onready var player : Player = %Player
 ##reference to child node : HUD
 @onready var hud := %HUD
 func _ready() -> void:
@@ -20,6 +20,7 @@ func _ready() -> void:
 	player.weapon_manager.ammo_updated.connect(hud._on_ammo_updated)
 	player.fsm.state_updated.connect(hud._on_player_fsm_state_updated)
 	player.entity_component.hp_component.hp_updated.connect(hud._on_player_hp_updated)
+	player.can_jump_midair_updated.connect(hud._on_player_can_jump_midair_updated)
 	#init current and max ammo for HUD
 	for ammo_type in Weapon.AmmoType.values():
 		player.weapon_manager.ammo_updated.emit(ammo_type, player.weapon_manager.current_ammo[ammo_type])

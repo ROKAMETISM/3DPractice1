@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://bxcsfsbdynv4y"]
+[gd_scene load_steps=31 format=4 uid="uid://bxcsfsbdynv4y"]
 
 [ext_resource type="PackedScene" uid="uid://b81emnirlm0d0" path="res://Scenes/player.tscn" id="1_a02cp"]
 [ext_resource type="Script" uid="uid://cxapm8es27fu7" path="res://Scripts/world.gd" id="1_go701"]
@@ -17,6 +17,8 @@
 [ext_resource type="Script" uid="uid://bky14xdc4kru7" path="res://Scripts/HUD/ammo_icon.gd" id="11_t2t4p"]
 [ext_resource type="Script" uid="uid://bmb3ankgtjdi5" path="res://Scripts/HUD/ammo_text.gd" id="12_0pcbe"]
 [ext_resource type="PackedScene" uid="uid://bgpam4vncl7bb" path="res://Scenes/Collectables/hp_potion.tscn" id="12_7yui6"]
+[ext_resource type="Texture2D" uid="uid://dwud3kfhb2cdq" path="res://Sprites/sprite_jump_hud_on.png" id="13_pyn1s"]
+[ext_resource type="Script" uid="uid://bvx62wcobbi0e" path="res://Scripts/HUD/jump_mid_air.gd" id="13_yq1aw"]
 [ext_resource type="PackedScene" uid="uid://djfbwkue7u3fx" path="res://Scenes/Collectables/armor_pickup.tscn" id="15_kn0ld"]
 [ext_resource type="PackedScene" uid="uid://bjjvl4x8roh6v" path="res://Scenes/Collectables/ammo_pickup.tscn" id="19_axeuq"]
 [ext_resource type="PackedScene" uid="uid://b62kpx3gwq6k7" path="res://Scenes/Enemies/enemy_fsm_test.tscn" id="20_1cojt"]
@@ -179,6 +181,15 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "123 / 123"
 script = ExtResource("12_0pcbe")
+
+[node name="DashJumpBox" type="HBoxContainer" parent="UI/HUD/PlayerInfo/BarsContainer"]
+layout_mode = 2
+
+[node name="JumpMidAir" type="TextureRect" parent="UI/HUD/PlayerInfo/BarsContainer/DashJumpBox"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("13_pyn1s")
+script = ExtResource("13_yq1aw")
 
 [node name="Player" parent="." instance=ExtResource("1_a02cp")]
 unique_name_in_owner = true
