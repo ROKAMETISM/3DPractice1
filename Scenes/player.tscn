@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/Weapons/weapon_manager.gd" id="2_cvnsp"]
 [ext_resource type="Script" uid="uid://cn36stk7m4rcc" path="res://Scripts/StateMachine/Datas/move_data.gd" id="2_gymyn"]
 [ext_resource type="Script" uid="uid://dnex1ykcrkxrl" path="res://Scripts/StateMachine/fsm.gd" id="3_x3wgy"]
-[ext_resource type="Script" uid="uid://b15s566tbph2o" path="res://Scripts/StateMachine/States/MoveState/state_fall.gd" id="4_3smsa"]
 [ext_resource type="Script" uid="uid://ceyuywa48f0n2" path="res://Scripts/Components/entity_component.gd" id="4_7dp3o"]
 [ext_resource type="Texture2D" uid="uid://bcbwydxk0m7br" path="res://Sprites/sprite_weapon_vis_base.png" id="4_ukyrk"]
 [ext_resource type="Script" uid="uid://ca33m87xecino" path="res://Scripts/StateMachine/States/MoveState/state_grounded.gd" id="5_8erm5"]
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/MoveState/state_stand.gd" id="6_f1ek2"]
+[ext_resource type="Script" uid="uid://d0byf4wcbvbiv" path="res://Scripts/StateMachine/States/MoveState/state_player_fall.gd" id="7_7dp3o"]
 [ext_resource type="Script" uid="uid://cdsp1005q4xww" path="res://Scripts/StateMachine/States/MoveState/state_walk.gd" id="7_gymyn"]
 [ext_resource type="Script" uid="uid://ckdbprffamh6n" path="res://Scripts/StateMachine/States/MoveState/state_player_jump.gd" id="9_7dp3o"]
 [ext_resource type="Script" uid="uid://1q0qk2k45731" path="res://Scripts/StateMachine/Controllers/player_move_controller.gd" id="9_pu2lt"]
@@ -17,6 +17,7 @@
 
 [sub_resource type="Resource" id="Resource_ukyrk"]
 script = ExtResource("2_gymyn")
+jump_velocity = 4.5
 walk_speed = 4.5
 sprint_speed = 6.0
 metadata/_custom_type_script = "uid://cn36stk7m4rcc"
@@ -99,16 +100,16 @@ starting_states = [NodePath("GroundedState"), NodePath("StandState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
 [node name="FallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state", "death_state")]
-script = ExtResource("4_3smsa")
-jump_state = NodePath("")
+script = ExtResource("7_7dp3o")
+jump_state = NodePath("../JumpState")
 grounded_state = NodePath("../GroundedState")
 death_state = NodePath("../DeathState")
-metadata/_custom_type_script = "uid://b15s566tbph2o"
+metadata/_custom_type_script = "uid://d0byf4wcbvbiv"
 
 [node name="GroundedState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state")]
 script = ExtResource("5_8erm5")
 fall_state = NodePath("../FallState")
-jump_state = NodePath("")
+jump_state = NodePath("../JumpState")
 metadata/_custom_type_script = "uid://ca33m87xecino"
 
 [node name="JumpState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "fall_state", "grounded_state")]

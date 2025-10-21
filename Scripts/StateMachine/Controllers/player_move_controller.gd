@@ -13,7 +13,10 @@ func jump_input() -> bool:
 func _ready() -> void:
 	fsm.state_updated.connect(_on_fsm_state_updated)
 func _on_fsm_state_updated(new_states : Array[State]):
+	if not parent:
+		return
 	for _state in new_states:
 		if _state is GroundedState:
 			parent.can_jump_midair = true
+			parent.can_jump_midair_updated.emit(true)
 		

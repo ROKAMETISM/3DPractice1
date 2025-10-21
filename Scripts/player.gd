@@ -73,6 +73,8 @@ signal fire_special_pressed
 signal fire_special_released
 ##triggers when fov changes so that crosshair can be updated
 signal fov_updated(new_fov : float)
+##triggers when can_jump_midair is changed
+signal can_jump_midair_updated(value : float)
 func _ready() -> void:
 	#window captures mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
