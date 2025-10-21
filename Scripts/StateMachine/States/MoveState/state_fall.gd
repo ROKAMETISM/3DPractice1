@@ -1,8 +1,8 @@
 class_name FallState
 extends State
-@export var jump_state: State
-@export var grounded_state: State
-@export var death_state : State
+@export var jump_state: JumpState
+@export var grounded_state: GroundedState
+@export var death_state : DeathState
 func enter() -> void:
 	super()
 func process_physics(delta: float) -> Array:

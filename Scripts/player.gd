@@ -27,10 +27,22 @@ var camera_rotation := Vector2.ZERO
 ##internal variable used for restricting
 ##weapon switch to only happen once per physics frame.
 var _allow_weapon_switch := true
+##set to true when player lands on ground.
+##when player jumps mid air, set back to false
+var can_jump_midair := true
 ##MoveData used for FSM 
 @export var move_data : MoveData
 ##boolean for toggling dynamic fov
 @export var dynamic_fov := false
+##number of dash charges player can hold at the same time
+@export var dash_charges := 2
+##current number of dash charges the player currently holds.
+##consumed on dash
+var current_dash_charge := dash_charges
+##variable for recharging dash according to cooldown
+var _dash_recharge_timer := 0.0
+##cooldown time for a dash charge to recharge, in seconds
+@export var dash_cooldown := 0.8
 ##reference to child node
 @onready var headpivot :Node3D= %HeadPivot
 ##reference to child node
