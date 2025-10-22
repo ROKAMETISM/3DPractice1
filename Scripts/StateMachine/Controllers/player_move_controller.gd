@@ -10,6 +10,8 @@ func sprint_input() -> bool:
 	return Input.is_action_pressed("sprint")
 func jump_input() -> bool:
 	return Input.is_action_just_pressed('jump')
+func dash_input() -> bool:
+	return Input.is_action_just_pressed("dash")
 func _ready() -> void:
 	fsm.state_updated.connect(_on_fsm_state_updated)
 func _on_fsm_state_updated(new_states : Array[State]):

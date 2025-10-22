@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b81emnirlm0d0"]
+[gd_scene load_steps=22 format=3 uid="uid://b81emnirlm0d0"]
 
 [ext_resource type="Script" uid="uid://cq2ch6kw1w2h7" path="res://Scripts/player.gd" id="1_v0iea"]
 [ext_resource type="Script" uid="uid://uftaxg1w3e2n" path="res://Scripts/Weapons/weapon_manager.gd" id="2_cvnsp"]
@@ -9,9 +9,11 @@
 [ext_resource type="Script" uid="uid://ca33m87xecino" path="res://Scripts/StateMachine/States/MoveState/state_grounded.gd" id="5_8erm5"]
 [ext_resource type="Script" uid="uid://ccou8x21gdhnh" path="res://Scripts/StateMachine/States/MoveState/state_stand.gd" id="6_f1ek2"]
 [ext_resource type="Script" uid="uid://d0byf4wcbvbiv" path="res://Scripts/StateMachine/States/MoveState/state_player_fall.gd" id="7_7dp3o"]
+[ext_resource type="Script" uid="uid://cfk6vupcfm0mr" path="res://Scripts/StateMachine/States/MoveState/state_player_default.gd" id="7_fd4e3"]
 [ext_resource type="Script" uid="uid://cdsp1005q4xww" path="res://Scripts/StateMachine/States/MoveState/state_walk.gd" id="7_gymyn"]
 [ext_resource type="Script" uid="uid://ckdbprffamh6n" path="res://Scripts/StateMachine/States/MoveState/state_player_jump.gd" id="9_7dp3o"]
 [ext_resource type="Script" uid="uid://1q0qk2k45731" path="res://Scripts/StateMachine/Controllers/player_move_controller.gd" id="9_pu2lt"]
+[ext_resource type="Script" uid="uid://21rs183ydymm" path="res://Scripts/StateMachine/States/MoveState/state_player_dash.gd" id="10_h4iuc"]
 [ext_resource type="Script" uid="uid://cf5cnu26g4qsj" path="res://Scripts/StateMachine/States/MoveState/state_sprint.gd" id="10_pu2lt"]
 [ext_resource type="Script" uid="uid://uv17e2g3f0fs" path="res://Scripts/StateMachine/States/MoveState/state_death.gd" id="11_pu2lt"]
 
@@ -96,28 +98,42 @@ texture = ExtResource("4_ukyrk")
 [node name="FSM" type="Node" parent="Controllers" node_paths=PackedStringArray("starting_states")]
 unique_name_in_owner = true
 script = ExtResource("3_x3wgy")
-starting_states = [NodePath("GroundedState"), NodePath("StandState")]
+starting_states = [NodePath("PlayerDefaultState"), NodePath("GroundedState"), NodePath("StandState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
-[node name="FallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state", "death_state")]
+[node name="PlayerDefaultState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("player_dash_state")]
+script = ExtResource("7_fd4e3")
+player_dash_state = NodePath("../PlayerDashState")
+metadata/_custom_type_script = "uid://cfk6vupcfm0mr"
+
+[node name="PlayerFallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state", "death_state")]
 script = ExtResource("7_7dp3o")
-jump_state = NodePath("../JumpState")
+jump_state = NodePath("../PlayerJumpState")
 grounded_state = NodePath("../GroundedState")
 death_state = NodePath("../DeathState")
 metadata/_custom_type_script = "uid://d0byf4wcbvbiv"
 
 [node name="GroundedState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state")]
 script = ExtResource("5_8erm5")
-fall_state = NodePath("../FallState")
-jump_state = NodePath("../JumpState")
+fall_state = NodePath("../PlayerFallState")
+jump_state = NodePath("../PlayerJumpState")
 metadata/_custom_type_script = "uid://ca33m87xecino"
 
-[node name="JumpState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "fall_state", "grounded_state")]
+[node name="PlayerJumpState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "fall_state", "grounded_state")]
 script = ExtResource("9_7dp3o")
 jump_state = NodePath(".")
-fall_state = NodePath("../FallState")
+fall_state = NodePath("../PlayerFallState")
 grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://ckdbprffamh6n"
+
+[node name="PlayerDashState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "stand_state")]
+script = ExtResource("10_h4iuc")
+fall_state = NodePath("../PlayerFallState")
+stand_state = NodePath("../StandState")
+dash_time = 0.15
+dash_speed = 30.0
+state_log = null
+metadata/_custom_type_script = "uid://21rs183ydymm"
 
 [node name="StandState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("walk_state", "sprint_state")]
 script = ExtResource("6_f1ek2")
