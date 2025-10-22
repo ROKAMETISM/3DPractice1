@@ -6,23 +6,24 @@ class_name PlayerDashState extends State
 var _dash_timer := dash_time
 func enter() -> void:
 	super()
-	parent.velocity.y = 0.0
 	if move_controller.move_input():
 		print("moveinput")
 		parent.velocity = _get_Vec3_move_input()*dash_speed
 	else:
 		print("no moveinput")
 		parent.velocity = parent.pointing_vector.normalized()*dash_speed
+	parent.velocity.y = 0.0
 	_dash_timer = dash_time
 	print(parent.velocity)
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	_dash_timer -= delta
-	parent.move_and_slide()
 	if _dash_timer <= 0.0:
+		parent.velocity = parent.velocity.normalized()*move_data.sprint_speed
 		_output.append(Transition.new(self, Transition.Type.Exit))
 		_output.append(Transition.new(fall_state, Transition.Type.Enter))
 		_output.append(Transition.new(stand_state, Transition.Type.Enter))
+	parent.move_and_slide()
 	return _output
 func get_state_name()->String:
 	return "PlayerDash"

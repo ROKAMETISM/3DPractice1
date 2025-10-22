@@ -11,6 +11,9 @@ func process_input(event: InputEvent) -> Array:
 	return _output
 func process_physics(delta: float) -> Array:
 	var _output : Array
+	if !get_move():
+		_set_single_state_transition(_output,  stand_state)
+		return _output
 	parent.velocity.x = move_data.walk_speed * get_move().x
 	parent.velocity.z = move_data.walk_speed * get_move().y
 	if not parent.is_on_floor():
@@ -20,9 +23,7 @@ func process_physics(delta: float) -> Array:
 		parent.velocity.x = get_move().x * move_data.walk_speed
 		parent.velocity.z = get_move().y * move_data.walk_speed
 	parent.move_and_slide()
-	if !get_move():
-		_set_single_state_transition(_output,  stand_state)
-		return _output
+	
 	if get_sprint():
 		_set_single_state_transition(_output,  sprint_state)
 	return _output

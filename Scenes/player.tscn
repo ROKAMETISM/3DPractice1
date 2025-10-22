@@ -132,7 +132,6 @@ fall_state = NodePath("../PlayerFallState")
 stand_state = NodePath("../StandState")
 dash_time = 0.15
 dash_speed = 30.0
-state_log = null
 metadata/_custom_type_script = "uid://21rs183ydymm"
 
 [node name="StandState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("walk_state", "sprint_state")]
