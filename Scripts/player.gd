@@ -35,12 +35,12 @@ var can_jump_midair := true
 ##boolean for toggling dynamic fov
 @export var dynamic_fov := false
 ##number of dash charges player can hold at the same time
-@export var dash_charges := 2
+@export var dash_charges := 2 
 ##cooldown time for a dash charge to recharge, in seconds
 @export var dash_cooldown := 0.8
 ##current number of dash charges the player currently holds.
 ##consumed on dash
-var current_dash_charge := dash_charges
+var current_dash_charge := dash_charges : set = _set_current_dash_charge
 ##var for holding dash recharge untile player hits groundS
 var dash_charge_queue := 0
 ##reference to child node
@@ -75,6 +75,8 @@ signal fire_special_released
 signal fov_updated(new_fov : float)
 ##triggers when can_jump_midair is changed
 signal can_jump_midair_updated(value : float)
+##triggers on current_dash_charge setter
+signal dash_charge_updated(value : int, max_value:int)
 func _ready() -> void:
 	#window captures mouse
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -200,3 +202,6 @@ func _dynamic_fov(delta:float)->void:
 	var target_fov = BASE_FOV + FOV_MODIFIER * velocity_clamped
 	camera.fov = lerp(camera.fov, target_fov, delta * 10.0)
 	fov_updated.emit(camera.fov)
+func _set_current_dash_charge(value : int)->void:
+	current_dash_charge = clamp(value, 0, dash_charges)
+	dash_charge_updated.emit(current_dash_charge, dash_charges)

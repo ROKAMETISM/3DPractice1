@@ -12,8 +12,6 @@ func enter() -> void:
 		parent.velocity = parent.pointing_vector.normalized()*dash_speed
 	parent.velocity.y = 0.0
 	_dash_timer = dash_time
-	print("current dash charge:%d"%parent.current_dash_charge)
-	print("dash charge queue  :%d"%parent.dash_charge_queue)
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	_dash_timer -= delta

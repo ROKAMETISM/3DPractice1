@@ -14,6 +14,8 @@ extends Control
 @onready var ammo_text := %AmmoText
 ##reference to the corresponding node.
 @onready var jump_midair_icon := %JumpMidAir
+##reference to the corresponding node.
+@onready var dash_container := %DashJumpBox
 ##triggers on player position_updated siganl
 ##updates debug text
 func _on_player_position_updated(new_position : Vector3) -> void:
@@ -59,3 +61,5 @@ func set_max_ammo(type:Weapon.AmmoType, value:int)->void:
 	ammo_text.update()
 func _on_player_can_jump_midair_updated(can_jump_midair:bool)->void:
 	jump_midair_icon._set_state(can_jump_midair)
+func _on_player_dash_charge_updated(value:int, max_value:int)->void:
+	dash_container.update_dash(value, max_value)
