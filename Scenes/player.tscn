@@ -101,9 +101,10 @@ script = ExtResource("3_x3wgy")
 starting_states = [NodePath("PlayerDefaultState"), NodePath("GroundedState"), NodePath("StandState")]
 metadata/_custom_type_script = "uid://dnex1ykcrkxrl"
 
-[node name="PlayerDefaultState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("player_dash_state")]
+[node name="PlayerDefaultState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("player_dash_state", "grounded_state")]
 script = ExtResource("7_fd4e3")
 player_dash_state = NodePath("../PlayerDashState")
+grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://cfk6vupcfm0mr"
 
 [node name="PlayerFallState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("jump_state", "grounded_state", "death_state")]

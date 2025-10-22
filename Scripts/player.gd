@@ -36,13 +36,13 @@ var can_jump_midair := true
 @export var dynamic_fov := false
 ##number of dash charges player can hold at the same time
 @export var dash_charges := 2
+##cooldown time for a dash charge to recharge, in seconds
+@export var dash_cooldown := 0.8
 ##current number of dash charges the player currently holds.
 ##consumed on dash
 var current_dash_charge := dash_charges
-##variable for recharging dash according to cooldown
-var _dash_recharge_timer := 0.0
-##cooldown time for a dash charge to recharge, in seconds
-@export var dash_cooldown := 0.8
+##var for holding dash recharge untile player hits groundS
+var dash_charge_queue := 0
 ##reference to child node
 @onready var headpivot :Node3D= %HeadPivot
 ##reference to child node

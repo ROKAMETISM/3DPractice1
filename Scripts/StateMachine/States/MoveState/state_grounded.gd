@@ -5,12 +5,12 @@ extends State
 func enter() -> void:
 	super()
 	parent.velocity.y = 0
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	var _output : Array
 	if get_jump():
 		_set_single_state_transition(_output,  jump_state)
 	return _output
-func process_physics(delta: float) -> Array:
+func process_physics(_delta: float) -> Array:
 	var _output : Array
 	parent.velocity.y = 0.0
 	parent.move_and_slide()
