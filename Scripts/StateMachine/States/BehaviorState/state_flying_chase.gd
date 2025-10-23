@@ -17,9 +17,13 @@ func process_physics(delta: float) -> Array:
 	if _get_target_distance() > chase_max_distance:
 		_set_single_state_transition(_output, wander_state)
 		return _output
+	if _get_target_distance() < melee_distance : 
+		return _output
+	if randi_range(0, 600) < 2:
+		_set_single_state_transition(_output, strafe_state)
 	return _output
 func get_state_name()->String:
-	return "Chase"
+	return "FlyingChase"
 func _get_target_distance()->float:
 	if not move_controller.target:
 		return 0.0
