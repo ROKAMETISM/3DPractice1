@@ -2,7 +2,7 @@ class_name PlayerFallState
 extends FallState
 func enter() -> void:
 	super()
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	var _output : Array
 	if get_jump() and parent.can_jump_midair:
 		parent.can_jump_midair = false

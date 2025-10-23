@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if hit_animation_timer < 0.0:
 		hit_animation_timer = 0.0
 		sprite.animation = "default"
-func _on_hit_taken(source:Node3D)->void:
+func _on_hit_taken(_source:Node3D)->void:
 	sprite.animation = "hit"
 	hit_animation_timer = HIT_ANIMATION_DURATION
 func _die() -> void:

@@ -5,7 +5,7 @@ extends State
 @export var friction := 13.0
 func enter() -> void:
 	super()
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	var _output : Array
 	if get_move():
 		_set_single_state_transition(_output,  walk_state)

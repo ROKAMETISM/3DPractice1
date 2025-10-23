@@ -4,7 +4,7 @@ extends State
 @export var sprint_state: State
 func enter() -> void:
 	super()
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	var _output : Array
 	if get_sprint():
 		_set_single_state_transition(_output,  sprint_state)

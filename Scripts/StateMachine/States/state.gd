@@ -14,11 +14,11 @@ func exit() -> void:
 	if state_log:
 		print("--exiting : " + get_state_name())
 	pass
-func process_input(event: InputEvent) -> Array:
+func process_input(_event: InputEvent) -> Array:
 	return []
-func process_frame(delta: float) -> Array:
+func process_frame(_delta: float) -> Array:
 	return []
-func process_physics(delta: float) -> Array:
+func process_physics(_delta: float) -> Array:
 	return []
 func fsm_get_current_states()->Array[State]:
 	return fsm.current_states

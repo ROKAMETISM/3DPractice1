@@ -20,6 +20,7 @@ func process_physics(delta: float) -> Array:
 	if !ground_detector.is_colliding():
 		move_controller.move_direction = (Vec2toVec3flat(_wander_direction_2d)+Vector3.DOWN).normalized()
 	else:
+		move_controller.last_ground_location = Vec3toVec2flat(parent.global_position)
 		if _get_height() < flight_height - flight_height_margin:
 			move_controller.move_direction = (Vec2toVec3flat(_wander_direction_2d)+Vector3.UP).normalized()
 		else:
@@ -44,3 +45,5 @@ func new_random_wander()->void:
 	_wander_vertical = randf_range(-1.0, 1.0)
 func Vec2toVec3flat(vec2 : Vector2)->Vector3:
 	return Vector3(vec2.x, 0, vec2.y)
+func Vec3toVec2flat(vec3 : Vector3)->Vector2:
+	return Vector2(vec3.x, vec3.z)

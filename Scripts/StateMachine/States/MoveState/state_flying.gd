@@ -5,7 +5,7 @@ extends State
 func enter() -> void:
 	super()
 	parent.velocity = Vector3.ZERO
-func process_physics(delta: float) -> Array:
+func process_physics(_delta: float) -> Array:
 	var _output : Array
 	parent.velocity = move_controller.flying_move_input() * move_data.walk_speed
 	parent.move_and_slide()

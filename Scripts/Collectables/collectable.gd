@@ -7,7 +7,7 @@ func collect(source:CharacterBody3D)->void:
 	print("Picked up %s"%pickup_name)
 	_on_collect(source)
 	queue_free()
-func _on_collect(source:CharacterBody3D)->void:
+func _on_collect(_source:CharacterBody3D)->void:
 	pass
 func _physics_process(delta: float) -> void:
 	_on_floor = ray.is_colliding()
