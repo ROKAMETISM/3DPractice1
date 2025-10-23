@@ -25,6 +25,7 @@ func process_physics(delta: float) -> Array:
 			move_controller.move_direction = (Vec2toVec3flat(_wander_direction_2d)+Vector3.UP).normalized()
 		else:
 			move_controller.move_direction = (Vec2toVec3flat(_wander_direction_2d)+Vector3(0,_wander_vertical,0)).normalized()
+	parent.look_at(parent.global_position + move_controller.move_direction)
 	_wander_timer -= delta
 	if _wander_timer < 0.0:
 		_wander_timer += wander_time

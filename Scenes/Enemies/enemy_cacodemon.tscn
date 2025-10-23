@@ -147,13 +147,17 @@ chase_max_distance = 20.0
 wander_state = NodePath("../FlyingWanderState")
 strafe_state = NodePath("../FlyingStrafeState")
 melee_attack_state = NodePath("../FlyingMeleeAttackState")
-melee_distance = 6.0
+melee_distance = 2.0
 metadata/_custom_type_script = "uid://bfpxkg2cx67cx"
 
 [node name="FlyingMeleeAttackState" type="Node" parent="Controllers/EnemyCacodemonMoveController/ControlFSM"]
 script = ExtResource("12_dkhep")
 metadata/_custom_type_script = "uid://bfnwiudxi0u30"
 
-[node name="FlyingStrafeState" type="Node" parent="Controllers/EnemyCacodemonMoveController/ControlFSM"]
+[node name="FlyingStrafeState" type="Node" parent="Controllers/EnemyCacodemonMoveController/ControlFSM" node_paths=PackedStringArray("wander_state", "chase_state")]
 script = ExtResource("13_kr40v")
+strafe_min_distance = 6.0
+strafe_max_distnace = 12.0
+wander_state = NodePath("../FlyingWanderState")
+chase_state = NodePath("../FlyingChaseState")
 metadata/_custom_type_script = "uid://u0e2sa7vr654"

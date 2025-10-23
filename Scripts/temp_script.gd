@@ -9,7 +9,7 @@ var vertical_state
 var attack_state
 var current_states : Array[State]
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	for state : State in current_states:
 		match state:
 			"move":
