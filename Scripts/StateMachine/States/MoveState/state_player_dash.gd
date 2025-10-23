@@ -1,5 +1,6 @@
 class_name PlayerDashState extends State
 @export var fall_state : PlayerFallState
+@export var jump_state : PlayerJumpState
 @export var stand_state : StandState
 @export var dash_time := 0.3
 @export var dash_speed := 10.0
@@ -15,6 +16,10 @@ func enter() -> void:
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	_dash_timer -= delta
+	if get_jump():
+		_output.append(Transition.new(self, Transition.Type.Exit))
+		_output.append(Transition.new(jump_state, Transition.Type.Enter))
+		_output.append(Transition.new(stand_state, Transition.Type.Enter))
 	if _dash_timer <= 0.0:
 		parent.velocity = parent.velocity.normalized()*move_data.sprint_speed
 		_output.append(Transition.new(self, Transition.Type.Exit))

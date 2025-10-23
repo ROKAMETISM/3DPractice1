@@ -122,6 +122,8 @@ func _physics_process(delta: float) -> void:
 	#process dynamic fov
 	if dynamic_fov:
 		_dynamic_fov(delta)
+	#debug dash charges
+	print("Dash : %d / %d"%[current_dash_charge, dash_charge_queue])
 func _process(delta: float) -> void:
 	#call FSM frame process
 	fsm.process_frame(delta)

@@ -127,9 +127,10 @@ fall_state = NodePath("../PlayerFallState")
 grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://ckdbprffamh6n"
 
-[node name="PlayerDashState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "stand_state")]
+[node name="PlayerDashState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state", "stand_state")]
 script = ExtResource("10_h4iuc")
 fall_state = NodePath("../PlayerFallState")
+jump_state = NodePath("../PlayerJumpState")
 stand_state = NodePath("../StandState")
 dash_time = 0.15
 dash_speed = 30.0

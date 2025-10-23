@@ -25,9 +25,8 @@ func process_physics(delta: float) -> Array:
 func get_state_name()->String:
 	return "PlayerDefault"
 func _recharge_dash(delta:float)->void:
-	if parent.current_dash_charge + parent.dash_charge_queue >= parent.dash_charges:
-		return
-	_dash_recharge_timer -= delta
+	if parent.current_dash_charge + parent.dash_charge_queue < parent.dash_charges:
+		_dash_recharge_timer -= delta
 	if _dash_recharge_timer <= 0.0:
 		_dash_recharge_timer = parent.dash_cooldown
 		parent.dash_charge_queue += 1
