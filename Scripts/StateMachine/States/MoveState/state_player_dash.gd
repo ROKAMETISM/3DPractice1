@@ -4,6 +4,7 @@ class_name PlayerDashState extends State
 @export var stand_state : StandState
 @export var dash_time := 0.3
 @export var dash_speed := 10.0
+@export var entity_component : EntityComponent
 var _dash_timer := dash_time
 func enter() -> void:
 	super()
@@ -13,15 +14,21 @@ func enter() -> void:
 		parent.velocity = parent.pointing_vector.normalized()*dash_speed
 	parent.velocity.y = 0.0
 	_dash_timer = dash_time
+	if entity_component:
+		entity_component.monitorable = false
 func process_physics(delta: float) -> Array:
 	var _output : Array
 	_dash_timer -= delta
 	if get_jump():
+		if entity_component:
+			entity_component.monitorable = true
 		_output.append(Transition.new(self, Transition.Type.Exit))
 		_output.append(Transition.new(jump_state, Transition.Type.Enter))
 		_output.append(Transition.new(stand_state, Transition.Type.Enter))
 	if _dash_timer <= 0.0:
 		parent.velocity = parent.velocity.normalized()*move_data.sprint_speed
+		if entity_component:
+			entity_component.monitorable = true
 		_output.append(Transition.new(self, Transition.Type.Exit))
 		_output.append(Transition.new(fall_state, Transition.Type.Enter))
 		_output.append(Transition.new(stand_state, Transition.Type.Enter))

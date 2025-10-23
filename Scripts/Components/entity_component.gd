@@ -9,6 +9,7 @@ signal hit_taken(hit_source:Node3D)
 signal died
 func _ready() -> void:
 	hp_component.init(max_hp,  max_armor)
+	monitoring = false
 	collision_layer = 0b0
 	collision_mask = 0b0
 	if is_enemy:

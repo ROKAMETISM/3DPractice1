@@ -59,6 +59,7 @@ shape = SubResource("CapsuleShape3D_h4iuc")
 
 [node name="EntityComponent" type="Area3D" parent="."]
 unique_name_in_owner = true
+monitoring = false
 script = ExtResource("4_7dp3o")
 is_enemy = false
 is_player = true
@@ -128,13 +129,14 @@ fall_state = NodePath("../PlayerFallState")
 grounded_state = NodePath("../GroundedState")
 metadata/_custom_type_script = "uid://ckdbprffamh6n"
 
-[node name="PlayerDashState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state", "stand_state")]
+[node name="PlayerDashState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("fall_state", "jump_state", "stand_state", "entity_component")]
 script = ExtResource("10_h4iuc")
 fall_state = NodePath("../PlayerFallState")
 jump_state = NodePath("../PlayerJumpState")
 stand_state = NodePath("../StandState")
 dash_time = 0.15
 dash_speed = 30.0
+entity_component = NodePath("../../../EntityComponent")
 metadata/_custom_type_script = "uid://21rs183ydymm"
 
 [node name="StandState" type="Node" parent="Controllers/FSM" node_paths=PackedStringArray("walk_state", "sprint_state")]
