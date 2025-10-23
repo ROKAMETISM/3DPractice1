@@ -21,7 +21,7 @@ func process_physics(delta: float) -> Array:
 	_dash_timer -= delta
 	if get_jump():
 		if entity_component:
-			entity_component.monitorable = true
+				entity_component.monitorable = true
 		_output.append(Transition.new(self, Transition.Type.Exit))
 		_output.append(Transition.new(jump_state, Transition.Type.Enter))
 		_output.append(Transition.new(stand_state, Transition.Type.Enter))
