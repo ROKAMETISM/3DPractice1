@@ -36,6 +36,7 @@ radius = 1.0
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_v0iea")
 move_data = SubResource("Resource_ukyrk")
+dash_cooldown = 0.5
 
 [node name="WeaponManager" type="Node3D" parent="."]
 unique_name_in_owner = true

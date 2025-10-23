@@ -23,7 +23,6 @@ func process_physics(delta: float) -> Array:
 		parent.velocity.x = get_move().x * move_data.walk_speed
 		parent.velocity.z = get_move().y * move_data.walk_speed
 	parent.move_and_slide()
-	
 	if get_sprint():
 		_set_single_state_transition(_output,  sprint_state)
 	return _output

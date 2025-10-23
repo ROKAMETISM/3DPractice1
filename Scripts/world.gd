@@ -32,6 +32,7 @@ func _ready() -> void:
 	#setup console commands
 	Console.add_command("spawn", _console_debug_spawn, 2)
 	Console.add_command("set_ammo", _console_set_ammo, 2)
+	Console.pause_enabled = true
 func _physics_process(delta: float) -> void:
 	#quit game when "quit" action is pressed
 	if Input.is_action_just_pressed("quit"):

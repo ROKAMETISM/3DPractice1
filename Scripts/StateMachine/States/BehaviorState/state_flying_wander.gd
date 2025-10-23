@@ -3,6 +3,8 @@ class_name FlyingWanderState extends State
 @export var flight_height_margin : float = 1.0
 @export var ground_detector : RayCast3D
 @export var wander_time : float = 3.0
+@export var vision_area : Area3D
+@export var chase_state : FlyingChaseState
 var _wander_timer := 0.0
 var _wander_direction_2d := Vector2.ZERO
 var _wander_vertical := 0.0
@@ -26,6 +28,10 @@ func process_physics(delta: float) -> Array:
 	if _wander_timer < 0.0:
 		_wander_timer += wander_time
 		new_random_wander()
+	if vision_area.get_overlapping_areas().is_empty():
+		return _output
+	_set_single_state_transition(_output, chase_state)
+	move_controller.target = vision_area.get_overlapping_areas().get(0).parent
 	return _output
 func get_state_name()->String:
 	return "FlyingWander"

@@ -198,6 +198,7 @@ metadata/_custom_type_script = "uid://c7q27glw5efw2"
 
 [node name="ChaseState" type="Node" parent="Controllers/EnemyFSMTestMoveController/ControlFSM" node_paths=PackedStringArray("idle_state", "try_attack_state", "melee_attack_state", "melee_range")]
 script = ExtResource("17_oxce1")
+chase_max_distance = 20.0
 attack_interval = 0.6
 idle_state = NodePath("../IDLEState")
 try_attack_state = NodePath("../TryAttackState")
