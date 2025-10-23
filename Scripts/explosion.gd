@@ -2,7 +2,7 @@ extends Area3D
 @export var damage := 16.0
 @export var explosion_range := 16.0
 const EXPLOSION_LINGER := 0.8
-const DAMAGE_PER_METER := 2.5
+const DAMAGE_PER_METER := 5.0
 var source:Node3D=null
 func affect_player(flag : bool)->void:
 	set_collision_mask_value(3, flag)
