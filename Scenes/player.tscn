@@ -51,6 +51,7 @@ max_ammo = Dictionary[int, int]({
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 mesh = SubResource("CapsuleMesh_vrkc0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -165,5 +166,13 @@ metadata/_custom_type_script = "uid://uv17e2g3f0fs"
 unique_name_in_owner = true
 script = ExtResource("9_pu2lt")
 metadata/_custom_type_script = "uid://1q0qk2k45731"
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9064274, 0)
+light_color = Color(1, 0.95686275, 0.8509804, 1)
+light_energy = 1.5
+light_volumetric_fog_energy = 0.0
+omni_range = 6.0
+omni_attenuation = 0.6
 
 [connection signal="area_entered" from="PickupRange" to="." method="_on_pickup_range_area_entered"]
