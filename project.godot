@@ -28,6 +28,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/console/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [global_group]
 
 Enemy=""
