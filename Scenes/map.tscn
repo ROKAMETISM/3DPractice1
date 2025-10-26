@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2d2trch0meb7"]
+
+[ext_resource type="ArrayMesh" uid="uid://cilflsxwbqi8i" path="res://Blender/Untitled.obj" id="1_ci6au"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ci6au"]
+points = PackedVector3Array(100.80159, 1.404762, 100.80159, -1.80159, -1.8015873, -1.80159, -1.80159, -1.8015873, 1.4122925, 100.80159, -1.8015873, 100.80159, 100.80159, -1.8015873, -0.19464874, -1.80159, 1.404762, -1.80159, -0.19464874, 1.404762, 100.80159, 100.80159, 1.404762, -0.19464874, -0.19464874, -1.8015873, 100.80159, 1.4122925, 1.404762, -1.80159, 1.4122925, -1.8015873, -1.80159, -1.80159, 1.404762, 1.4122925)
+
+[node name="Map" type="StaticBody3D"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_ci6au")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_ci6au")
