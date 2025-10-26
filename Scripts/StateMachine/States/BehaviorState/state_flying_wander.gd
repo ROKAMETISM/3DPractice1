@@ -13,7 +13,7 @@ func enter() -> void:
 	move_controller.target = null
 	move_controller.want_jump = false
 	move_controller.want_sprint = false
-	move_controller.move_direction = Vector3.ZERO
+	move_controller.move_direction = Vector3.FORWARD
 	ground_detector.target_position = Vector3(0, -flight_height,0)
 func process_physics(delta: float) -> Array:
 	var _output : Array
