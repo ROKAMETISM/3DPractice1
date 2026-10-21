@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://se8yxgm8wpes"]
+[gd_resource type="Theme" format=3 uid="uid://se8yxgm8wpes"]
 
 [sub_resource type="SystemFont" id="SystemFont_dc3m0"]
 font_names = PackedStringArray("Arial")
